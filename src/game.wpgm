@@ -1,8 +1,17 @@
 import wollok.game.*
-import pepita.*
+import jugador.*
+import configuraciones.*
+
 
 program game {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	game.title("CORRE WACHIN!")
+	game.height(altura)
+	game.width(ancho)
+
+	
+	prueba.iniciar()
+	
+	game.showAttributes(jugador)
+	
 	game.start()
 }

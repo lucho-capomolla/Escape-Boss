@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><projectDescription>
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
 	<name>empty-game</name>
-	<comment/>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -31,4 +32,11 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.uqbar.project.wollok.wollokNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>assets/Personaje.png</name>
+			<type>1</type>
+			<location>C:/Users/Lucho.DESKTOP-MGTTVNC/Desktop/UTN/2do/PdeP/Objetos/elJuegoDePepita/assets/Personaje.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>
