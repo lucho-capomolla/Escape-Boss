@@ -7,7 +7,7 @@ program game {
 	game.title("CORRE WACHIN!")
 	game.height(altura)
 	game.width(ancho)
-
+	game.cellSize(60)
 	
 	prueba.iniciar()
 	
