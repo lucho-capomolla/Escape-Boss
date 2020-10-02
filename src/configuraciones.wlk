@@ -39,7 +39,9 @@ object configuraciones {
 				}
 			})
 		
-		//keyboard.space().onPressDo({})
+		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
+		//keyboard.e().onPressDo({})		Esconderse en una planta		
+		
 
 	}/*
 	method configurarTeclas() {
