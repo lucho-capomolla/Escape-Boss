@@ -6,12 +6,10 @@ object jugador {
 	//const ganasDeViciar = true
 
 	method image() {
-		return "prueba.gif"
+		return "Jugador2.png"
 	}
 	
 	method moverA(nuevaPosicion) {
 		position = nuevaPosicion
 	}
-
 }
-

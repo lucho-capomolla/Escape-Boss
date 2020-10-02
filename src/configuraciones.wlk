@@ -1,8 +1,9 @@
 import jugador.*
 import wollok.game.*
+import tarjetas.*
 
-const ancho = 20
-const altura = 15
+const ancho = 19
+const altura = 12
 
 object prueba {
 	
@@ -17,10 +18,28 @@ object prueba {
 object configuraciones {
 	
 	method configurarTeclas() {
-		keyboard.left().onPressDo({ if(jugador.position().x() > 0)jugador.moverA(jugador.position().left(1))})
-		keyboard.right().onPressDo({ if(jugador.position().x() < (ancho - 1))jugador.moverA(jugador.position().right(1))})
-		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 1))jugador.moverA(jugador.position().up(1))})
-		keyboard.down().onPressDo({ if(jugador.position().y() > 0)jugador.moverA(jugador.position().down(1))})
+		keyboard.left().onPressDo({ if(jugador.position().x() > 1){
+				jugador.moverA(jugador.position().left(1))
+				tarjetas.hacerTurno()
+				}
+			})
+		keyboard.right().onPressDo({ if(jugador.position().x() < (ancho - 5)){
+				jugador.moverA(jugador.position().right(1))
+				tarjetas.hacerTurno()
+				}
+			})
+		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 2)){
+				jugador.moverA(jugador.position().up(1))
+				tarjetas.hacerTurno()
+				}
+			})
+		keyboard.down().onPressDo({ if(jugador.position().y() > 1){
+				jugador.moverA(jugador.position().down(1))
+				tarjetas.hacerTurno()
+				}
+			})
+		
+		//keyboard.space().onPressDo({})
 
 	}/*
 	method configurarTeclas() {
