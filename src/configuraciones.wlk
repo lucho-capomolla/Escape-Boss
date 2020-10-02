@@ -18,7 +18,7 @@ object prueba {
 object configuraciones {
 	
 	method configurarTeclas() {
-		keyboard.left().onPressDo({ if(jugador.position().x() > 1){
+		keyboard.left().onPressDo({ if(jugador.position().x() > 3){
 				jugador.moverA(jugador.position().left(1))
 				tarjetas.hacerTurno()
 				}
@@ -28,7 +28,7 @@ object configuraciones {
 				tarjetas.hacerTurno()
 				}
 			})
-		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 2)){
+		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 3)){
 				jugador.moverA(jugador.position().up(1))
 				tarjetas.hacerTurno()
 				}
