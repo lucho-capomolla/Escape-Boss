@@ -43,7 +43,9 @@ object impresora {
 
 
 object companieri {
+	var property position = game.at(13,5)
 	
+	method image() = "Companieri.png"
 	// El que te tira las Quest para ir a entregarle una tarea especifica
 }
 

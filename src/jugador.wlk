@@ -3,9 +3,13 @@ import wollok.game.*
 object jugador {
 	var property position = game.at(3,2)
 	var paciencia = 100
-
+	var property direccion = "Derecha"
+	
+	
 	method image() {
-		return "JugadorDerechapng"
+		if(self.direccion() == "Derecha") 
+			return "JugadorDerecha.png"
+		return "JugadorIzquierda.png"
 	}
 	
 	method moverA(nuevaPosicion) {

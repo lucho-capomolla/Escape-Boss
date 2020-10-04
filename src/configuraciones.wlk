@@ -1,6 +1,7 @@
 import jugador.*
 import wollok.game.*
 import tarjetas.*
+import oficina.*
 import jefe.*
 
 const ancho = 19
@@ -11,6 +12,7 @@ object prueba {
 	method iniciar() {
 		game.addVisual(jugador)
 		game.addVisual(jefe)
+		game.addVisual(companieri)
 		configuraciones.configurarTeclas()
 		
 	}
@@ -23,11 +25,13 @@ object configuraciones {
 		keyboard.left().onPressDo({ if(jugador.position().x() > 3){
 				jugador.moverA(jugador.position().left(1))
 				tarjetas.hacerTurno()
+				jugador.direccion("Izquierda")
 				}
 			})
 		keyboard.right().onPressDo({ if(jugador.position().x() < (ancho - 5)){
 				jugador.moverA(jugador.position().right(1))
 				tarjetas.hacerTurno()
+				jugador.direccion("Derecha")
 				}
 			})
 		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 3)){
