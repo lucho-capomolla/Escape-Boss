@@ -1,11 +1,11 @@
 import wollok.game.*
 
 object jugador {
-	var property position = game.center()
+	var property position = game.at(3,2)
 	var paciencia = 100
 
 	method image() {
-		return "Jugador2.png"
+		return "JugadorDerechapng"
 	}
 	
 	method moverA(nuevaPosicion) {
@@ -19,6 +19,10 @@ object jugador {
 	method esconderse() {
 		
 		// tiene que estar colisionando con la planta, y cambia su imagen
+	}
+	
+	method usarImpresora() {
+		// para conseguir la tarea de una impresora particular
 	}
 	
 	method presentarTarea() {

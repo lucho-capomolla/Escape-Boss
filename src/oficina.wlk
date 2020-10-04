@@ -46,3 +46,10 @@ object companieri {
 	
 	// El que te tira las Quest para ir a entregarle una tarea especifica
 }
+
+
+object puerta {
+	
+	// cuando colisione, que haya un if donde verifique si tiene las 3 tareas completadas, si no es asi, no sucede nada
+	// recien puede terminar el juego cuando tenga las tareas terminadas
+}

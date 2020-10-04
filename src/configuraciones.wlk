@@ -1,6 +1,7 @@
 import jugador.*
 import wollok.game.*
 import tarjetas.*
+import jefe.*
 
 const ancho = 19
 const altura = 12
@@ -9,6 +10,7 @@ object prueba {
 	
 	method iniciar() {
 		game.addVisual(jugador)
+		game.addVisual(jefe)
 		configuraciones.configurarTeclas()
 		
 	}
