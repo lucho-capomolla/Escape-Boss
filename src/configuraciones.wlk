@@ -10,13 +10,13 @@ const altura = 12
 object prueba {
 	
 	method iniciar() {
-		game.addVisual(jugador)
+		game.addVisual(cafeConLeche)
 		game.addVisual(jefe)
 		game.addVisual(companieri)
+		game.addVisual(jugador)
+		game.addVisual(planta)
 		configuraciones.configurarTeclas()
-		
 	}
-	
 }
 
 object configuraciones {
@@ -45,8 +45,10 @@ object configuraciones {
 				}
 			})
 		
+		keyboard.c().onPressDo({jugador.consumirPotenciador(game.uniqueCollider(jugador))})
 		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
-		//keyboard.e().onPressDo({})		Esconderse en una planta		
+		
+		//keyboard.e().onPressDo({jugador.esconderse(game.uniqueCollider(jugador))})	
 		
 
 	}/*

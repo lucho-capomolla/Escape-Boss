@@ -1,28 +1,40 @@
 import wollok.game.*
+import oficina.*
 
 object jugador {
 	var property position = game.at(3,2)
-	var paciencia = 100
+	var property energia = 100
 	var property direccion = "Derecha"
-	
+	//Delegar las direcciones
 	
 	method image() {
-		if(self.direccion() == "Derecha") 
+		if(self.estaEscondido())
+			return "JugadorEscondido.png"
+		else if(self.direccion() == "Derecha") 
 			return "JugadorDerecha.png"
 		return "JugadorIzquierda.png"
 	}
 	
 	method moverA(nuevaPosicion) {
 		position = nuevaPosicion
+		self.disminuirEnergia(1)
 	}
 	
 	method consumirPotenciador(objeto) {
 		objeto.potenciar(self)
+		game.removeVisual(objeto)
 	}
 	
-	method esconderse() {
-		
-		// tiene que estar colisionando con la planta, y cambia su imagen
+	method aumentarEnergia(cantidad) {
+		energia += cantidad
+	}
+	
+	method disminuirEnergia(cantidad) {
+		energia -= cantidad
+	}
+	
+	method estaEscondido() {
+		return position == planta.position()
 	}
 	
 	method usarImpresora() {
