@@ -28,22 +28,26 @@ object configuraciones {
 				jugador.moverA(jugador.position().left(1))
 				tarjetas.hacerTurno()
 				jugador.direccion("Izquierda")
+				jugador.estaEnLaPuerta()
 				}
 			})
 		keyboard.right().onPressDo({ if(jugador.position().x() < (ancho - 5)){
 				jugador.moverA(jugador.position().right(1))
 				tarjetas.hacerTurno()
 				jugador.direccion("Derecha")
+				jugador.estaEnLaPuerta()
 				}
 			})
 		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 3)){
 				jugador.moverA(jugador.position().up(1))
 				tarjetas.hacerTurno()
+				jugador.estaEnLaPuerta()
 				}
 			})
 		keyboard.down().onPressDo({ if(jugador.position().y() > 1){
 				jugador.moverA(jugador.position().down(1))
 				tarjetas.hacerTurno()
+				jugador.estaEnLaPuerta()
 				}
 			})
 		
