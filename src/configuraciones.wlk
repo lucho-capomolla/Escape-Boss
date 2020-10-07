@@ -18,6 +18,7 @@ object prueba {
 		game.addVisual(jugador)
 		game.addVisual(planta)
 		configuraciones.configurarTeclas()
+		configuraciones.configurarColisiones()
 	}
 }
 
@@ -57,12 +58,10 @@ object configuraciones {
 		//keyboard.e().onPressDo({jugador.esconderse(game.uniqueCollider(jugador))})	
 		
 
-	}/*
-	method configurarTeclas() {
-		keyboard.up().onPressDo({ jugador.moverA(jugador.position().up(1)) })
-		keyboard.down().onPressDo({ jugador.moverA(jugador.position().down(1)) })
-		keyboard.left().onPressDo({ jugador.moverA(jugador.position().left(1)) })
-		keyboard.right().onPressDo({ jugador.moverA(jugador.position().right(1)) })
-	}*/
+	}
 	
+	method configurarColisiones() {
+		game.onCollideDo(jugador, { algo => algo.teEncontro()})
+		
+	}
 }

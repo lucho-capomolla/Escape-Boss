@@ -15,9 +15,10 @@ object cafeConLeche inherits Consumible {
 	method image() = "Cafe.png"
 	// Ponele que este te reponga la energia
 	method position() = game.at(7,7)
+	method teEncontro() = true
 	method potenciar(jugador) {
 		jugador.aumentarEnergia(energiaAportada)
-		game.say(self, "Aumento la energia en 25")
+		game.say(self, "Aumento la energia en" + energiaAportada)
 	}
 }
 
@@ -41,6 +42,8 @@ object planta {
 	var property position = game.at(9,3)
 	
 	method image() = "pepita.png"
+	
+	method teEncontro() = true
 	// Hacer que el jugador se esconda en la planta por X turnos, y el jefe se aleja a la direccion contraria
 	// Cuando ingresa a la planta, se cambia la imagen y el jefe no puede colisionar con el, averiguar como seria
 	
@@ -54,6 +57,8 @@ object impresora {
 	
 	method image() = "Impresora.png"
 	
+	method teEncontro() = true
+	
 	method esAtravesable() = false
 	// 3 impresoras de diferente tipo, no se si conviene que haya una sola clase, e instanciarlas como diferentes
 	// o hacer 3 objetos
@@ -64,6 +69,8 @@ object companieri {
 	var property position = game.at(13,5)
 	
 	method image() = "Companieri.png"
+	
+	method teEncontro() = true
 	// El que te tira las Quest para ir a entregarle una tarea especifica
 }
 
@@ -73,6 +80,7 @@ object puerta {
 	
 	method image() = "Puerta.png"
 	
+	method teEncontro() = true
 	
 	// cuando colisione, que haya un if donde verifique si tiene las 3 tareas completadas, si no es asi, no sucede nada
 	// recien puede terminar el juego cuando tenga las tareas terminadas
