@@ -12,7 +12,7 @@ class Consumible {
 
 object cafeConLeche inherits Consumible {
 	const energiaAportada = 25
-	method image() = "muro.png"
+	method image() = "Cafe.png"
 	// Ponele que este te reponga la energia
 	method position() = game.at(7,7)
 	method potenciar(jugador) {
@@ -38,9 +38,9 @@ object llamadaAfip inherits Consumible {
 
 object planta {
 	
-	method position() = game.at(9,3)
+	var property position = game.at(9,3)
 	
-	method image () = "pepita.png"
+	method image() = "pepita.png"
 	// Hacer que el jugador se esconda en la planta por X turnos, y el jefe se aleja a la direccion contraria
 	// Cuando ingresa a la planta, se cambia la imagen y el jefe no puede colisionar con el, averiguar como seria
 	
@@ -50,7 +50,11 @@ object planta {
 
 
 object impresora {
+	var property position = game.at(3,5)
 	
+	method image() = "Impresora.png"
+	
+	method esAtravesable() = false
 	// 3 impresoras de diferente tipo, no se si conviene que haya una sola clase, e instanciarlas como diferentes
 	// o hacer 3 objetos
 }
@@ -65,6 +69,9 @@ object companieri {
 
 
 object puerta {
+	var property position = game.at(8,9)
+	
+	method image() = "Puerta.png"
 	
 	
 	// cuando colisione, que haya un if donde verifique si tiene las 3 tareas completadas, si no es asi, no sucede nada

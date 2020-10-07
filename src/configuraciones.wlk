@@ -10,9 +10,11 @@ const altura = 12
 object prueba {
 	
 	method iniciar() {
+		game.addVisual(puerta)
 		game.addVisual(cafeConLeche)
 		game.addVisual(jefe)
 		game.addVisual(companieri)
+		game.addVisual(impresora)
 		game.addVisual(jugador)
 		game.addVisual(planta)
 		configuraciones.configurarTeclas()

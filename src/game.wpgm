@@ -8,7 +8,7 @@ program game {
 	game.height(altura)
 	game.width(ancho)
 	game.cellSize(60)
-	game.boardGround("fondoClave.png")
+	game.boardGround("fondo.png")
 	
 	prueba.iniciar()
 	

@@ -37,6 +37,11 @@ object jugador {
 		return position == planta.position()
 	}
 	
+	method estaEnLaPuerta() {
+		if(position == puerta.position())
+			game.say(self, "Estamos en la puerta")
+	}
+	
 	method usarImpresora() {
 		// para conseguir la tarea de una impresora particular
 	}
