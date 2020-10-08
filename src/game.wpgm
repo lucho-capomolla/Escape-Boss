@@ -15,5 +15,4 @@ program game {
 	game.showAttributes(jugador)
 	
 	game.start()
-	
 }
