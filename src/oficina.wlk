@@ -18,7 +18,7 @@ object cafeConLeche inherits Consumible {
 	method teEncontro() = true
 	method potenciar(jugador) {
 		jugador.aumentarEnergia(energiaAportada)
-		game.say(self, "Aumento la energia en" + energiaAportada)
+		game.say(jugador, "Aumento la energia en " + energiaAportada)
 	}
 }
 

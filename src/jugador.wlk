@@ -6,6 +6,7 @@ object jugador {
 	var property energia = 100
 	var property direccion = "Derecha"
 	//Delegar las direcciones
+	//Cada direccion tiene que ser un objeto
 	
 	method image() {
 		if(self.estaEscondido())

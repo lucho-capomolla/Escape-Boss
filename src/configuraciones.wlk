@@ -54,10 +54,14 @@ object configuraciones {
 		
 		keyboard.c().onPressDo({jugador.consumirPotenciador(game.uniqueCollider(jugador))})
 		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
+	
+		// Que los limites sean un objeto, y no pueda atraversarlo, como paredes invisibles (?
+		// REPETICION DE LOGICA EN LAS TECLA, delegar bastante
+		// Verificar que el jugador PUEDA MOVERSE a Tal direccion
+		// Que pueda interactuar con el cuadro del carpincho?
 		
-		//keyboard.e().onPressDo({jugador.esconderse(game.uniqueCollider(jugador))})	
-		
-
+		// Turno: Que el jugador se mueva durante su turno, y el Jefe durante el suyo -> ESTE TURNO = Tiempo, Cantidad de movimientos o Al tocar una Tecla
+		// Etapa siguiente <- Pensarlo bien bien
 	}
 	
 	method configurarColisiones() {
