@@ -25,6 +25,12 @@ object prueba {
 object configuraciones {
 	
 	method configurarTeclas() {
+	
+		keyboard.up().onPressDo({arriba.moverse(1)})
+		keyboard.down().onPressDo({abajo.moverse(1)})
+		keyboard.right().onPressDo({derecha.moverse(1)})
+		keyboard.left().onPressDo({izquierda.moverse(1)})
+	/*
 		keyboard.left().onPressDo({ if(jugador.position().x() > 3){
 				jugador.moverA(jugador.position().left(1))
 				tarjetas.hacerTurno()
@@ -51,7 +57,7 @@ object configuraciones {
 				jugador.estaEnLaPuerta()
 				}
 			})
-		
+		*/
 		keyboard.c().onPressDo({jugador.consumirPotenciador(game.uniqueCollider(jugador))})
 		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
 	
@@ -67,5 +73,40 @@ object configuraciones {
 	method configurarColisiones() {
 		game.onCollideDo(jugador, { algo => algo.teEncontro()})
 		
+	}
+}
+
+class Direccion {
+	
+	method moverse(cantidad) {
+	}
+
+}
+
+object arriba inherits Direccion {
+	
+	override method moverse(cantidad) {
+		jugador.moverA(jugador.position().up(cantidad))
+	}
+}
+
+object abajo inherits Direccion {
+	
+	override method moverse(cantidad) {
+		jugador.moverA(jugador.position().down(cantidad))
+	}
+}
+
+object derecha inherits Direccion {
+	
+	override method moverse(cantidad) {
+		jugador.moverA(jugador.position().right(cantidad))
+	}
+}
+
+object izquierda inherits Direccion {
+	
+	override method moverse( cantidad) {
+		jugador.moverA(jugador.position().left(cantidad))
 	}
 }

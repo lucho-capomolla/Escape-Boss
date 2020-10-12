@@ -21,6 +21,10 @@ object jugador {
 		self.disminuirEnergia(1)
 	}
 	
+	method puedeMoverse(posicion) {
+		
+	}
+	
 	method consumirPotenciador(objeto) {
 		objeto.potenciar(self)
 		game.removeVisual(objeto)
