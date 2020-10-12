@@ -8,6 +8,8 @@ class Consumible {
 		//jugador.aumentarEnergia(cantidad)
 	//} 
 	
+	method esAtravesable() = true
+	
 }
 
 object cafeConLeche inherits Consumible {
@@ -44,6 +46,8 @@ object planta {
 	method image() = "pepita.png"
 	
 	method teEncontro() = true
+	
+	method esAtravesable() = true
 	// Hacer que el jugador se esconda en la planta por X turnos, y el jefe se aleja a la direccion contraria
 	// Cuando ingresa a la planta, se cambia la imagen y el jefe no puede colisionar con el, averiguar como seria
 	
@@ -71,6 +75,8 @@ object companieri {
 	method image() = "Companieri.png"
 	
 	method teEncontro() = true
+	
+	method esAtravesable() = false
 	// El que te tira las Quest para ir a entregarle una tarea especifica
 }
 
@@ -82,6 +88,7 @@ object puerta {
 	
 	method teEncontro() = true
 	
+	method esAtravesable() = true
 	// cuando colisione, que haya un if donde verifique si tiene las 3 tareas completadas, si no es asi, no sucede nada
 	// recien puede terminar el juego cuando tenga las tareas terminadas
 }

@@ -1,11 +1,12 @@
 import wollok.game.*
 import jugador.*
+import configuraciones.*
 
 object jefe {
 	var property position = game.at(14,9)
+	var property image = "JefeIzquierda.png"
 	
-	method image() = "JefeIzquierda.png"
-	
+	method esAtravesable() = true
 	
 	method teEncontro() {
 		if(position == jugador.position())

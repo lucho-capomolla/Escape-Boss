@@ -7,7 +7,7 @@ import jefe.*
 const ancho = 19
 const altura = 12
 
-object prueba {
+object prueba {	
 	
 	method iniciar() {
 		game.addVisual(puerta)
@@ -58,7 +58,9 @@ object configuraciones {
 				}
 			})
 		*/
-		keyboard.c().onPressDo({jugador.consumirPotenciador(game.uniqueCollider(jugador))})
+		//keyboard.c().onPressDo({game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
+		//game.whenKeyPressedDo(keyboard.c().onPressDo({}), {game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
+		keyboard.c().onPressDo({if(game.uniqueCollider(jugador))jugador.consumirPotenciador(game.uniqueCollider(jugador))})
 		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
 	
 		// Que los limites sean un objeto, y no pueda atraversarlo, como paredes invisibles (?
@@ -71,22 +73,25 @@ object configuraciones {
 	}
 	
 	method configurarColisiones() {
-		game.onCollideDo(jugador, { algo => algo.teEncontro()})
-		
+		game.onCollideDo(jugador, {algo => algo.teEncontro()})
+		//game.whenCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})
 	}
 }
 
 class Direccion {
 	
 	method moverse(cantidad) {
+		tarjetas.hacerTurno()
+		jugador.estaEnLaPuerta()
 	}
 
 }
 
 object arriba inherits Direccion {
-	
+
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().up(cantidad))
+		super(cantidad)
 	}
 }
 
@@ -94,6 +99,7 @@ object abajo inherits Direccion {
 	
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().down(cantidad))
+		super(cantidad)
 	}
 }
 
@@ -101,12 +107,18 @@ object derecha inherits Direccion {
 	
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().right(cantidad))
+		//jugador.image("JugadorDerecha.png")
+		jugador.direccion(self)
+		super(cantidad)
 	}
 }
 
 object izquierda inherits Direccion {
 	
-	override method moverse( cantidad) {
+	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().left(cantidad))
+		//jugador.image("JugadorIzquierda.png")
+		jugador.direccion(self)
+		super(cantidad)
 	}
 }

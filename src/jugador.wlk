@@ -1,29 +1,35 @@
 import wollok.game.*
 import oficina.*
+import configuraciones.*
 
 object jugador {
 	var property position = game.at(3,1)
 	var property energia = 100
-	var property direccion = "Derecha"
+	var property direccion = derecha
 	//Delegar las direcciones
 	//Cada direccion tiene que ser un objeto
+	
+	//var property image = "JugadorDerecha.png"
 	
 	method image() {
 		if(self.estaEscondido())
 			return "JugadorEscondido.png"
-		else if(self.direccion() == "Derecha") 
+		if(self.direccion() == derecha)
 			return "JugadorDerecha.png"
 		return "JugadorIzquierda.png"
+		
+		//else if(direccionQueMira) 
+			//return "JugadorDerecha.png"
+		//return "JugadorIzquierda.png"
 	}
 	
 	method moverA(nuevaPosicion) {
-		position = nuevaPosicion
+		if(self.puedeMoverse(nuevaPosicion))
+			position = nuevaPosicion
 		self.disminuirEnergia(1)
 	}
 	
-	method puedeMoverse(posicion) {
-		
-	}
+	method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
 	
 	method consumirPotenciador(objeto) {
 		objeto.potenciar(self)
@@ -39,6 +45,7 @@ object jugador {
 	}
 	
 	method estaEscondido() {
+		//self.image("JugadorEscondido.png")
 		return position == planta.position()
 	}
 	
@@ -56,4 +63,9 @@ object jugador {
 		// hacer una coleccion,donde tenga las 3 tareas asignadas por defecto, y otra coleccion, donde estan las tareas listas
 		// una vez que ésta está lista, entregarla a su respectivo compañery.
 	}
+}
+
+object direccionQueMira {
+	var property direccion = derecha
+	
 }
