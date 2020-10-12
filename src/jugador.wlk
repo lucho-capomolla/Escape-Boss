@@ -2,7 +2,7 @@ import wollok.game.*
 import oficina.*
 
 object jugador {
-	var property position = game.at(3,2)
+	var property position = game.at(3,1)
 	var property energia = 100
 	var property direccion = "Derecha"
 	//Delegar las direcciones

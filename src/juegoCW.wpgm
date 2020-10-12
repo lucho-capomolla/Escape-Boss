@@ -1,0 +1,32 @@
+import wollok.game.*
+import jugador.*
+import configuraciones.*
+
+
+program juego {
+	game.title("CORRE WACHIN!")
+	game.height(altura)
+	game.width(ancho)
+	game.cellSize(60)
+	game.boardGround("Fondo.png")
+	
+	prueba.iniciar()
+	
+	game.showAttributes(jugador)
+	
+	game.start()
+}
+
+
+// esAtravesable solo en la parte de moverA
+// game.
+// game.position.all elementes
+// aPosition.allElements()
+
+
+
+// Meta proxima semana: 
+		// - Plantear etapas/turnos
+		// - Delegar las direcciones IMPORTANTE
+		// - Jefe que pueda moverse RECOMENDADO
+		// - Que entienda los limites, que puede ser atravesado (Objetos, como limites del tablero)

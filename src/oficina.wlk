@@ -55,7 +55,7 @@ object planta {
 object impresora {
 	var property position = game.at(3,5)
 	
-	method image() = "Impresora.png"
+	method image() = "Impresora2.png"
 	
 	method teEncontro() = true
 	
