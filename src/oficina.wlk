@@ -78,7 +78,7 @@ object companieri {
 object puerta {
 	var property position = game.at(8,9)
 	
-	method image() = "OtraPuerta.png"
+	method image() = "puerta.png"
 	
 	method teEncontro() = true
 	
