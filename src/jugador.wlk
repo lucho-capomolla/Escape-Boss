@@ -14,9 +14,7 @@ object jugador {
 	method image() {
 		if(self.estaEscondido())
 			return "JugadorEscondido.png"
-		if(self.direccion() == derecha)
-			return "JugadorDerecha.png"
-		return "JugadorIzquierda.png"
+		return "Jugador" + direccion.nombre() + ".png"
 		
 		//else if(direccionQueMira) 
 			//return "JugadorDerecha.png"

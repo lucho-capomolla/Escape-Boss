@@ -89,6 +89,9 @@ class Direccion {
 
 object arriba inherits Direccion {
 
+	method nombre() {
+	}
+
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().up(cantidad))
 		super(cantidad)
@@ -96,6 +99,9 @@ object arriba inherits Direccion {
 }
 
 object abajo inherits Direccion {
+	
+	method nombre() {
+	}
 	
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().down(cantidad))
@@ -105,9 +111,10 @@ object abajo inherits Direccion {
 
 object derecha inherits Direccion {
 	
+	method nombre() = "Derecha"
+	
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().right(cantidad))
-		//jugador.image("JugadorDerecha.png")
 		jugador.direccion(self)
 		super(cantidad)
 	}
@@ -115,9 +122,10 @@ object derecha inherits Direccion {
 
 object izquierda inherits Direccion {
 	
+	method nombre() = "Izquierda"
+	
 	override method moverse(cantidad) {
 		jugador.moverA(jugador.position().left(cantidad))
-		//jugador.image("JugadorIzquierda.png")
 		jugador.direccion(self)
 		super(cantidad)
 	}
