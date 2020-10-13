@@ -60,7 +60,7 @@ object configuraciones {
 		*/
 		//keyboard.c().onPressDo({game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
 		//game.whenKeyPressedDo(keyboard.c().onPressDo({}), {game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
-		keyboard.c().onPressDo({if(game.uniqueCollider(jugador))jugador.consumirPotenciador(game.uniqueCollider(jugador))})
+		keyboard.c().onPressDo({jugador.consumir()})
 		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
 	
 		// Que los limites sean un objeto, y no pueda atraversarlo, como paredes invisibles (?
@@ -74,8 +74,10 @@ object configuraciones {
 	
 	method configurarColisiones() {
 		game.onCollideDo(jugador, {algo => algo.teEncontro()})
+		//game.onCollideDo(jugador, {algo => algo.teEncontro()})
 		//game.whenCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})
 	}
+	
 }
 
 class Direccion {

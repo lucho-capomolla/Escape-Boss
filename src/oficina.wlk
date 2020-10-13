@@ -1,27 +1,28 @@
 import wollok.game.*
 
 class Consumible {
-	//var energiaAportada
+	var energiaAportada
 	// Todos los consumibles duran X cantidad de tiempo, ej game.onTick(5000, ...) serian 5 segundos
 	// o podrian ser X turnos 
-	//method potenciar(jugador) {
-		//jugador.aumentarEnergia(cantidad)
-	//} 
-	
+	method potenciar(jugador) {
+		jugador.aumentarEnergia(energiaAportada)
+		game.say(jugador, "Aumento la energia en " + energiaAportada)
+	} 
+	method teEncontro() = true
 	method esAtravesable() = true
 	
 }
 
-object cafeConLeche inherits Consumible {
-	const energiaAportada = 25
+object cafeConLeche inherits Consumible (energiaAportada=25) {
+	//const energiaAportada = 25
 	method image() = "Cafe.png"
 	// Ponele que este te reponga la energia
 	method position() = game.at(7,7)
-	method teEncontro() = true
-	method potenciar(jugador) {
-		jugador.aumentarEnergia(energiaAportada)
-		game.say(jugador, "Aumento la energia en " + energiaAportada)
-	}
+	//method teEncontro() = true
+	//method potenciar(jugador) {
+	//	jugador.aumentarEnergia(energiaAportada)
+	//	game.say(jugador, "Aumento la energia en " + energiaAportada)
+	//}
 }
 
 object barritaEnergetica inherits Consumible {

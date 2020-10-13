@@ -35,11 +35,15 @@ object jugador {
 	}
 	
 	method aumentarEnergia(cantidad) {
-		energia += cantidad
+		energia=(energia + cantidad).min(100)
 	}
 	
 	method disminuirEnergia(cantidad) {
-		energia -= cantidad
+		energia=(energia - cantidad).max(0)
+			if(energia==0){
+		game.say(self, "Sin energía")
+		game.schedule(3000, {game.stop()})
+		}
 	}
 	
 	method estaEscondido() {
@@ -61,9 +65,17 @@ object jugador {
 		// hacer una coleccion,donde tenga las 3 tareas asignadas por defecto, y otra coleccion, donde estan las tareas listas
 		// una vez que ésta está lista, entregarla a su respectivo compañery.
 	}
+	method consumir() {
+		position.allElements().forEach({})
+	}
 }
 
 object direccionQueMira {
 	var property direccion = derecha
 	
+}
+
+object fondoPerdedor{
+		var property position = game.at(0,0)
+		method image() = "fondoperdio1.png"
 }
