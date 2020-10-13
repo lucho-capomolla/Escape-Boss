@@ -15,11 +15,12 @@ object jugador {
 		if(self.estaEscondido())
 			return "JugadorEscondido.png"
 		return "Jugador" + direccion.nombre() + ".png"
+	}
 		
 		//else if(direccionQueMira) 
 			//return "JugadorDerecha.png"
 		//return "JugadorIzquierda.png"
-	}
+	
 	
 	method moverA(nuevaPosicion) {
 		if(self.puedeMoverse(nuevaPosicion))
@@ -29,19 +30,26 @@ object jugador {
 	
 	method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
 	
-	method consumirPotenciador(objeto) {
-		objeto.potenciar(self)
-		game.removeVisual(objeto)
+	method consumir() {
+		position.allElements().forEach({objeto => objeto.potenciar()})
+	}
+	
+	method serConsumido(){
 	}
 	
 	method aumentarEnergia(cantidad) {
-		energia += cantidad
+		energia = 100.min(energia + cantidad)
 	}
+	
 	
 	method disminuirEnergia(cantidad) {
-		energia -= cantidad
+		energia = 0.max(energia - cantidad)
+		if(energia == 0){
+			game.say(self, "Sin energía")
+			game.schedule(3000, {game.stop()})
+		}
 	}
-	
+
 	method estaEscondido() {
 		//self.image("JugadorEscondido.png")
 		return position == planta.position()
@@ -63,7 +71,8 @@ object jugador {
 	}
 }
 
-object direccionQueMira {
-	var property direccion = derecha
-	
+
+object fondoPerdedor{
+	var property position = game.at(0,0)
+	method image() = "fondoperdio1.png"
 }

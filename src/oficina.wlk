@@ -1,27 +1,38 @@
 import wollok.game.*
 
+
 class Consumible {
+	var energiaAportada 
 	//var energiaAportada
 	// Todos los consumibles duran X cantidad de tiempo, ej game.onTick(5000, ...) serian 5 segundos
 	// o podrian ser X turnos 
-	//method potenciar(jugador) {
-		//jugador.aumentarEnergia(cantidad)
-	//} 
+	
+	method serConsumido(jugador) {
+		jugador.aumentarEnergia(energiaAportada)
+		game.say(jugador, "Aumento la energia en" + energiaAportada)
+		game.removeVisual(self)
+	} 
+	
+	method sePuedeConsumir() = true
+	
+	method teEncontro() = true
 	
 	method esAtravesable() = true
 	
 }
 
-object cafeConLeche inherits Consumible {
-	const energiaAportada = 25
+object cafeConLeche inherits Consumible (energiaAportada = 25) {
+	
 	method image() = "Cafe.png"
 	// Ponele que este te reponga la energia
+	
 	method position() = game.at(7,7)
-	method teEncontro() = true
-	method potenciar(jugador) {
+	
+	/*override method potenciar() {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada)
-	}
+		game.removeVisual(self)
+	}*/
 }
 
 object barritaEnergetica inherits Consumible {
@@ -45,7 +56,10 @@ object planta {
 	
 	method image() = "pepita.png"
 	
-	method teEncontro() = true
+	//method teEncontro() = position == jugador.position()
+	
+	method potenciar(){
+	}
 	
 	method esAtravesable() = true
 	// Hacer que el jugador se esconda en la planta por X turnos, y el jefe se aleja a la direccion contraria
@@ -61,7 +75,7 @@ object impresora {
 	
 	method image() = "Impresora2.png"
 	
-	method teEncontro() = true
+	//method teEncontro() = true
 	
 	method esAtravesable() = false
 	// 3 impresoras de diferente tipo, no se si conviene que haya una sola clase, e instanciarlas como diferentes
@@ -74,7 +88,7 @@ object companieri {
 	
 	method image() = "Companieri.png"
 	
-	method teEncontro() = true
+	//method teEncontro() = true
 	
 	method esAtravesable() = false
 	// El que te tira las Quest para ir a entregarle una tarea especifica
@@ -87,6 +101,9 @@ object puerta {
 	method image() = "puerta.png"
 	
 	method teEncontro() = true
+	
+	method potenciar(){
+	}
 	
 	method esAtravesable() = true
 	// cuando colisione, que haya un if donde verifique si tiene las 3 tareas completadas, si no es asi, no sucede nada

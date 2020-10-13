@@ -60,7 +60,9 @@ object configuraciones {
 		*/
 		//keyboard.c().onPressDo({game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
 		//game.whenKeyPressedDo(keyboard.c().onPressDo({}), {game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
-		keyboard.c().onPressDo({if(game.uniqueCollider(jugador))jugador.consumirPotenciador(game.uniqueCollider(jugador))})
+		
+		//keyboard.c().onPressDo({if(!game.uniqueCollider(jugador).isEmpty())jugador.consumirPotenciador(game.uniqueCollider(jugador))})
+		keyboard.c().onPressDo({jugador.consumir()})
 		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
 	
 		// Que los limites sean un objeto, y no pueda atraversarlo, como paredes invisibles (?
@@ -78,45 +80,51 @@ object configuraciones {
 	}
 }
 
+
 class Direccion {
 	
 	method moverse(cantidad) {
+		jugador.moverA(self.direccion(cantidad))
 		tarjetas.hacerTurno()
-		jugador.estaEnLaPuerta()
-	}
-
+		jugador.estaEnLaPuerta()	
+	}	
+	
+	method direccion(cantidad)
 }
 
 object arriba inherits Direccion {
-
-	method nombre() {
-	}
-
-	override method moverse(cantidad) {
-		jugador.moverA(jugador.position().up(cantidad))
-		super(cantidad)
+	
+	override method direccion(cantidad) {
+		if(jugador.position().y() < (altura - 3)){
+			return jugador.position().up(cantidad)
+		}
+		jugador.error("No es por ahi man")
+		return jugador.position()
 	}
 }
 
 object abajo inherits Direccion {
 	
-	method nombre() {
-	}
-	
-	override method moverse(cantidad) {
-		jugador.moverA(jugador.position().down(cantidad))
-		super(cantidad)
-	}
+	override method direccion(cantidad) {
+		if(jugador.position().y() > 1){
+			return jugador.position().down(cantidad)
+		}	
+		jugador.error("No es por ahi man")
+		return jugador.position()
+	} 
 }
 
 object derecha inherits Direccion {
 	
 	method nombre() = "Derecha"
 	
-	override method moverse(cantidad) {
-		jugador.moverA(jugador.position().right(cantidad))
-		jugador.direccion(self)
-		super(cantidad)
+	override method direccion(cantidad) {
+		if(jugador.position().x() < (ancho - 5)){
+			jugador.direccion(self)
+			return jugador.position().right(cantidad)
+		}
+		jugador.error("No es por ahi man")
+		return jugador.position()
 	}
 }
 
@@ -124,9 +132,12 @@ object izquierda inherits Direccion {
 	
 	method nombre() = "Izquierda"
 	
-	override method moverse(cantidad) {
-		jugador.moverA(jugador.position().left(cantidad))
-		jugador.direccion(self)
-		super(cantidad)
+	override method direccion(cantidad) {
+		if(jugador.position().x() > 3){
+			jugador.direccion(self)
+			return jugador.position().left(cantidad)
+		}
+		jugador.error("No es por ahi man")
+		return jugador.position()
 	}
 }

@@ -14,6 +14,9 @@ object jefe {
 			game.schedule(2000, {game.stop()})
 	}
 	
+	method potenciar(){
+	}
+	
 	// El jefe te persigue de acuerdo a la posicion en la que te encontras, y si choca con algo que no es atravesable, que se dirija a la posicion donde
 	// PUEDE MOVERSE
 		
