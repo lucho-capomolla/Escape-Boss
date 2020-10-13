@@ -39,6 +39,7 @@ object jugador {
 		energia=(energia - cantidad).max(0)
 			if(energia==0){
 		game.say(self, "Sin energía")
+		game.addVisual(fondoPerdedor)
 		game.schedule(3000, {game.stop()})
 		}
 	}
@@ -77,6 +78,6 @@ object direccionQueMira {
 }
 
 object fondoPerdedor{
-		var property position = game.at(0,0)
+		var property position = game.origin()
 		method image() = "fondoperdio1.png"
 }
