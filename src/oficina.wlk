@@ -4,7 +4,7 @@ class Consumible {
 	var energiaAportada
 	// Todos los consumibles duran X cantidad de tiempo, ej game.onTick(5000, ...) serian 5 segundos
 	// o podrian ser X turnos 
-	method potenciar(jugador) {
+	method serConsumido(jugador) {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada)
 	} 

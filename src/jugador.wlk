@@ -66,8 +66,10 @@ object jugador {
 		// una vez que ésta está lista, entregarla a su respectivo compañery.
 	}
 	method consumir() {
-		position.allElements().forEach({})
+		position.allElements().forEach({elemento=>elemento.serConsumido()})
+		//position.allElements().forEach({elemento=>self.consumirPotenciador(elemento)})
 	}
+	method serConsumido()
 }
 
 object direccionQueMira {
