@@ -20,18 +20,10 @@ class Consumible {
 
 
 object cafeConLeche inherits Consumible (energiaAportada=25) {
-	//const energiaAportada = 25
+	
 	method image() = "Cafe.png"
-	// Ponele que este te reponga la energia
 	
 	method position() = game.at(7,7)
-
-	//method teEncontro() = true
-	//method potenciar(jugador) {
-	//	jugador.aumentarEnergia(energiaAportada)
-	//	game.say(jugador, "Aumento la energia en " + energiaAportada)
-	//}
-
 }
 
 object barritaEnergetica inherits Consumible {
@@ -65,25 +57,32 @@ object planta {
 	}
 	
 	method esAtravesable() = true
-	// Hacer que el jugador se esconda en la planta por X turnos, y el jefe se aleja a la direccion contraria
-	// Cuando ingresa a la planta, se cambia la imagen y el jefe no puede colisionar con el, averiguar como seria
-	
 	
 }
 
 
+class Impresora {
+	method esAtravesable() = false
+}
 
-object impresora {
+object impresoraA inherits Impresora {
 	var property position = game.at(3,5)
 	
 	method image() = "Impresora2.png"
-	
-	//method teEncontro() = true
-	
-	method esAtravesable() = false
-	// 3 impresoras de diferente tipo, no se si conviene que haya una sola clase, e instanciarlas como diferentes
-	// o hacer 3 objetos
 }
+
+object impresoraB inherits Impresora {
+	var property position = game.at(8,2)
+	
+	method image() = "Impresora2.png"
+}
+
+object impresoraC inherits Impresora {
+	var property position = game.center()
+	
+	method image() = "Impresora2.png"
+}
+
 
 
 object companieri {

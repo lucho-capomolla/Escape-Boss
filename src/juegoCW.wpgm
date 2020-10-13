@@ -9,7 +9,7 @@ program juego {
 	game.width(ancho)
 	game.cellSize(60)
 	game.boardGround("fondoPrueba.png")
-	
+
 	prueba.iniciar()
 	
 	game.showAttributes(jugador)
@@ -18,15 +18,6 @@ program juego {
 }
 
 
-// esAtravesable solo en la parte de moverA
-// game.
-// game.position.all elementes
-// aPosition.allElements()
-
-
-
 // Meta proxima semana: 
 		// - Plantear etapas/turnos
-		// - Delegar las direcciones IMPORTANTE
 		// - Jefe que pueda moverse RECOMENDADO
-		// - Que entienda los limites, que puede ser atravesado (Objetos, como limites del tablero)

@@ -78,6 +78,6 @@ object direccionQueMira {
 }
 
 object fondoPerdedor{
-		var property position = game.origin()
+		var property position = game.at(3,1)
 		method image() = "fondoperdio1.png"
 }

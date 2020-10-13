@@ -14,7 +14,9 @@ object prueba {
 		game.addVisual(cafeConLeche)
 		game.addVisual(jefe)
 		game.addVisual(companieri)
-		game.addVisual(impresora)
+		game.addVisual(impresoraA)
+		game.addVisual(impresoraB)
+		game.addVisual(impresoraC)
 		game.addVisual(jugador)
 		game.addVisual(planta)
 		configuraciones.configurarTeclas()
@@ -30,42 +32,9 @@ object configuraciones {
 		keyboard.down().onPressDo({abajo.moverse(1)})
 		keyboard.right().onPressDo({derecha.moverse(1)})
 		keyboard.left().onPressDo({izquierda.moverse(1)})
-	/*
-		keyboard.left().onPressDo({ if(jugador.position().x() > 3){
-				jugador.moverA(jugador.position().left(1))
-				tarjetas.hacerTurno()
-				jugador.direccion("Izquierda")
-				jugador.estaEnLaPuerta()
-				}
-			})
-		keyboard.right().onPressDo({ if(jugador.position().x() < (ancho - 5)){
-				jugador.moverA(jugador.position().right(1))
-				tarjetas.hacerTurno()
-				jugador.direccion("Derecha")
-				jugador.estaEnLaPuerta()
-				}
-			})
-		keyboard.up().onPressDo({ if(jugador.position().y() < (altura - 3)){
-				jugador.moverA(jugador.position().up(1))
-				tarjetas.hacerTurno()
-				jugador.estaEnLaPuerta()
-				}
-			})
-		keyboard.down().onPressDo({ if(jugador.position().y() > 1){
-				jugador.moverA(jugador.position().down(1))
-				tarjetas.hacerTurno()
-				jugador.estaEnLaPuerta()
-				}
-			})
-		*/
-		//keyboard.c().onPressDo({game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
-		//game.whenKeyPressedDo(keyboard.c().onPressDo({}), {game.onCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})})
+
 		keyboard.c().onPressDo({jugador.consumir()})
-		//keyboard.c().onPressDo({}) 		Interactuar con objeto (Impresora, consumible, compañery)
 	
-		// Que los limites sean un objeto, y no pueda atraversarlo, como paredes invisibles (?
-		// REPETICION DE LOGICA EN LAS TECLA, delegar bastante
-		// Verificar que el jugador PUEDA MOVERSE a Tal direccion
 		// Que pueda interactuar con el cuadro del carpincho?
 		
 		// Turno: Que el jugador se mueva durante su turno, y el Jefe durante el suyo -> ESTE TURNO = Tiempo, Cantidad de movimientos o Al tocar una Tecla
@@ -74,10 +43,7 @@ object configuraciones {
 	
 	method configurarColisiones() {
 		game.onCollideDo(jugador, {algo => algo.teEncontro()})
-		//game.onCollideDo(jugador, {algo => algo.teEncontro()})
-		//game.whenCollideDo(jugador, {consumible => jugador.consumirPotenciador(consumible)})
-	}
-	
+	}	
 }
 
 
