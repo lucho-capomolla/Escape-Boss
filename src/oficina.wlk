@@ -1,16 +1,16 @@
 import wollok.game.*
-
+import jugador.*
 
 class Consumible {
-
 	var energiaAportada
 
 	// Todos los consumibles duran X cantidad de tiempo, ej game.onTick(5000, ...) serian 5 segundos
 	// o podrian ser X turnos 
 
-	method serConsumido(jugador) {
+	method serConsumido() {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada)
+		game.removeVisual(self)
 	} 
 	method teEncontro() = true
 
@@ -55,7 +55,11 @@ object planta {
 	
 	method image() = "pepita.png"
 	
-	//method teEncontro() = position == jugador.position()
+	method teEncontro() = position == jugador.position()
+	
+	method serConsumido() {
+		jugador.error("Eto no eh comida papi")
+	}
 	
 	method potenciar(){
 	}
