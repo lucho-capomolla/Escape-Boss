@@ -84,17 +84,31 @@ object impresoraC inherits Impresora {
 }
 
 
+class Companieri {
+	
+	method esAtravesable() = false
+	
+}
 
-object companieri {
+object companieri1 inherits Companieri {
 	var property position = game.at(13,5)
 	
 	method image() = "Companieri.png"
-	
-	//method teEncontro() = true
-	
-	method esAtravesable() = false
-	// El que te tira las Quest para ir a entregarle una tarea especifica
 }
+
+object companieri2 inherits Companieri {
+	var property position =
+	
+	method image() = 
+}
+
+object companieri3 inherits Companieri {
+	var property position =
+	
+	method image() =
+}
+
+
 
 
 object puerta {

@@ -11,6 +11,7 @@ object jefe {
 	method teEncontro() {
 		if(position == jugador.position())
 			game.say(self, "Asi te queria agarrar chinwenwencha!")
+			game.addVisual(fondoPerdedor)
 			game.schedule(2000, {game.stop()})
 	}
 	
