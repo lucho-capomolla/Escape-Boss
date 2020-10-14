@@ -10,9 +10,10 @@ object jefe {
 	
 	method teEncontro() {
 		if(position == jugador.position())
-			game.say(self, "Asi te queria agarrar chinwenwencha!")
+			//game.say(self, "Asi te queria agarrar chinwenwencha!")
 			game.addVisual(fondoPerdedor)
-			game.schedule(2000, {game.stop()})
+			game.addVisual(fondoJefeGano)
+			game.schedule(5000, {game.stop()})
 			
 			// Tal vez podria hacerse que en esa pantalla de Game Over, se pueda poner al Jefe y al jugador todo gris
 			// y al jefe tirando ese comentario

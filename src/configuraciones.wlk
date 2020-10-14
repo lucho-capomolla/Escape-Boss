@@ -16,14 +16,24 @@ object prueba {
 		game.addVisual(companieriAzul)
 		game.addVisual(companieriRojo)
 		game.addVisual(companieriVerde)
-		game.addVisual(impresoraA)
-		game.addVisual(impresoraB)
-		game.addVisual(impresoraC)
+		game.addVisual(impresoraAzul)
+		game.addVisual(impresoraRojo)
+		game.addVisual(impresoraVerde)
 		game.addVisual(jugador)
 		game.addVisual(planta)
 		configuraciones.configurarTeclas()
 		configuraciones.configurarColisiones()
 	}
+}
+
+object fondoPerdedor{
+		var property position = game.at(3,1)
+		method image() = "fondoperdio1.png"
+}
+
+object fondoJefeGano {
+	var property position = game.at(5,1)
+	method image() = "GameOverPa.png"
 }
 
 object configuraciones {

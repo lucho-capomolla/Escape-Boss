@@ -65,29 +65,28 @@ class Impresora {
 	method esAtravesable() = false
 }
 
-object impresoraA inherits Impresora {
+object impresoraAzul inherits Impresora {
 	var property position = game.at(3,5)
 	
-	method image() = "Impresora2.png"
+	method image() = "ImpresoraAzul.png"
 }
 
-object impresoraB inherits Impresora {
+object impresoraRojo inherits Impresora {
 	var property position = game.at(8,2)
 	
-	method image() = "Impresora2.png"
+	method image() = "ImpresoraRojo.png"
 }
 
-object impresoraC inherits Impresora {
+object impresoraVerde inherits Impresora {
 	var property position = game.center()
 	
-	method image() = "Impresora2.png"
+	method image() = "ImpresoraVerde.png"
 }
 
 
 class Companieri {
 	
 	method esAtravesable() = false
-	
 }
 
 object companieriAzul inherits Companieri {
