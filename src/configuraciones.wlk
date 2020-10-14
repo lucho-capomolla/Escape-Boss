@@ -14,8 +14,8 @@ object prueba {
 		game.addVisual(cafeConLeche)
 		game.addVisual(jefe)
 		game.addVisual(companieri1)
-		game.addVisual(companieri2)
-		game.addVisual(companieri3)
+		//game.addVisual(companieri2)
+		//game.addVisual(companieri3)
 		game.addVisual(impresoraA)
 		game.addVisual(impresoraB)
 		game.addVisual(impresoraC)
@@ -52,96 +52,51 @@ object configuraciones {
 class Direccion {
 	
 	method moverse(cantidad) {
-		jugador.moverA(self.direccion(jugador.position(), cantidad))
+		jugador.moverA(self.direccion(cantidad))
 		tarjetas.hacerTurno()
 		jugador.estaEnLaPuerta()	
 	}	
 	
-	method direccion(posicion, cantidad) {
-		if(posicion.y().between((altura - 3), 1) or posicion.x().between((ancho - 5), 3)){
+	method direccion(cantidad) {
+		if(self.puedeIr()){
 			return self.hacia(cantidad)
 		}
 		jugador.error("No es por ahi man")
 		return jugador.position()
 	}
 	
+	method puedeIr()
 	method hacia(cantidad)
 }
 
 object arriba inherits Direccion {
 	
+	override method puedeIr() = jugador.position().y() < (altura - 3)
 	override method hacia(cantidad) = jugador.position().up(cantidad)
-	
-	/*
-	override method direccion(cantidad) {
-		if(jugador.position().y() < (altura - 3)){
-			return jugador.position().up(cantidad)
-		}
-		jugador.error("No es por ahi man")
-		return jugador.position()
-	}*/
- 	/*
-	override method direccion(posicion, cantidad){
-		//super(posicion, cantidad)
-		return jugador.position().up(cantidad)
-	}*/
 }
-/*
-object 
-jugador.position().y().between((altura - 3), 1)
-jugador.position().x().between((ancho - 5), 3)
-*/
 
 object abajo inherits Direccion {
 	
+	override method puedeIr() = jugador.position().y() > 1
 	override method hacia(cantidad) = jugador.position().down(cantidad)
-	/* 
-	override method direccion(cantidad) {
-		if(jugador.position().y() > 1){
-			return jugador.position().down(cantidad)
-		}	
-		jugador.error("No es por ahi man")
-		return jugador.position()
-	} */
-	
-	
 }
 
 object derecha inherits Direccion {
 	
 	method nombre() = "Derecha"
-	
+	override method puedeIr() = jugador.position().x() < (ancho - 5)
 	override method hacia(cantidad) {
 		jugador.direccion(self)
 		return jugador.position().right(cantidad)
 	}
-	/*
-	override method direccion(cantidad) {
-		if(jugador.position().x() < (ancho - 5)){
-			jugador.direccion(self)
-			return jugador.position().right(cantidad)
-		}
-		jugador.error("No es por ahi man")
-		return jugador.position()
-	}*/
 }
 
 object izquierda inherits Direccion {
 	
 	method nombre() = "Izquierda"
-	
+	override method puedeIr() = jugador.position().x() > 3
 	override method hacia(cantidad) {
 		jugador.direccion(self)
 		return jugador.position().left(cantidad)
 	}
-	
-	/*
-	override method direccion(cantidad) {
-		if(jugador.position().x() > 3){
-			jugador.direccion(self)
-			return jugador.position().left(cantidad)
-		}
-		jugador.error("No es por ahi man")
-		return jugador.position()
-	}*/
 }
