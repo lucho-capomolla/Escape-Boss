@@ -16,27 +16,31 @@ class Consumible {
 
 	method esAtravesable() = true
 	
+	method image()
+	
+	method position()
 }
 
 
-object cafeConLeche inherits Consumible (energiaAportada=25) {
+object cafeConLeche inherits Consumible (energiaAportada=20) {
 	
-	method image() = "Cafe.png"
+	override method image() = "Cafe.png"
 	
-	method position() = game.at(7,7)
+	override method position() = game.at(7,7)
 }
 
-object barritaEnergetica inherits Consumible {
+object chocolate inherits Consumible (energiaAportada=35){
 	
-	//method image() =
-	// Este te hace ir 2 cuadraditos o dos pasos por cada movimiento
-	// o podria ser que te de energia infinita por X turnos
+	override method image() = "chocolate.png"
+	
+	override method position() = game.at(13,8)
 }
 
-object llamadaAfip inherits Consumible {
+object hamburguesa inherits Consumible (energiaAportada=50) {
 	
-	//method image() =
-	// Este hace que el jefe se quede bloqueado en su posicion por X turnos/segundos
+	override method image() = "hamburguesa.png"
+	
+	override method position() = game.at(11,2)
 }
 
 

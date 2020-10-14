@@ -12,6 +12,8 @@ object prueba {
 	method iniciar() {
 		game.addVisual(puerta)
 		game.addVisual(cafeConLeche)
+		game.addVisual(chocolate)
+		game.addVisual(hamburguesa)
 		game.addVisual(jefe)
 		game.addVisual(companieriAzul)
 		game.addVisual(companieriRojo)
@@ -28,7 +30,7 @@ object prueba {
 
 object fondoPerdedor{
 		var property position = game.at(3,1)
-		method image() = "fondoperdio1.png"
+		method image() = "cami.png"
 }
 
 object fondoJefeGano {
