@@ -90,22 +90,22 @@ class Companieri {
 	
 }
 
-object companieri1 inherits Companieri {
+object companieriAzul inherits Companieri {
 	var property position = game.at(13,5)
 	
-	method image() = "Companieri.png"
+	method image() = "CompanieriAzul.png"
 }
 
-object companieri2 inherits Companieri {
-	var property position =
+object companieriRojo inherits Companieri {
+	var property position = game.at(6,4)
 	
-	method image() = 
+	method image() = "CompanieriRojo.png"
 }
 
-object companieri3 inherits Companieri {
-	var property position =
+object companieriVerde inherits Companieri {
+	var property position =game.at(3,8)
 	
-	method image() =
+	method image() = "CompanieriVerde.png"
 }
 
 

@@ -13,6 +13,11 @@ object jefe {
 			game.say(self, "Asi te queria agarrar chinwenwencha!")
 			game.addVisual(fondoPerdedor)
 			game.schedule(2000, {game.stop()})
+			
+			// Tal vez podria hacerse que en esa pantalla de Game Over, se pueda poner al Jefe y al jugador todo gris
+			// y al jefe tirando ese comentario
+			
+			
 	}
 	
 	method potenciar(){
