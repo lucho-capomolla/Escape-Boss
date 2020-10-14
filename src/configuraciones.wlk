@@ -34,8 +34,8 @@ object fondoPerdedor{
 }
 
 object fondoJefeGano {
-	var property position = game.at(5,1)
-	method image() = "GameOverPa.png"
+	var property position = game.at(3,1)
+	method image() = "lucho.png"
 }
 
 object configuraciones {

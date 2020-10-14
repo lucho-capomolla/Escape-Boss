@@ -72,19 +72,19 @@ class Impresora {
 object impresoraAzul inherits Impresora {
 	var property position = game.at(3,5)
 	
-	method image() = "ImpresoraAzul.png"
+	method image() = "ImpresoraAAzul.png"
 }
 
 object impresoraRojo inherits Impresora {
 	var property position = game.at(8,2)
 	
-	method image() = "ImpresoraRojo.png"
+	method image() = "ImpresoraBRojo.png"
 }
 
 object impresoraVerde inherits Impresora {
 	var property position = game.center()
 	
-	method image() = "ImpresoraVerde.png"
+	method image() = "ImpresoraAVerde.png"
 }
 
 
