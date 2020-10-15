@@ -8,13 +8,17 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	var property energia = 100
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
-	const tareasPendientes = #{}
+	var tareaEnMano = null
 	
 	method image() {
 		if(self.estaEscondido())
 			return "JugadorEscondido.png"
 		return "Personaje/Jugador" + orientacion.nombre() + ".png"
 	}
+	
+	// Agregar que el jugador cambie de imagen, de acuerdo a la tarea que lleva en su mano
+	// Ej: JugadorDeFrente + tarea
+	// Donde tarea puede ser Verde|Rojo|Azul o nada directamente
 	
 	override method moverHacia(nuevaPosicion) {
 		//if(self.puedeMoverse(nuevaPosicion))
@@ -55,11 +59,11 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	}
 	
 	method agregarTarea(tarea) {
-		tareasPendientes.add(tarea)
+		tareaEnMano = tarea
 	}
 	
 	method terminarTarea(tarea) {
-		tareasPendientes.remove(tarea)
+		tareaEnMano = null
 		tareasRealizadas.add(tarea)
 	}
 	
