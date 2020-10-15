@@ -26,6 +26,7 @@ object prueba {
 		game.addVisual(jugador)
 		configuraciones.configurarTeclas()
 		configuraciones.configurarColisiones()
+		jefe.moverse()
 	}
 }
 

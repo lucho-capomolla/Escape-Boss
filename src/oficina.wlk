@@ -67,7 +67,7 @@ object planta {
 
 
 class Impresora {
-	const position
+	var property position
 	var tarea
 	
 	method esAtravesable() = true
@@ -94,7 +94,7 @@ object impresoraVerde inherits Impresora (tarea = tareaVerde, position = game.ce
 
 
 class Companieri {
-	const position
+	var property position
 	var tareaRequerida
 	
 	method esAtravesable() = false
@@ -128,7 +128,7 @@ object companieriVerde inherits Companieri (tareaRequerida = tareaVerde, positio
 
 
 object puerta {
-	const position = game.at(8,9)
+	var property position = game.at(8,9)
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
 	
 	method escapar() {

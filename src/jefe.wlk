@@ -1,11 +1,15 @@
 import wollok.game.*
 import jugador.*
 import configuraciones.*
+import direcciones.*
 
 object jefe inherits Personaje(position = game.at(14,9)){
 	//var property position = game.at(14,9)
-	var property image = "JefeIzquierda.png"
+	//var property image = "JefeIzquierda.png"
+	var property orientacion = izquierda
 	
+	method image()="Jefe" + orientacion.nombre() + ".png"
+		
 	method esAtravesable() = true
 	
 	//method moverA(nuevaPosicion) {
@@ -22,7 +26,16 @@ object jefe inherits Personaje(position = game.at(14,9)){
 	}
 	
 	method moverse(){
-		//game.onTick(2000, "Perseguir", {self.})
+		game.onTick(1000, "Perseguir", {self.moverHaciaJugador()})
 	}
+	
+	method moverHaciaJugador(){
+	var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
+	self.moverHaciaSiSePuede(self,direccionMasConveniente)	
+	}
+	
+	method direccionMasConveniente(direcciones)=direcciones.min({ direccion => direccion.posicion(position).distance(jugador.position()) }) 
+	
+	method direccionesAtravesables() = [izquierda, arriba, abajo, derecha]
 		
 }
