@@ -67,7 +67,9 @@ object planta {
 
 
 class Impresora {
+	const position
 	var tarea
+	
 	method esAtravesable() = true
 	
 	method darCopia() {
@@ -78,27 +80,23 @@ class Impresora {
 	method teEncontro() = true
 }
 
-object impresoraAzul inherits Impresora (tarea = tareaAzul) {
-	var property position = game.at(3,5)
-	
+object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,5)) {
 	method image() = "ImpresoraAAzul.png"
 }
 
-object impresoraRojo inherits Impresora (tarea = tareaRojo) {
-	var property position = game.at(8,2)
-	
+object impresoraRojo inherits Impresora (tarea = tareaRojo, position = game.at(8,2)) {
 	method image() = "ImpresoraBRojo.png"
 }
 
-object impresoraVerde inherits Impresora (tarea = tareaVerde) {
-	var property position = game.center()
-	
+object impresoraVerde inherits Impresora (tarea = tareaVerde, position = game.center()) {
 	method image() = "ImpresoraAVerde.png"
 }
 
 
 class Companieri {
+	const position
 	var tareaRequerida
+	
 	method esAtravesable() = false
 	
 	method presentarTarea(tarea) {
@@ -110,24 +108,19 @@ class Companieri {
 			game.say(self, "Te equivocaste de tarea, papafrita")
 		}
 	}
+	
 	method teEncontro() = true
 }
 
-object companieriAzul inherits Companieri (tareaRequerida = tareaAzul){
-	var property position = game.at(13,5)
-	
+object companieriAzul inherits Companieri (tareaRequerida = tareaAzul, position = game.at(13,5)){
 	method image() = "CompanieriAzul.png"
 }
 
-object companieriRojo inherits Companieri (tareaRequerida = tareaRojo){
-	var property position = game.at(6,4)
-	
+object companieriRojo inherits Companieri (tareaRequerida = tareaRojo, position = game.at(6,4)){
 	method image() = "CompanieriRojo.png"
 }
 
-object companieriVerde inherits Companieri (tareaRequerida = tareaVerde){
-	var property position =game.at(3,8)
-	
+object companieriVerde inherits Companieri (tareaRequerida = tareaVerde, position = game.at(3,8)){
 	method image() = "CompanieriVerde.png"
 }
 
@@ -135,7 +128,7 @@ object companieriVerde inherits Companieri (tareaRequerida = tareaVerde){
 
 
 object puerta {
-	var property position = game.at(8,9)
+	const position = game.at(8,9)
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
 	
 	method escapar() {

@@ -18,7 +18,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	
-	override method moverHacia(nuevaPosicion) {
+	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
 		self.disminuirEnergia(1)
 	}
@@ -49,12 +49,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 
 //		ACCIONES POR ENTORNO (ESCONDERSE, ESCAPAR)
 	method estaEscondido() = position == planta.position()
-	
-	//method estaEnLaPuerta() {
-		//if(position == puerta.position())
-		//	puerta.escapar()
-	//}
-	
+
 	
 //	      TAREAS
 	method usarImpresora() {

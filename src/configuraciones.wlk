@@ -43,13 +43,14 @@ object configuraciones {
 	
 	method configurarTeclas() {
 
-		keyboard.up().onPressDo({jugador.moverHacia(arriba)})
-		keyboard.down().onPressDo({jugador.moverHacia(abajo)})
-		keyboard.right().onPressDo({jugador.moverHacia(derecha)})
-		keyboard.left().onPressDo({jugador.moverHacia(izquierda)})
-		keyboard.d().onPressDo({jugador.usarImpresora()})
-		keyboard.c().onPressDo({jugador.consumir()})
-		keyboard.x().onPressDo({jugador.entregarTarea()})
+		keyboard.up().onPressDo({jugador.moverse(arriba)})
+		keyboard.down().onPressDo({jugador.moverse(abajo)})
+		keyboard.right().onPressDo({jugador.moverse(derecha)})
+		keyboard.left().onPressDo({jugador.moverse(izquierda)})
+		keyboard.s().onPressDo({jugador.usarImpresora()})
+		keyboard.a().onPressDo({jugador.consumir()})
+		keyboard.d().onPressDo({jugador.entregarTarea()})
+		//keyboard.w().onPressDo({jugador.estaerEgg()})
 		// Que pueda interactuar con el cuadro del carpincho?
 		
 		// Turno: Que el jugador se mueva durante su turno, y el Jefe durante el suyo -> ESTE TURNO = Tiempo, Cantidad de movimientos o Al tocar una Tecla
@@ -64,19 +65,9 @@ object configuraciones {
 
 class Personaje {
 	var property position
-	var property estiloDeMovimiento = normal
 	
-	method moverHacia(direccion) {
-		estiloDeMovimiento.moverHaciaSiSePuede(self, direccion)
-	}
-}
-
-object normal {
-	
-	method moverHacia(personaje, direccion) {
-		const nuevaPosicion = direccion.posicion(personaje.position())
-		personaje.orientacion(direccion)
-		personaje.position(nuevaPosicion)
+	method moverse(direccion) {
+		self.moverHaciaSiSePuede(self, direccion)
 	}
 	
 	method moverHaciaSiSePuede(personaje, direccion) {
@@ -88,5 +79,14 @@ object normal {
 		}
 	}
 	
-	method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
+	method moverHacia(personaje, direccion) {
+		const nuevaPosicion = direccion.posicion(personaje.position())
+		personaje.orientacion(direccion)
+		personaje.position(nuevaPosicion)
+	}
+	
+
 }
+
+	
+	//method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
