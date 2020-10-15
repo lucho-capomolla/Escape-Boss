@@ -22,8 +22,8 @@ object prueba {
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraVerde)
-		game.addVisual(jugador)
 		game.addVisual(planta)
+		game.addVisual(jugador)
 		configuraciones.configurarTeclas()
 		configuraciones.configurarColisiones()
 	}

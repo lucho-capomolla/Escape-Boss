@@ -2,18 +2,19 @@ import wollok.game.*
 import oficina.*
 import configuraciones.*
 import direcciones.*
+import tareas.*
 
 object jugador inherits Personaje (position = game.at(3,1)) {
 	//var property position = game.at(3,1)
 	var property energia = 100
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
-	var tareaEnMano = null
+	var tareaEnMano = sinTarea
 	
 	method image() {
 		if(self.estaEscondido())
-			return "JugadorEscondido.png"
-		return "Personaje/Jugador" + orientacion.nombre() + ".png"
+			return "Escondido.png"
+		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	
 	// Agregar que el jugador cambie de imagen, de acuerdo a la tarea que lleva en su mano
@@ -63,7 +64,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	}
 	
 	method terminarTarea(tarea) {
-		tareaEnMano = null
+		tareaEnMano = sinTarea
 		tareasRealizadas.add(tarea)
 	}
 	
