@@ -1,27 +1,29 @@
 import wollok.game.*
 import oficina.*
 import configuraciones.*
+import direcciones.*
 
-object jugador {
-	var property position = game.at(3,1)
+object jugador inherits Personaje (position = game.at(3,1)) {
+	//var property position = game.at(3,1)
 	var property energia = 100
-	var property direccion = derecha
+	var property orientacion = derecha
 	const property tareasRealizadas = #{}
 	const tareasPendientes = #{}
 	
 	method image() {
 		if(self.estaEscondido())
 			return "JugadorEscondido.png"
-		return "Jugador" + direccion.nombre() + ".png"
+		return "Jugador" + orientacion.nombre() + ".png"
 	}
 	
-	method moverA(nuevaPosicion) {
-		if(self.puedeMoverse(nuevaPosicion))
-			position = nuevaPosicion
+	override method moverHacia(nuevaPosicion) {
+		//if(self.puedeMoverse(nuevaPosicion))
+			//position = nuevaPosicion
+		super(nuevaPosicion)
 		self.disminuirEnergia(1)
 	}
 	
-	method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
+	//method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
 	
 	method aumentarEnergia(cantidad) {
 		energia=(energia + cantidad).min(100)

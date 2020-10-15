@@ -100,6 +100,8 @@ object impresoraVerde inherits Impresora (tarea = tareaVerde) {
 class Companieri {
 	
 	method esAtravesable() = false
+	
+	method teEncontro() = true
 }
 
 object companieriAzul inherits Companieri {

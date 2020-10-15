@@ -2,11 +2,15 @@ import wollok.game.*
 import jugador.*
 import configuraciones.*
 
-object jefe {
-	var property position = game.at(14,9)
+object jefe inherits Personaje(position = game.at(14,9)){
+	//var property position = game.at(14,9)
 	var property image = "JefeIzquierda.png"
 	
 	method esAtravesable() = true
+	
+	//method moverA(nuevaPosicion) {
+		//position = nuevaPosicion
+	//}
 	
 	method teEncontro() {
 		if(position == jugador.position())
@@ -18,7 +22,7 @@ object jefe {
 	}
 	
 	method moverse(){
-		//game.onTick(2000, "Perseguir", {})
+		//game.onTick(2000, "Perseguir", {self.})
 	}
 		
 }

@@ -3,6 +3,7 @@ import wollok.game.*
 import tarjetas.*
 import oficina.*
 import jefe.*
+import direcciones.*
 
 const ancho = 19
 const altura = 12
@@ -42,10 +43,14 @@ object configuraciones {
 	
 	method configurarTeclas() {
 	
-		keyboard.up().onPressDo({arriba.moverse(1)})
-		keyboard.down().onPressDo({abajo.moverse(1)})
-		keyboard.right().onPressDo({derecha.moverse(1)})
-		keyboard.left().onPressDo({izquierda.moverse(1)})
+		//keyboard.up().onPressDo({arriba.moverse(1)})
+		//keyboard.down().onPressDo({abajo.moverse(1)})
+		//keyboard.right().onPressDo({derecha.moverse(1)})
+		//keyboard.left().onPressDo({izquierda.moverse(1)})
+		keyboard.up().onPressDo({jugador.moverHacia(arriba)})
+		keyboard.down().onPressDo({jugador.moverHacia(abajo)})
+		keyboard.right().onPressDo({jugador.moverHacia(derecha)})
+		keyboard.left().onPressDo({jugador.moverHacia(izquierda)})
 		keyboard.d().onPressDo({jugador.usarImpresora()})
 		keyboard.c().onPressDo({jugador.consumir()})
 	
@@ -61,54 +66,31 @@ object configuraciones {
 }
 
 
-class Direccion {
+class Personaje {
+	var property position
+	var property estiloDeMovimiento = normal
 	
-	method moverse(cantidad) {
-		jugador.moverA(self.direccion(cantidad))
-		tarjetas.hacerTurno()
-		jugador.estaEnLaPuerta()	
-	}	
+	method moverHacia(direccion) {
+		estiloDeMovimiento.moverHaciaSiSePuede(self, direccion)
+	}
+}
+
+object normal {
 	
-	method direccion(cantidad) {
-		if(self.puedeIr()){
-			return self.hacia(cantidad)
+	method moverHacia(personaje, direccion) {
+		const nuevaPosicion = direccion.posicion(personaje.position())
+		personaje.orientacion(direccion)
+		personaje.position(nuevaPosicion)
+	}
+	
+	method moverHaciaSiSePuede(personaje, direccion) {
+		if(direccion.puedeIr(personaje)){
+			self.moverHacia(personaje, direccion)
 		}
-		jugador.error("No es por ahi man")
-		return jugador.position()
+		else {
+			personaje.error("No es por ahi man")
+		}
 	}
 	
-	method puedeIr()
-	method hacia(cantidad)
-}
-
-object arriba inherits Direccion {
-	
-	override method puedeIr() = jugador.position().y() < (altura - 3)
-	override method hacia(cantidad) = jugador.position().up(cantidad)
-}
-
-object abajo inherits Direccion {
-	
-	override method puedeIr() = jugador.position().y() > 1
-	override method hacia(cantidad) = jugador.position().down(cantidad)
-}
-
-object derecha inherits Direccion {
-	
-	method nombre() = "Derecha"
-	override method puedeIr() = jugador.position().x() < (ancho - 5)
-	override method hacia(cantidad) {
-		jugador.direccion(self)
-		return jugador.position().right(cantidad)
-	}
-}
-
-object izquierda inherits Direccion {
-	
-	method nombre() = "Izquierda"
-	override method puedeIr() = jugador.position().x() > 3
-	override method hacia(cantidad) {
-		jugador.direccion(self)
-		return jugador.position().left(cantidad)
-	}
+	method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
 }
