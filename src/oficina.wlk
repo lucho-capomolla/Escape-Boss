@@ -98,25 +98,34 @@ object impresoraVerde inherits Impresora (tarea = tareaVerde) {
 
 
 class Companieri {
-	
+	var tareaRequerida
 	method esAtravesable() = false
 	
+	method presentarTarea(tarea) {
+		if(tareaRequerida == tarea) {
+			game.say(self, "Me has salvado! Estoy agradecido")
+			jugador.terminarTarea(tarea)
+		}
+		else{
+			game.say(self, "Te equivocaste de tarea, papafrita")
+		}
+	}
 	method teEncontro() = true
 }
 
-object companieriAzul inherits Companieri {
+object companieriAzul inherits Companieri (tareaRequerida = tareaAzul){
 	var property position = game.at(13,5)
 	
 	method image() = "CompanieriAzul.png"
 }
 
-object companieriRojo inherits Companieri {
+object companieriRojo inherits Companieri (tareaRequerida = tareaRojo){
 	var property position = game.at(6,4)
 	
 	method image() = "CompanieriRojo.png"
 }
 
-object companieriVerde inherits Companieri {
+object companieriVerde inherits Companieri (tareaRequerida = tareaVerde){
 	var property position =game.at(3,8)
 	
 	method image() = "CompanieriVerde.png"
@@ -141,7 +150,11 @@ object puerta {
 	
 	method image() = "Puerta.png"
 	
-	method teEncontro() = true
+	method teEncontro() {
+		if(position == jugador.position()){
+			self.escapar()
+		}
+	}
 	
 	method potenciar(){
 	}

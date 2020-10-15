@@ -42,18 +42,14 @@ object fondoJefeGano {
 object configuraciones {
 	
 	method configurarTeclas() {
-	
-		//keyboard.up().onPressDo({arriba.moverse(1)})
-		//keyboard.down().onPressDo({abajo.moverse(1)})
-		//keyboard.right().onPressDo({derecha.moverse(1)})
-		//keyboard.left().onPressDo({izquierda.moverse(1)})
+
 		keyboard.up().onPressDo({jugador.moverHacia(arriba)})
 		keyboard.down().onPressDo({jugador.moverHacia(abajo)})
 		keyboard.right().onPressDo({jugador.moverHacia(derecha)})
 		keyboard.left().onPressDo({jugador.moverHacia(izquierda)})
 		keyboard.d().onPressDo({jugador.usarImpresora()})
 		keyboard.c().onPressDo({jugador.consumir()})
-	
+		keyboard.x().onPressDo({jugador.entregarTarea()})
 		// Que pueda interactuar con el cuadro del carpincho?
 		
 		// Turno: Que el jugador se mueva durante su turno, y el Jefe durante el suyo -> ESTE TURNO = Tiempo, Cantidad de movimientos o Al tocar una Tecla
