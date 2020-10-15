@@ -132,6 +132,9 @@ object puerta {
 			game.say(self, "GOOD ENDING")
 			game.schedule(5000, {game.stop()})
 		}
+		else {
+			game.say(self, "TE FALTAN TAREAS BOLUDO")
+		}
 	}
 	
 	method image() = "puerta.png"

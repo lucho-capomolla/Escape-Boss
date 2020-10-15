@@ -65,6 +65,9 @@ object jugador {
 		
 		// hacer una coleccion,donde tenga las 3 tareas asignadas por defecto, y otra coleccion, donde estan las tareas listas
 		// una vez que ésta está lista, entregarla a su respectivo compañery.
+		
+		
+		// Conviene que presente la tarea estando en la misma posicion, o que presente la tarea cuando se encuentra a la derecha
 	}
 	
 	method consumir() {

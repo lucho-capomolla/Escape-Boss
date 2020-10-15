@@ -17,5 +17,8 @@ object jefe {
 	method potenciar(){
 	}
 	
+	method moverse(){
+		//game.onTick(2000, "Perseguir", {})
+	}
 		
 }
