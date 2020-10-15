@@ -32,14 +32,14 @@ object cafeConLeche inherits Consumible (energiaAportada=20) {
 
 object chocolate inherits Consumible (energiaAportada=35){
 	
-	override method image() = "chocolate.png"
+	override method image() = "Chocolate.png"
 	
 	override method position() = game.at(13,8)
 }
 
 object hamburguesa inherits Consumible (energiaAportada=50) {
 	
-	override method image() = "hamburguesa.png"
+	override method image() = "Hamburguesa.png"
 	
 	override method position() = game.at(11,2)
 }
@@ -50,7 +50,7 @@ object planta {
 	
 	var property position = game.at(9,3)
 	
-	method image() = "pepita.png"
+	method image() = "Planta.png"
 	
 	method teEncontro() = position == jugador.position()
 	
@@ -139,7 +139,7 @@ object puerta {
 		}
 	}
 	
-	method image() = "puerta.png"
+	method image() = "Puerta.png"
 	
 	method teEncontro() = true
 	

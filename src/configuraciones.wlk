@@ -31,12 +31,12 @@ object prueba {
 
 object fondoPerdedor{
 		var property position = game.at(3,1)
-		method image() = "cami.png"
+		method image() = "GameOver.png"
 }
 
 object fondoJefeGano {
 	var property position = game.at(3,1)
-	method image() = "lucho.png"
+	method image() = "GameOverJefe.png"
 }
 
 object configuraciones {

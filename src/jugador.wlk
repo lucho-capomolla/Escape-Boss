@@ -13,7 +13,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method image() {
 		if(self.estaEscondido())
 			return "JugadorEscondido.png"
-		return "Jugador" + orientacion.nombre() + ".png"
+		return "Personaje/Jugador" + orientacion.nombre() + ".png"
 	}
 	
 	override method moverHacia(nuevaPosicion) {

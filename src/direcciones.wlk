@@ -58,7 +58,7 @@ object izquierda inherits Direccion {
 
 
 object arriba {
-	method nombre() = "Arriba"
+	method nombre() = "Espalda"
 	
 	method posicion(posicion) = posicion.up(1)
 	
@@ -71,7 +71,7 @@ object arriba {
 }
  
 object abajo {
-	method nombre() = "Abajo"
+	method nombre() = "DeFrente"
 	
 	method posicion(posicion) = posicion.down(1)
 	
