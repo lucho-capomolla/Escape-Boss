@@ -46,7 +46,7 @@ object configuraciones {
 		keyboard.down().onPressDo({abajo.moverse(1)})
 		keyboard.right().onPressDo({derecha.moverse(1)})
 		keyboard.left().onPressDo({izquierda.moverse(1)})
-
+		keyboard.d().onPressDo({jugador.usarImpresora()})
 		keyboard.c().onPressDo({jugador.consumir()})
 	
 		// Que pueda interactuar con el cuadro del carpincho?

@@ -6,6 +6,8 @@ object jugador {
 	var property position = game.at(3,1)
 	var property energia = 100
 	var property direccion = derecha
+	const property tareasRealizadas = #{}
+	const tareasPendientes = #{}
 	
 	method image() {
 		if(self.estaEscondido())
@@ -28,9 +30,11 @@ object jugador {
 	method disminuirEnergia(cantidad) {
 		energia=(energia - cantidad).max(0)
 			if(energia==0){
-		game.say(self, "Sin energía")
+		//game.say(self, "Sin energía")
 		game.addVisual(fondoPerdedor)
-		game.schedule(3000, {game.stop()})
+		game.schedule(5000, {game.stop()})
+		
+		// Hacer que se bloqueen las teclas cuando se queda sin energia, sino muestra un mensaje de Error
 		}
 	}
 
@@ -38,11 +42,23 @@ object jugador {
 	
 	method estaEnLaPuerta() {
 		if(position == puerta.position())
-			game.say(self, "Estamos en la puerta")
+			puerta.escapar()
 	}
 	
 	method usarImpresora() {
-		// para conseguir la tarea de una impresora particular
+		position.allElements().forEach({impresora=>impresora.darCopia()})
+	}
+	
+	method darCopia(){
+	}
+	
+	method agregarTarea(tarea) {
+		tareasPendientes.add(tarea)
+	}
+	
+	method terminarTarea(tarea) {
+		tareasPendientes.remove(tarea)
+		tareasRealizadas.add(tarea)
 	}
 	
 	method presentarTarea() {
@@ -50,6 +66,7 @@ object jugador {
 		// hacer una coleccion,donde tenga las 3 tareas asignadas por defecto, y otra coleccion, donde estan las tareas listas
 		// una vez que ésta está lista, entregarla a su respectivo compañery.
 	}
+	
 	method consumir() {
 		position.allElements().forEach({elemento=>elemento.serConsumido()})
 	}

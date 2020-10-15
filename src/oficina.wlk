@@ -1,5 +1,6 @@
 import wollok.game.*
 import jugador.*
+import tareas.*
 
 class Consumible {
 	var energiaAportada
@@ -66,22 +67,30 @@ object planta {
 
 
 class Impresora {
-	method esAtravesable() = false
+	var tarea
+	method esAtravesable() = true
+	
+	method darCopia() {
+		jugador.agregarTarea(tarea)
+		game.say(self, "Printer does BRRR BRRR")
+	}
+	
+	method teEncontro() = true
 }
 
-object impresoraAzul inherits Impresora {
+object impresoraAzul inherits Impresora (tarea = tareaAzul) {
 	var property position = game.at(3,5)
 	
 	method image() = "ImpresoraAAzul.png"
 }
 
-object impresoraRojo inherits Impresora {
+object impresoraRojo inherits Impresora (tarea = tareaRojo) {
 	var property position = game.at(8,2)
 	
 	method image() = "ImpresoraBRojo.png"
 }
 
-object impresoraVerde inherits Impresora {
+object impresoraVerde inherits Impresora (tarea = tareaVerde) {
 	var property position = game.center()
 	
 	method image() = "ImpresoraAVerde.png"
@@ -116,6 +125,14 @@ object companieriVerde inherits Companieri {
 
 object puerta {
 	var property position = game.at(8,9)
+	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
+	
+	method escapar() {
+		if (tareasNecesarias == jugador.tareasRealizadas()){
+			game.say(self, "GOOD ENDING")
+			game.schedule(5000, {game.stop()})
+		}
+	}
 	
 	method image() = "puerta.png"
 	
@@ -125,6 +142,4 @@ object puerta {
 	}
 	
 	method esAtravesable() = true
-	// cuando colisione, que haya un if donde verifique si tiene las 3 tareas completadas, si no es asi, no sucede nada
-	// recien puede terminar el juego cuando tenga las tareas terminadas
 }
