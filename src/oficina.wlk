@@ -3,10 +3,8 @@ import jugador.*
 import tareas.*
 
 class Consumible {
+	var property position
 	var energiaAportada
-
-	// Todos los consumibles duran X cantidad de tiempo, ej game.onTick(5000, ...) serian 5 segundos
-	// o podrian ser X turnos 
 
 	method serConsumido() {
 		jugador.aumentarEnergia(energiaAportada)
@@ -16,38 +14,24 @@ class Consumible {
 	method teEncontro() = true
 
 	method esAtravesable() = true
-	
-	method image()
-	
-	method position()
 }
 
 
-object cafeConLeche inherits Consumible (energiaAportada=20) {
-	
-	override method image() = "Cafe.png"
-	
-	override method position() = game.at(7,7)
+object cafeConLeche inherits Consumible (energiaAportada=20, position = game.at(7,7)) {
+	 method image() = "Cafe.png"
 }
 
-object chocolate inherits Consumible (energiaAportada=35){
-	
-	override method image() = "Chocolate.png"
-	
-	override method position() = game.at(13,8)
+object chocolate inherits Consumible (energiaAportada=35, position = game.at(13,8)){
+	method image() = "Chocolate.png"
 }
 
-object hamburguesa inherits Consumible (energiaAportada=50) {
-	
-	override method image() = "Hamburguesa.png"
-	
-	override method position() = game.at(11,2)
+object hamburguesa inherits Consumible (energiaAportada=50, position = game.at(11,2)) {
+	 method image() = "Hamburguesa.png"
 }
 
 
 
 object planta {
-	
 	var property position = game.at(9,3)
 	
 	method image() = "Planta.png"
@@ -62,7 +46,6 @@ object planta {
 	}
 	
 	method esAtravesable() = true
-	
 }
 
 
@@ -123,7 +106,6 @@ object companieriRojo inherits Companieri (tareaRequerida = tareaRojo, position 
 object companieriVerde inherits Companieri (tareaRequerida = tareaVerde, position = game.at(3,8)){
 	method image() = "CompanieriVerde.png"
 }
-
 
 
 

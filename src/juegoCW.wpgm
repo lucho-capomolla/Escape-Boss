@@ -22,5 +22,28 @@ program juego {
 		// - Plantear etapas/turnos
 		// - Jefe que pueda moverse RECOMENDADO
 
-		
-// 
+// DUDA: Cuando aparece un fondo (sea victoria o derrota), el juego deberia "pararse", para que deje ejecutar de fondo
+
+/*
+ * Pantalla de inicio
+ * 	- Seleccion de jugadores? 
+ * 	- Instrucciones o muestra de teclas
+ * Dificultad => de acuerdo a la cantidad de tiempo que se mueve el jefe
+ * 		0,5 Dificil
+ * 		1 Normal
+ * 		2 Facil
+ * Movimiento de jefe IMPORTANTE
+ * Fondo de victoria
+ * Agrandar imagen lluviosa del fondo para GameOverJefe
+ * Fondo cuando perdes por perdida de energia
+ * Todo el tema de las tarjetas con los turnos IMPORTANTE
+ * Que se vean las tarjetas en la derecha SEMI IMPORTANTE
+ * Que se vean las tareas en la derecha, ya sea realizadas o pendientes SEMI IMPORTANTE
+ * Reubicar objetos
+ * Agregar paneles para cortar el paso, u obstaculos SEMI IMPORTANTE
+ * 	- Pila de papeles
+ * 	- Cajas
+ * Agregar otra planta más
+ * EASTER EGG
+ * Que el Jefe ignore cuando el personaje esté en la planta
+ */
