@@ -27,6 +27,10 @@ object prueba {
 		configuraciones.configurarTeclas()
 		configuraciones.configurarColisiones()
 		jefe.moverse()
+		//if(jugador.estaEscondido()){
+			//jefe.moverseOpuesto()
+		//}
+	//	else{jefe.moverse()}
 	}
 }
 

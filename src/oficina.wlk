@@ -1,6 +1,7 @@
 import wollok.game.*
 import jugador.*
 import tareas.*
+import jefe.*
 
 class Consumible {
 	var property position
@@ -14,6 +15,11 @@ class Consumible {
 	method teEncontro() = true
 
 	method esAtravesable() = true
+	
+	method darCopia(){
+	}
+	method presentarTarea(){
+	}
 }
 
 
@@ -59,7 +65,10 @@ class Impresora {
 		jugador.agregarTarea(tarea)
 		game.say(self, "Printer does BRRR BRRR")
 	}
-	
+	method serConsumido(){
+	}
+	method presentarTarea(){
+	}
 	method teEncontro() = true
 }
 
@@ -91,7 +100,10 @@ class Companieri {
 			game.say(self, "Te equivocaste de tarea, papafrita")
 		}
 	}
-	
+	method darCopia(){
+	}
+	method serConsumido(){
+	}
 	method teEncontro() = true
 }
 
@@ -116,6 +128,7 @@ object puerta {
 	method escapar() {
 		if (tareasNecesarias == jugador.tareasRealizadas()){
 			game.say(self, "GOOD ENDING")
+			game.removeVisual(jefe)
 			game.schedule(5000, {game.stop()})
 		}
 		else {

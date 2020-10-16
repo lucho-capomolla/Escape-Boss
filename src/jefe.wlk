@@ -23,12 +23,22 @@ object jefe inherits Personaje(position = game.at(14,9)){
 		game.onTick(1000, "Perseguir", {self.moverHaciaJugador()})
 	}
 	
-	method moverHaciaJugador(){
-	var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
-	self.moverHaciaSiSePuede(self,direccionMasConveniente)	
+	method moverseOpuesto(){
+		game.onTick(2000, "Buscar", {self.moverOpuesto()})
 	}
 	
-	method direccionMasConveniente(direcciones)=direcciones.min({ direccion => direccion.posicion(position).distance(jugador.position()) }) 
+	method moverHaciaJugador(){
+		var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
+		self.moverHaciaSiSePuede(self,direccionMasConveniente)	
+	}
+	
+	method moverOpuesto(){
+		var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
+		self.moverHaciaSiSePuede(self, direccionMasConveniente.opuesto())
+	}
+	
+	
+	method direccionMasConveniente(direcciones) = direcciones.min({ direccion => direccion.posicion(position).distance(jugador.position())}) 
 	
 	method direccionesAtravesables() = [izquierda, arriba, abajo, derecha]
 		

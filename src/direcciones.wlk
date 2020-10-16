@@ -8,6 +8,8 @@ object arriba {
 	
 	method posicion(posicion) = posicion.up(1)
 	
+	method opuesto() = abajo
+	
 	//method posicion(posicion, cantidad) = posicion.up(cantidad)
 	
 	method puedeIr(personaje) = personaje.position().y() < (altura - 3)
@@ -21,6 +23,8 @@ object abajo {
 	method nombre() = "DeFrente"
 	
 	method posicion(posicion) = posicion.down(1)
+	
+	method opuesto() = arriba
 	
 	//method posicion(posicion, cantidad) = posicion.down(cantidad)
 	
@@ -38,6 +42,8 @@ object derecha {
 	
 	method puedeIr(personaje) = personaje.position().x() < (ancho - 5)
 	
+	method opuesto() = izquierda
+	
 	//method posicion(posicion, cantidad) = posicion.right(cantidad)
 	
 	method orientar(personaje, posicion) {
@@ -50,6 +56,8 @@ object izquierda {
 	method nombre() = "Izquierda"
 	
 	//method posicion(posicion, cantidad) = posicion.left(cantidad)
+	
+	method opuesto() = derecha
 	
 	method posicion(posicion) = posicion.left(1)
 	

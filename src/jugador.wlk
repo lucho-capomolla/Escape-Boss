@@ -3,6 +3,7 @@ import oficina.*
 import configuraciones.*
 import direcciones.*
 import tareas.*
+import jefe.*
 
 object jugador inherits Personaje (position = game.at(3,1)) {
 	
@@ -47,10 +48,11 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	}
 
 
-//		ACCIONES POR ENTORNO (ESCONDERSE, ESCAPAR)
+//		ACCIONES POR ENTORNO (ESCONDERSE)
 	method estaEscondido() = position == planta.position()
 
 	
+
 //	      TAREAS
 	method usarImpresora() {
 		position.allElements().forEach({impresora=>impresora.darCopia()})
