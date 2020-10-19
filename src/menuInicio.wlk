@@ -14,6 +14,10 @@ object menuInicio {
 		//game.clear()
 	}
 	
+	method elegirDificultad(){
+		
+	}
+	
 	method continuar(){
 		self.cerrar()
 		pantallaJuego.iniciar()
