@@ -4,6 +4,32 @@ import configuraciones.*
 import direcciones.*
 import tareas.*
 import jefe.*
+import pantallaJuego.*
+
+
+class Personaje {
+	var property position
+	
+	method moverse(direccion) {
+		self.moverHaciaSiSePuede(self, direccion)
+	}
+	
+	method moverHaciaSiSePuede(personaje, direccion) {
+		if(direccion.puedeIr(personaje)){
+			self.moverHacia(personaje, direccion)
+		}
+		else {
+			personaje.error("No es por ahi man")
+		}
+	}
+	
+	method moverHacia(personaje, direccion) {
+		const nuevaPosicion = direccion.posicion(personaje.position())
+		personaje.orientacion(direccion)
+		personaje.position(nuevaPosicion)
+	}
+}
+
 
 object jugador inherits Personaje (position = game.at(3,1)) {
 	

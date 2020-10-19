@@ -2,6 +2,7 @@ import wollok.game.*
 import jugador.*
 import configuraciones.*
 import direcciones.*
+import pantallaJuego.*
 
 object jefe inherits Personaje(position = game.at(14,9)){
 	var property orientacion = izquierda
@@ -12,6 +13,8 @@ object jefe inherits Personaje(position = game.at(14,9)){
 	
 	method teEncontro() {
 		if(position == jugador.position())
+			//game.allVisuals().forEach({visual => game.removeVisual(visual)})
+			game.clear()
 			game.addVisual(fondoJefeGano)
 			game.schedule(10000, {game.stop()})	
 	}
@@ -20,7 +23,7 @@ object jefe inherits Personaje(position = game.at(14,9)){
 	}
 	
 	method moverse(){
-		game.onTick(1000, "Perseguir", {self.moverHaciaJugador()})
+		game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
 	}
 	
 	method moverseOpuesto(){
