@@ -10,8 +10,8 @@ object menuInicio {
 	}
 	
 	method cerrar(){
-		//game.allVisuals().forEach({visual => game.removeVisual(visual)})
-		game.clear()
+		game.allVisuals().forEach({visual => game.removeVisual(visual)})
+		//game.clear()
 	}
 	
 	method continuar(){

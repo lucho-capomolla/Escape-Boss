@@ -22,6 +22,7 @@ object configuraciones {
 		keyboard.s().onPressDo({estadoActual.alPresionarS()})
 		keyboard.a().onPressDo({estadoActual.alPresionarA()})
 		keyboard.d().onPressDo({estadoActual.alPresionarD()})
+		keyboard.w().onPressDo({estadoActual.alPresionarW()})
 		keyboard.enter().onPressDo({estadoActual.alPresionarEnter()})
 		
 /*
@@ -58,12 +59,13 @@ class Estado{
 	method alPresionarS(){}
 	method alPresionarA(){}
 	method alPresionarD(){}
+	method alPresionarW(){}
 	method alPresionarEnter(){}
 }
 
 object estadoMenuInicio inherits Estado{
 	override method alPresionarEnter() {
-		menuInicio.continuar()
+		menuInicio.elegirDificultad()
 	}
 }
 
