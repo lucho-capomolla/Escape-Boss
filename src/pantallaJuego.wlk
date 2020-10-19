@@ -7,6 +7,7 @@ import configuraciones.*
 object pantallaJuego {
 	
 	method iniciar() {
+		configuraciones.cambiarEstado(estadoJuego)
 		game.addVisual(puerta)
 		game.addVisual(cafeConLeche)
 		game.addVisual(chocolate)
@@ -20,7 +21,8 @@ object pantallaJuego {
 		game.addVisual(impresoraVerde)
 		game.addVisual(planta)
 		game.addVisual(jugador)
-		configuraciones.configurarTeclas()
+		game.showAttributes(jugador)
+		//configuraciones.configurarTeclas()
 		configuraciones.configurarColisiones()
 		jefe.moverse()
 		//if(jugador.estaEscondido()){
@@ -28,12 +30,16 @@ object pantallaJuego {
 		//}
 	//	else{jefe.moverse()}
 	}
+	
+	method terminar(){
+		game.clear()
+	}
 }
 	
 
-object fondoPerdedor{
+object fondoPerdioEnergia{
 		var property position = game.at(3,1)
-		method image() = "GameOver.png"
+		method image() = "GameOverEnergia.png"
 }
 
 object fondoJefeGano {
@@ -49,13 +55,10 @@ class Dificultad{
 }
 
 object facil inherits Dificultad(nivelDeDificultad=3000){
-	
 }
 
 object normal inherits Dificultad(nivelDeDificultad=2000){
-
 }
 
-object dificil inherits Dificultad(nivelDeDificultad=1000){
-	
+object dificil inherits Dificultad(nivelDeDificultad=1000){	
 }

@@ -1,11 +1,15 @@
 import wollok.game.*
 import jugador.*
-import configuraciones.*
 import direcciones.*
 import pantallaJuego.*
 
 object jefe inherits Personaje(position = game.at(14,9)){
 	var property orientacion = izquierda
+	var dificultad = facil
+	
+	method elegirDificultad(nuevaDificultad) {
+		dificultad = nuevaDificultad
+	}
 	
 	method image()="Jefe" + orientacion.nombre() + ".png"
 		

@@ -67,7 +67,7 @@ class Impresora {
 	}
 	method serConsumido(){
 	}
-	method presentarTarea(){
+	method presentarTarea(unaTarea){
 	}
 	method teEncontro() = true
 }
