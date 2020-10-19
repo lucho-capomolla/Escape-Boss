@@ -43,18 +43,19 @@ object fondoJefeGano {
 
 
 class Dificultad{
-	method nivel()
+	var nivelDeDificultad
+	method nivel()=nivelDeDificultad
 
 }
 
-object facil inherits Dificultad{
-	override method nivel() = 3000
+object facil inherits Dificultad(nivelDeDificultad=3000){
+	
 }
 
-object normal inherits Dificultad{
-	override method nivel() = 2000
+object normal inherits Dificultad(nivelDeDificultad=2000){
+
 }
 
-object dificil inherits Dificultad{
-	override method nivel() = 1000
+object dificil inherits Dificultad(nivelDeDificultad=1000){
+	
 }
