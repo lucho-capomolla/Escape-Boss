@@ -28,20 +28,6 @@ object configuraciones {
 		keyboard.num2().onPressDo({estadoActual.alPresionar2()})
 		keyboard.num3().onPressDo({estadoActual.alPresionar3()})
 		
-/*
-		keyboard.up().onPressDo({jugador.moverse(arriba)})
-		keyboard.down().onPressDo({jugador.moverse(abajo)})
-		keyboard.right().onPressDo({jugador.moverse(derecha)})
-		keyboard.left().onPressDo({jugador.moverse(izquierda)})
-		keyboard.s().onPressDo({jugador.usarImpresora()})
-		keyboard.a().onPressDo({jugador.consumir()})
-		keyboard.d().onPressDo({jugador.entregarTarea()})
-		keyboard.enter().onPressDo({menuInicio.continuar()})
-		//keyboard.w().onPressDo({jugador.estaerEgg()})
-		// Que pueda interactuar con el cuadro del carpincho?
-		*/
-		// Turno: Que el jugador se mueva durante su turno, y el Jefe durante el suyo -> ESTE TURNO = Tiempo, Cantidad de movimientos o Al tocar una Tecla
-		// Etapa siguiente <- Pensarlo bien bien
 		}
 		
 		method cambiarEstado(nuevoEstado) {
@@ -111,5 +97,8 @@ object estadoJuego inherits Estado{
 	}
 	override method alPresionarD() {
 		jugador.entregarTarea()
+	}
+	override method alPresionarW(){
+		
 	}
 }

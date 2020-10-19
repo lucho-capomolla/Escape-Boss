@@ -2,6 +2,7 @@ import wollok.game.*
 import jugador.*
 import tareas.*
 import jefe.*
+import pantallaJuego.*
 
 class Consumible {
 	var property position
@@ -128,7 +129,8 @@ object puerta {
 	method escapar() {
 		if (tareasNecesarias == jugador.tareasRealizadas()){
 			game.say(self, "GOOD ENDING")
-			game.removeVisual(jefe)
+			pantallaJuego.terminar()
+			game.addVisual(fondoGanador)
 			game.schedule(5000, {game.stop()})
 		}
 		else {

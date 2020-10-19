@@ -65,8 +65,9 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method disminuirEnergia(cantidad) {
 		energia=(energia - cantidad).max(0)
 			if(energia==0){
-		game.addVisual(fondoPerdioEnergia)
-		game.schedule(5000, {game.stop()})
+				pantallaJuego.terminar()
+				game.addVisual(fondoPerdioEnergia)
+				game.schedule(5000, {game.stop()})
 		}
 	}
 

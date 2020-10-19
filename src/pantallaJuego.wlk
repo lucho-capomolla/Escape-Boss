@@ -16,19 +16,14 @@ object pantallaJuego {
 		game.addVisual(companieriAzul)
 		game.addVisual(companieriRojo)
 		game.addVisual(companieriVerde)
+		game.addVisual(planta)
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraVerde)
-		game.addVisual(planta)
 		game.addVisual(jugador)
 		game.showAttributes(jugador)
-		//configuraciones.configurarTeclas()
 		configuraciones.configurarColisiones()
 		jefe.moverse()
-		//if(jugador.estaEscondido()){
-			//jefe.moverseOpuesto()
-		//}
-	//	else{jefe.moverse()}
 	}
 	
 	method terminar(){
@@ -38,8 +33,8 @@ object pantallaJuego {
 	
 
 object fondoPerdioEnergia{
-		var property position = game.at(3,1)
-		method image() = "GameOverEnergia.png"
+	var property position = game.at(3,1)
+	method image() = "GameOverEnergia.png"
 }
 
 object fondoJefeGano {
@@ -47,6 +42,10 @@ object fondoJefeGano {
 	method image() = "GameOverJefe.png"
 }
 
+object fondoGanador{
+	var property position = game.at(3,1)
+	method image() = "GoodEnding.png"
+}
 
 class Dificultad{
 	var nivelDeDificultad

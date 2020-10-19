@@ -17,8 +17,7 @@ object jefe inherits Personaje(position = game.at(14,9)){
 	
 	method teEncontro() {
 		if(position == jugador.position())
-			//game.allVisuals().forEach({visual => game.removeVisual(visual)})
-			game.clear()
+			pantallaJuego.terminar()
 			game.addVisual(fondoJefeGano)
 			game.schedule(10000, {game.stop()})	
 	}
