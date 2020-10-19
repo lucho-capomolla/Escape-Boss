@@ -24,7 +24,6 @@ program juego {
 /*
  * 	- Seleccion de jugadores? 
  * Fondo de victoria
- * Agrandar imagen lluviosa del fondo para GameOverJefe
  * Todo el tema de las tarjetas con los turnos IMPORTANTE
  * Que se vean las tarjetas en la derecha SEMI IMPORTANTE
  * Que se vean las tareas en la derecha, ya sea realizadas o pendientes SEMI IMPORTANTE

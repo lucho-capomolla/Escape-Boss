@@ -5,7 +5,7 @@ import pantallaJuego.*
 object menuInicio {
 	
 	method iniciar(){
-		game.addVisualIn(self, game.at(3,1))
+		game.addVisualIn(self, game.origin())
 		configuraciones.cambiarEstado(estadoMenuInicio)
 	}
 	
@@ -15,11 +15,11 @@ object menuInicio {
 	
 	method elegirDificultad(){
 		configuraciones.cambiarEstado(estadoDificultad)
-		game.addVisualIn(dificultades, game.at(3,1))
+		game.addVisualIn(dificultades, game.origin())
 	}
 	
 	method mostrarInstrucciones(){
-		game.addVisualIn(instrucciones, game.at(3,1))
+		game.addVisualIn(instrucciones, game.origin())
 		game.schedule(5000, {self.continuar()})
 	}
 	
@@ -28,15 +28,15 @@ object menuInicio {
 		pantallaJuego.iniciar()
 	}
 	
-	method image() = "pantallaInicio1.png"
+	method image() = "MenuInicio.png"
 }
 
 object dificultades{
 	
-	method image() = "pantallaInicio2.png"
+	method image() = "MenuDificultades.png"
 }
 
 object instrucciones{
 	
-	method image() = "pantallaInicio3.png"
+	method image() = "Instrucciones.png"
 }

@@ -47,7 +47,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
-		self.disminuirEnergia(1)
+		self.disminuirEnergia(2)
 	}
 	
 //       CONSUMIBLES

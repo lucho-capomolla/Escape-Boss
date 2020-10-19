@@ -33,17 +33,17 @@ object pantallaJuego {
 	
 
 object fondoPerdioEnergia{
-	var property position = game.at(3,1)
+	var property position = game.origin()
 	method image() = "GameOverEnergia.png"
 }
 
 object fondoJefeGano {
-	var property position = game.at(3,1)
+	var property position = game.origin()
 	method image() = "GameOverJefe.png"
 }
 
 object fondoGanador{
-	var property position = game.at(3,1)
+	var property position = game.origin()
 	method image() = "GoodEnding.png"
 }
 
@@ -53,11 +53,11 @@ class Dificultad{
 
 }
 
-object facil inherits Dificultad(nivelDeDificultad=3000){
+object facil inherits Dificultad(nivelDeDificultad=2000){
 }
 
-object normal inherits Dificultad(nivelDeDificultad=2000){
+object normal inherits Dificultad(nivelDeDificultad=1000){
 }
 
-object dificil inherits Dificultad(nivelDeDificultad=1000){	
+object dificil inherits Dificultad(nivelDeDificultad=500){	
 }
