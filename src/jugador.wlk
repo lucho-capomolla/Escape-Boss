@@ -66,10 +66,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		energia=(energia - cantidad).max(0)
 			if(energia==0){
 		game.addVisual(fondoPerdioEnergia)
-		// Agregar un fondo particular cuando se pierda por quedarse sin energía
 		game.schedule(5000, {game.stop()})
-		
-		// Hacer que se bloqueen las teclas cuando se queda sin energia, sino muestra un mensaje de Error
 		}
 	}
 

@@ -24,6 +24,9 @@ object configuraciones {
 		keyboard.d().onPressDo({estadoActual.alPresionarD()})
 		keyboard.w().onPressDo({estadoActual.alPresionarW()})
 		keyboard.enter().onPressDo({estadoActual.alPresionarEnter()})
+		keyboard.num1().onPressDo({estadoActual.alPresionar1()})
+		keyboard.num2().onPressDo({estadoActual.alPresionar2()})
+		keyboard.num3().onPressDo({estadoActual.alPresionar3()})
 		
 /*
 		keyboard.up().onPressDo({jugador.moverse(arriba)})
@@ -61,11 +64,29 @@ class Estado{
 	method alPresionarD(){}
 	method alPresionarW(){}
 	method alPresionarEnter(){}
+	method alPresionar1(){}
+	method alPresionar2(){}
+	method alPresionar3(){}
 }
 
 object estadoMenuInicio inherits Estado{
 	override method alPresionarEnter() {
 		menuInicio.elegirDificultad()
+	}
+}
+
+object estadoDificultad inherits Estado{
+	override method alPresionar1(){
+		jefe.elegirDificultad(facil)
+		menuInicio.mostrarInstrucciones()
+	}
+	override method alPresionar2(){
+		jefe.elegirDificultad(normal)
+		menuInicio.mostrarInstrucciones()
+	}
+	override method alPresionar3(){
+		jefe.elegirDificultad(dificil)
+		menuInicio.mostrarInstrucciones()
 	}
 }
 

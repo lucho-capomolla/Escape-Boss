@@ -11,11 +11,16 @@ object menuInicio {
 	
 	method cerrar(){
 		game.allVisuals().forEach({visual => game.removeVisual(visual)})
-		//game.clear()
 	}
 	
 	method elegirDificultad(){
-		
+		configuraciones.cambiarEstado(estadoDificultad)
+		game.addVisualIn(dificultades, game.at(3,1))
+	}
+	
+	method mostrarInstrucciones(){
+		game.addVisualIn(instrucciones, game.at(3,1))
+		game.schedule(5000, {self.continuar()})
 	}
 	
 	method continuar(){
@@ -24,6 +29,14 @@ object menuInicio {
 	}
 	
 	method image() = "pantallaInicio1.png"
-	//jefe.elegirDificultad(DIFICULTAD SELECCIONADA)
+}
+
+object dificultades{
 	
+	method image() = "pantallaInicio2.png"
+}
+
+object instrucciones{
+	
+	method image() = "pantallaInicio3.png"
 }

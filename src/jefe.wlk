@@ -5,7 +5,7 @@ import pantallaJuego.*
 
 object jefe inherits Personaje(position = game.at(14,9)){
 	var property orientacion = izquierda
-	var dificultad = facil
+	var dificultad
 	
 	method elegirDificultad(nuevaDificultad) {
 		dificultad = nuevaDificultad
