@@ -1,6 +1,7 @@
 import wollok.game.*
 import configuraciones.*
 import pantallaJuego.*
+import sonidos.*
 
 object menuInicio {
 	
@@ -15,6 +16,7 @@ object menuInicio {
 	
 	method elegirDificultad(){
 		configuraciones.cambiarEstado(estadoDificultad)
+		//confirmacion.play()
 		game.addVisualIn(dificultades, game.origin())
 	}
 	

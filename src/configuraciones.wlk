@@ -6,6 +6,7 @@ import jefe.*
 import direcciones.*
 import menuInicio.*
 import pantallaJuego.*
+import sonidos.*
 
 const ancho = 19
 const altura = 12
@@ -58,6 +59,7 @@ class Estado{
 object estadoMenuInicio inherits Estado{
 	override method alPresionarEnter() {
 		menuInicio.elegirDificultad()
+		confirmacion1.play()
 	}
 }
 
@@ -65,14 +67,17 @@ object estadoDificultad inherits Estado{
 	override method alPresionar1(){
 		jefe.elegirDificultad(facil)
 		menuInicio.mostrarInstrucciones()
+		confirmacion2.play()
 	}
 	override method alPresionar2(){
 		jefe.elegirDificultad(normal)
 		menuInicio.mostrarInstrucciones()
+		confirmacion2.play()
 	}
 	override method alPresionar3(){
 		jefe.elegirDificultad(dificil)
 		menuInicio.mostrarInstrucciones()
+		confirmacion2.play()
 	}
 }
 
