@@ -40,5 +40,5 @@ object dificultades{
 
 object instrucciones{
 	
-	method image() = "Fondos/Instrucciones.png"
+	method image() = "Fondos/pantallaInicio3.png"
 }
