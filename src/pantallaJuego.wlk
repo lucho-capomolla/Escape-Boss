@@ -34,17 +34,17 @@ object pantallaJuego {
 
 object fondoPerdioEnergia{
 	var property position = game.origin()
-	method image() = "GameOverEnergia.png"
+	method image() = "Fondos/GameOverEnergia.png"
 }
 
 object fondoJefeGano {
 	var property position = game.origin()
-	method image() = "GameOverJefe.png"
+	method image() = "Fondos/GameOverJefe.png"
 }
 
 object fondoGanador{
 	var property position = game.origin()
-	method image() = "GoodEnding.png"
+	method image() = "Fondos/GoodEnding.png"
 }
 
 class Dificultad{

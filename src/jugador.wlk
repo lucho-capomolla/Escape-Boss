@@ -41,7 +41,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	method image() {
 		if(self.estaEscondido())
-			return "Escondido.png"
+			return "Personaje/Escondido.png"
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	

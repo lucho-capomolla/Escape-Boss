@@ -11,7 +11,7 @@ object jefe inherits Personaje(position = game.at(14,9)){
 		dificultad = nuevaDificultad
 	}
 	
-	method image()="Jefe" + orientacion.nombre() + ".png"
+	method image()="Jefe/Jefe" + orientacion.nombre() + ".png"
 		
 	method esAtravesable() = true
 	

@@ -28,15 +28,15 @@ object menuInicio {
 		pantallaJuego.iniciar()
 	}
 	
-	method image() = "MenuInicio.png"
+	method image() = "Fondos/MenuInicio.png"
 }
 
 object dificultades{
 	
-	method image() = "MenuDificultades.png"
+	method image() = "Fondos/MenuDificultades.png"
 }
 
 object instrucciones{
 	
-	method image() = "Instrucciones.png"
+	method image() = "Fondos/Instrucciones.png"
 }
