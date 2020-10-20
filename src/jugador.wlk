@@ -33,7 +33,7 @@ class Personaje {
 
 object jugador inherits Personaje (position = game.at(3,1)) {
 	
-	var property energia = 100
+	var property energia = 35
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
 	var tareaEnMano = sinTarea
@@ -47,7 +47,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
-		self.disminuirEnergia(2)
+		self.disminuirEnergia(1)
 	}
 	
 //       CONSUMIBLES
@@ -74,7 +74,14 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 
 
 //		ACCIONES POR ENTORNO (ESCONDERSE)
-	method estaEscondido() = position == planta.position()
+	method estaEscondido() {
+		if(position == planta.position()){
+			jefe.correrse()
+			return true
+		}
+		jefe.moverse()
+		return false
+	}
 
 	
 

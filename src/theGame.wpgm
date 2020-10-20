@@ -35,3 +35,11 @@ program juego {
  * EASTER EGG
  * Que el Jefe ignore cuando el personaje esté en la planta
  */
+ 
+ 
+ /* IDEAS
+  * Agregar tiempo a cada impresora
+  * Agregar mas tareas, o que cada compañero requiera mas tareas
+  * Alargar tareas, agregando nuevas tareas o cosas para hacer
+  * Agregar cafeteria, y usarlo para misiones
+  */

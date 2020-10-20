@@ -3,8 +3,9 @@ import jugador.*
 import direcciones.*
 import pantallaJuego.*
 import sonidos.*
+import oficina.*
 
-object jefe inherits Personaje(position = game.at(14,9)){
+object jefe inherits Personaje(position = game.at(14,1)){
 	var property orientacion = izquierda
 	var dificultad
 	
@@ -31,8 +32,8 @@ object jefe inherits Personaje(position = game.at(14,9)){
 		game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
 	}
 	
-	method moverseOpuesto(){
-		game.onTick(2000, "Buscar", {self.moverOpuesto()})
+	method correrse(){
+		game.onTick(dificultad.nivel(), "Buscar", {self.irAPuerta()})
 	}
 	
 	method moverHaciaJugador(){
@@ -40,13 +41,15 @@ object jefe inherits Personaje(position = game.at(14,9)){
 		self.moverHaciaSiSePuede(self,direccionMasConveniente)	
 	}
 	
-	method moverOpuesto(){
-		var direccionMasConveniente = self.direccionMasConveniente(self.direccionesAtravesables())
-		self.moverHaciaSiSePuede(self, direccionMasConveniente.opuesto())
+	method irAPuerta(){
+		var direccionAPuerta = self.perritoGuardian(self.direccionesAtravesables())
+		self.moverHaciaSiSePuede(self, direccionAPuerta)
 	}
 	
 	
 	method direccionMasConveniente(direcciones) = direcciones.min({ direccion => direccion.posicion(position).distance(jugador.position())}) 
+	
+	method perritoGuardian(direcciones) = direcciones.min({direccion => direccion.posicion(position).distance(puerta.position())})
 	
 	method direccionesAtravesables() = [izquierda, arriba, abajo, derecha]
 		
