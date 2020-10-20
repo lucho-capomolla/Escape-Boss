@@ -19,6 +19,7 @@ object pantallaJuego {
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraVerde)
+		game.addVisual(cuadrito)
 		game.addVisual(jefe)
 		game.addVisual(jugador)
 		game.showAttributes(jugador)

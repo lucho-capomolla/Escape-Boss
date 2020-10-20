@@ -21,7 +21,7 @@ object jefe inherits Personaje(position = game.at(14,1)){
 		if(position == jugador.position())
 			pantallaJuego.terminar()
 			game.addVisual(fondoJefeGano)
-			sonido.reproducir("Lost.wav")
+			game.schedule(250, {sonido.reproducir("Lost.wav")})
 			game.schedule(10000, {game.stop()})	
 	}
 	
@@ -31,8 +31,18 @@ object jefe inherits Personaje(position = game.at(14,1)){
 	method moverse(){
 		game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
 	}
+		/*game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
+		if(jugador.estaEscondido()){
+			game.removeTickEvent("Perseguir")
+			game.onTick(dificultad.nivel(), "Buscar", {self.irAPuerta()})
+		}
+		else{
+			game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
+		}*/
+	
 	
 	method correrse(){
+		game.removeTickEvent("Perseguir")
 		game.onTick(dificultad.nivel(), "Buscar", {self.irAPuerta()})
 	}
 	
@@ -42,7 +52,7 @@ object jefe inherits Personaje(position = game.at(14,1)){
 	}
 	
 	method irAPuerta(){
-		var direccionAPuerta = self.perritoGuardian(self.direccionesAtravesables())
+		const direccionAPuerta = self.perritoGuardian(self.direccionesAtravesables())
 		self.moverHaciaSiSePuede(self, direccionAPuerta)
 	}
 	

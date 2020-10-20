@@ -67,21 +67,22 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 			if(energia==0){
 				pantallaJuego.terminar()
 				game.addVisual(fondoPerdioEnergia)
-				sonido.reproducir("Lost.wav")
+				game.schedule(500, {sonido.reproducir("Lost.wav")})
 				game.schedule(5000, {game.stop()})
 		}
 	}
 
 
 //		ACCIONES POR ENTORNO (ESCONDERSE)
-	method estaEscondido() {
-		if(position == planta.position()){
-			jefe.correrse()
-			return true
-		}
-		jefe.moverse()
-		return false
-	}
+	method estaEscondido() = position == planta.position()
+		//if(position == planta.position()){
+			//game.removeTickEvent("Perseguir")
+			//jefe.correrse()
+		//	return true
+		//}
+		//jefe.moverse()
+		//return false
+	//}
 
 	
 
@@ -99,6 +100,10 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	method entregarTarea() {
 		position.allElements().forEach({companieri=>companieri.presentarTarea(tareaEnMano)})
+	}
+	
+	method interactuar(){
+		position.allElements().forEach({elemento => elemento.analizar()})
 	}
 	
 	method presentarTarea(tarea){

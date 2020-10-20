@@ -109,6 +109,6 @@ object estadoJuego inherits Estado{
 		jugador.entregarTarea()
 	}
 	override method alPresionarW(){
-		
+		jugador.interactuar()
 	}
 }

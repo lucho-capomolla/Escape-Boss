@@ -19,10 +19,9 @@ class Consumible {
 
 	method esAtravesable() = true
 	
-	method darCopia(){
-	}
-	method presentarTarea(){
-	}
+	method darCopia(){}
+	method presentarTarea(){}
+	method analizar(){}
 }
 
 
@@ -55,6 +54,7 @@ object planta {
 	}
 	
 	method esAtravesable() = true
+	method analizar(){}
 }
 
 
@@ -74,6 +74,7 @@ class Impresora {
 	method presentarTarea(unaTarea){
 	}
 	method teEncontro() = true
+	method analizar(){}
 }
 
 object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,5)) {
@@ -110,6 +111,7 @@ class Companieri {
 	method serConsumido(){
 	}
 	method teEncontro() = true
+	method analizar(){}
 }
 
 object companieriAzul inherits Companieri (tareaRequerida = tareaAzul, position = game.at(13,5)){
@@ -142,7 +144,6 @@ object puerta {
 			game.say(self, "TE FALTAN TAREAS BOLUDO")
 		}
 	}
-	
 	method image() = "Oficina/Puerta.png"
 	
 	method teEncontro() {
@@ -151,8 +152,27 @@ object puerta {
 		}
 	}
 	
-	method potenciar(){
+	method potenciar(){}
+	method serConsumido(){}
+	method presentarTarea(){}
+	method darCopia(){}
+	method esAtravesable() = true
+	method analizar(){}
+}
+
+
+object cuadrito {
+	var property position = game.at(10,9)
+	
+	method image() = "Fondos/Cuadrito.png"
+	
+	method teEncontro() = position == jugador.position()
+	
+	method analizar(){
+		sonido.reproducir("CampanasEnLaNoche.mp3")
 	}
 	
-	method esAtravesable() = true
+	method darCopia(){}
+	method presentarTarea(){}
+	method serConsumido(){}
 }
