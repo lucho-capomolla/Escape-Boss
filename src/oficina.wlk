@@ -12,8 +12,8 @@ class Consumible {
 	method serConsumido() {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada)
-		sonido.reproducir("Burp.mp3")
 		game.removeVisual(self)
+		sonido.reproducir("Burp.mp3")
 	} 
 	method teEncontro() = true
 
@@ -66,8 +66,8 @@ class Impresora {
 	
 	method darCopia() {
 		jugador.agregarTarea(tarea)
-		sonido.reproducir("Impresion.mp3")
 		game.say(self, "Printer does BRRR BRRR")
+		sonido.reproducir("Impresion.mp3")
 	}
 	method serConsumido(){
 	}
@@ -98,8 +98,8 @@ class Companieri {
 	method presentarTarea(tarea) {
 		if(tareaRequerida == tarea) {
 			game.say(self, "Me has salvado! Estoy agradecido")
-			sonido.reproducir("Carpeta.mp3")
 			jugador.terminarTarea(tarea)
+			sonido.reproducir("Carpeta.mp3")
 		}
 		else{
 			game.say(self, "Te equivocaste de tarea, papafrita")
@@ -135,6 +135,7 @@ object puerta {
 			game.say(self, "GOOD ENDING")
 			pantallaJuego.terminar()
 			game.addVisual(fondoGanador)
+			sonido.reproducir("Yodelling.mp3")
 			game.schedule(5000, {game.stop()})
 		}
 		else {
