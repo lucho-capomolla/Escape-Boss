@@ -59,7 +59,7 @@ class Estado{
 object estadoMenuInicio inherits Estado{
 	override method alPresionarEnter() {
 		menuInicio.elegirDificultad()
-		confirmacion1.play()
+		sonido.reproducir("Confirmar.wav")
 	}
 }
 
@@ -67,19 +67,23 @@ object estadoDificultad inherits Estado{
 	override method alPresionar1(){
 		jefe.elegirDificultad(facil)
 		menuInicio.mostrarInstrucciones()
-		confirmacion2.play()
+		sonido.reproducir("Confirmar.wav")
 	}
 	override method alPresionar2(){
 		jefe.elegirDificultad(normal)
 		menuInicio.mostrarInstrucciones()
-		confirmacion2.play()
+		sonido.reproducir("Confirmar.wav")
 	}
 	override method alPresionar3(){
 		jefe.elegirDificultad(dificil)
 		menuInicio.mostrarInstrucciones()
-		confirmacion2.play()
+		sonido.reproducir("Confirmar.wav")
 	}
 }
+
+
+
+
 
 object estadoJuego inherits Estado{
 	override method alPresionarUp() {
@@ -94,6 +98,7 @@ object estadoJuego inherits Estado{
 	override method alPresionarLeft() {
 		jugador.moverse(izquierda)
 	}
+	
 	override method alPresionarS() {
 		jugador.usarImpresora()
 	}

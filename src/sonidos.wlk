@@ -1,6 +1,11 @@
 import wollok.game.*
 
+object sonido{
 
-
-const confirmacion1 = game.sound("Sonidos/Confirmar.wav")
-const confirmacion2 = game.sound("Sonidos/Confirmar.wav")
+	
+	method sonido(audio) = game.sound("Sonidos/" + audio)
+	
+	method reproducir(audio) {
+		self.sonido(audio).play()
+	}
+}

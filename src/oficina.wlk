@@ -3,6 +3,7 @@ import jugador.*
 import tareas.*
 import jefe.*
 import pantallaJuego.*
+import sonidos.*
 
 class Consumible {
 	var property position
@@ -11,6 +12,7 @@ class Consumible {
 	method serConsumido() {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada)
+		sonido.reproducir("Burp.mp3")
 		game.removeVisual(self)
 	} 
 	method teEncontro() = true
@@ -64,6 +66,7 @@ class Impresora {
 	
 	method darCopia() {
 		jugador.agregarTarea(tarea)
+		sonido.reproducir("Impresion.mp3")
 		game.say(self, "Printer does BRRR BRRR")
 	}
 	method serConsumido(){
@@ -95,6 +98,7 @@ class Companieri {
 	method presentarTarea(tarea) {
 		if(tareaRequerida == tarea) {
 			game.say(self, "Me has salvado! Estoy agradecido")
+			sonido.reproducir("Carpeta.mp3")
 			jugador.terminarTarea(tarea)
 		}
 		else{

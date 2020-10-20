@@ -2,6 +2,7 @@ import wollok.game.*
 import jugador.*
 import direcciones.*
 import pantallaJuego.*
+import sonidos.*
 
 object jefe inherits Personaje(position = game.at(14,9)){
 	var property orientacion = izquierda
@@ -19,6 +20,7 @@ object jefe inherits Personaje(position = game.at(14,9)){
 		if(position == jugador.position())
 			pantallaJuego.terminar()
 			game.addVisual(fondoJefeGano)
+			sonido.reproducir("Lost.wav")
 			game.schedule(10000, {game.stop()})	
 	}
 	

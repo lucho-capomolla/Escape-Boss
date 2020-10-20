@@ -5,7 +5,7 @@ import direcciones.*
 import tareas.*
 import jefe.*
 import pantallaJuego.*
-
+import sonidos.*
 
 class Personaje {
 	var property position
@@ -67,6 +67,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 			if(energia==0){
 				pantallaJuego.terminar()
 				game.addVisual(fondoPerdioEnergia)
+				sonido.reproducir("Lost.wav")
 				game.schedule(5000, {game.stop()})
 		}
 	}
