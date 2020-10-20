@@ -45,7 +45,7 @@ object fondoJefeGano {
 
 object fondoGanador{
 	var property position = game.origin()
-	method image() = "Fondos/GoodEnding.png"
+	method image() = "Fondos/Tomorrowland.png"
 }
 
 class Dificultad{
