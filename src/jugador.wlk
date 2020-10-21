@@ -55,8 +55,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		position.allElements().forEach({elemento=>elemento.serConsumido()})
 	}
 	
-	method serConsumido(){
-	}
+	method serConsumido(){}
 	
 	method aumentarEnergia(cantidad) {
 		energia=(energia + cantidad).min(100)
@@ -91,8 +90,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		position.allElements().forEach({impresora=>impresora.darCopia()})
 	}
 	
-	method darCopia(){
-	}
+	method darCopia(){}
 	
 	method agregarTarea(tarea) {
 		tareaEnMano = tarea
@@ -106,8 +104,9 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		position.allElements().forEach({elemento => elemento.analizar()})
 	}
 	
-	method presentarTarea(tarea){
-	}
+	method analizar(){}
+	
+	method presentarTarea(tarea){}
 	
 	method terminarTarea(tarea) {
 		tareaEnMano = sinTarea

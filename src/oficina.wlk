@@ -20,7 +20,9 @@ class Consumible {
 	method esAtravesable() = true
 	
 	method darCopia(){}
+	
 	method presentarTarea(){}
+	
 	method analizar(){}
 }
 
@@ -50,10 +52,10 @@ object planta {
 		jugador.error("Eto no eh comida papi")
 	}
 	
-	method potenciar(){
-	}
+	method presentarTarea(){}
 	
 	method esAtravesable() = true
+	
 	method analizar(){}
 }
 
@@ -69,11 +71,13 @@ class Impresora {
 		game.say(self, "Printer does BRRR BRRR")
 		sonido.reproducir("Impresion.mp3")
 	}
-	method serConsumido(){
-	}
-	method presentarTarea(unaTarea){
-	}
+	
+	method serConsumido(){}
+	
+	method presentarTarea(){}
+	
 	method teEncontro() = true
+	
 	method analizar(){}
 }
 
@@ -106,11 +110,13 @@ class Companieri {
 			game.say(self, "Te equivocaste de tarea, papafrita")
 		}
 	}
-	method darCopia(){
-	}
-	method serConsumido(){
-	}
+	
+	method darCopia(){}
+	
+	method serConsumido(){}
+	
 	method teEncontro() = true
+	
 	method analizar(){}
 }
 
@@ -153,10 +159,15 @@ object puerta {
 	}
 	
 	method potenciar(){}
+	
 	method serConsumido(){}
+	
 	method presentarTarea(){}
+	
 	method darCopia(){}
+	
 	method esAtravesable() = true
+	
 	method analizar(){}
 }
 
@@ -169,10 +180,26 @@ object cuadrito {
 	method teEncontro() = position == jugador.position()
 	
 	method analizar(){
-		sonido.reproducir("CampanasEnLaNoche.mp3")
+		//game.removeTickEvent("Perseguir")
+		game.removeVisual(jefe)
+		game.addVisual(carpinchito)
+		game.schedule(2000, {game.removeVisual(carpinchito)})
+		game.schedule(2000, {game.addVisual(jefe)})
+		//jefe.moverse()
+		//game.addVisual(jefe)
 	}
 	
 	method darCopia(){}
+	
 	method presentarTarea(){}
+	
 	method serConsumido(){}
+	
+	method esAtravesable() = true
+}
+
+object carpinchito {
+	var property position = game.origin()
+	
+	method image() = "Fondos/Carpinchito.jpg"
 }
