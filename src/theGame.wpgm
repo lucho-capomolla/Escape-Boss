@@ -23,16 +23,15 @@ program juego {
 
 /*
  * 	- Seleccion de jugadores? 
- * Fondo de victoria
  * Todo el tema de las tarjetas con los turnos IMPORTANTE
  * Que se vean las tarjetas en la derecha SEMI IMPORTANTE
  * Que se vean las tareas en la derecha, ya sea realizadas o pendientes SEMI IMPORTANTE
+ * Agregar un visual mostrando la cantidad de energía que queda
  * Reubicar objetos
  * Agregar paneles para cortar el paso, u obstaculos SEMI IMPORTANTE
  * 	- Pila de papeles
  * 	- Cajas
  * Agregar otra planta más
- * EASTER EGG
  * Que el Jefe ignore cuando el personaje esté en la planta
  */
  

@@ -21,7 +21,7 @@ class Consumible {
 	
 	method darCopia(){}
 	
-	method presentarTarea(){}
+	method presentarTarea(tarea){}
 	
 	method analizar(){}
 }
@@ -52,7 +52,7 @@ object planta {
 		jugador.error("Eto no eh comida papi")
 	}
 	
-	method presentarTarea(){}
+	method presentarTarea(tarea){}
 	
 	method esAtravesable() = true
 	
@@ -74,7 +74,7 @@ class Impresora {
 	
 	method serConsumido(){}
 	
-	method presentarTarea(){}
+	method presentarTarea(unaTarea){}
 	
 	method teEncontro() = true
 	
@@ -162,7 +162,7 @@ object puerta {
 	
 	method serConsumido(){}
 	
-	method presentarTarea(){}
+	method presentarTarea(tarea){}
 	
 	method darCopia(){}
 	
@@ -191,7 +191,7 @@ object cuadrito {
 	
 	method darCopia(){}
 	
-	method presentarTarea(){}
+	method presentarTarea(tarea){}
 	
 	method serConsumido(){}
 	

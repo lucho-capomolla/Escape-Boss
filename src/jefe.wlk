@@ -25,9 +25,6 @@ object jefe inherits Personaje(position = game.at(14,1)){
 			game.schedule(10000, {game.stop()})	
 	}
 	
-	method potenciar(){
-	}
-	
 	method moverse(){
 		game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
 	}
