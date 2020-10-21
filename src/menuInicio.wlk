@@ -37,6 +37,21 @@ object dificultades{
 	method image() = "Fondos/MenuDificultades.png"
 }
 
+class Dificultad{
+	var nivelDeDificultad
+	method nivel() = nivelDeDificultad
+}
+
+object facil inherits Dificultad(nivelDeDificultad=2000){
+}
+
+object normal inherits Dificultad(nivelDeDificultad=1000){
+}
+
+object dificil inherits Dificultad(nivelDeDificultad=500){	
+}
+
+
 object instrucciones{
 	
 	method image() = "Fondos/pantallaInicio3.png"

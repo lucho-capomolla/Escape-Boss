@@ -42,7 +42,7 @@ object hamburguesa inherits Consumible (energiaAportada=50, position = game.at(1
 
 
 object planta {
-	var property position = game.at(9,3)
+	var property position = game.at(3,6)
 	
 	method image() = "Oficina/Planta.png"
 	
@@ -54,7 +54,7 @@ object planta {
 	
 	method presentarTarea(tarea){}
 	
-	method esAtravesable() = true
+	method esAtravesable() = jugador.puedeEsconderse() && not(jefe.puedeEsconderse())
 	
 	method analizar(){}
 }
@@ -81,7 +81,7 @@ class Impresora {
 	method analizar(){}
 }
 
-object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,5)) {
+object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,4)) {
 	method image() = "Oficina/ImpresoraAAzul.png"
 }
 
@@ -98,7 +98,7 @@ class Companieri {
 	var property position
 	var tareaRequerida
 	
-	method esAtravesable() = false
+	method esAtravesable() = true
 	
 	method presentarTarea(tarea) {
 		if(tareaRequerida == tarea) {
@@ -180,13 +180,10 @@ object cuadrito {
 	method teEncontro() = position == jugador.position()
 	
 	method analizar(){
-		//game.removeTickEvent("Perseguir")
 		game.removeVisual(jefe)
 		game.addVisual(carpinchito)
 		game.schedule(2000, {game.removeVisual(carpinchito)})
 		game.schedule(2000, {game.addVisual(jefe)})
-		//jefe.moverse()
-		//game.addVisual(jefe)
 	}
 	
 	method darCopia(){}

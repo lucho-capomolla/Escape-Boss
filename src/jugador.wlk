@@ -23,10 +23,15 @@ class Personaje {
 		}
 	}
 	
+	method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
+	
 	method moverHacia(personaje, direccion) {
 		const nuevaPosicion = direccion.posicion(personaje.position())
-		personaje.orientacion(direccion)
-		personaje.position(nuevaPosicion)
+		if(self.puedeMoverse(nuevaPosicion)){
+			personaje.orientacion(direccion)
+			personaje.position(nuevaPosicion)
+		}
+		
 	}
 }
 
@@ -44,6 +49,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 			return "Personaje/Escondido.png"
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
+	
 	
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
@@ -74,16 +80,10 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 
 //		ACCIONES POR ENTORNO (ESCONDERSE)
 	method estaEscondido() = position == planta.position()
-		//if(position == planta.position()){
-			//game.removeTickEvent("Perseguir")
-			//jefe.correrse()
-		//	return true
-		//}
-		//jefe.moverse()
-		//return false
-	//}
 
+	method puedeEsconderse() = true
 	
+	method esAtravesable() = false
 
 //	      TAREAS
 	method usarImpresora() {

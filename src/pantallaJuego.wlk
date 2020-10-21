@@ -20,8 +20,8 @@ object pantallaJuego {
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraVerde)
 		game.addVisual(cuadrito)
-		game.addVisual(jefe)
 		game.addVisual(jugador)
+		game.addVisual(jefe)
 		game.showAttributes(jugador)
 		configuraciones.configurarColisiones()
 		jefe.moverse()
@@ -48,17 +48,8 @@ object fondoGanador{
 	method image() = "Fondos/Tomorrowland.png"
 }
 
-class Dificultad{
-	var nivelDeDificultad
-	method nivel()=nivelDeDificultad
 
-}
-
-object facil inherits Dificultad(nivelDeDificultad=2000){
-}
-
-object normal inherits Dificultad(nivelDeDificultad=1000){
-}
-
-object dificil inherits Dificultad(nivelDeDificultad=500){	
+object energiaJugador {
+	var property position = game.at(15,3)
+	method image() = "Numeros/" + jugador.energia().toString()
 }

@@ -39,7 +39,6 @@ object configuraciones {
 		game.onCollideDo(jugador, {algo => algo.teEncontro()})
 	}	
 }	
-	//method puedeMoverse(posicion) = posicion.allElements().all({objeto => objeto.esAtravesable()})
 	
 class Estado{
 	method alPresionarUp(){}

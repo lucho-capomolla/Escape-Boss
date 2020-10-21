@@ -40,4 +40,5 @@ program juego {
   * Agregar mas tareas, o que cada compañero requiera mas tareas
   * Alargar tareas, agregando nuevas tareas o cosas para hacer
   * Agregar cafeteria, y usarlo para misiones
+  * Si no se agregan más tareas, hacer que las impresoras tengan un valor centinela, y verifique cuando ya entrego una tarea
   */

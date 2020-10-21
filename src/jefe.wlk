@@ -4,6 +4,7 @@ import direcciones.*
 import pantallaJuego.*
 import sonidos.*
 import oficina.*
+import menuInicio.*
 
 object jefe inherits Personaje(position = game.at(14,1)){
 	var property orientacion = izquierda
@@ -24,6 +25,8 @@ object jefe inherits Personaje(position = game.at(14,1)){
 			game.schedule(250, {sonido.reproducir("Lost.wav")})
 			game.schedule(10000, {game.stop()})	
 	}
+
+	method puedeEsconderse() = false
 	
 	method moverse(){
 		game.onTick(dificultad.nivel(), "Perseguir", {self.perseguir()})
