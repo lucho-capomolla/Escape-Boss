@@ -26,21 +26,16 @@ object jefe inherits Personaje(position = game.at(14,1)){
 	}
 	
 	method moverse(){
-		game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
+		game.onTick(dificultad.nivel(), "Perseguir", {self.perseguir()})
 	}
-		/*game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
+	
+	method perseguir(){
 		if(jugador.estaEscondido()){
-			game.removeTickEvent("Perseguir")
-			game.onTick(dificultad.nivel(), "Buscar", {self.irAPuerta()})
+			self.irAPuerta()
 		}
 		else{
-			game.onTick(dificultad.nivel(), "Perseguir", {self.moverHaciaJugador()})
-		}*/
-	
-	
-	method correrse(){
-		game.removeTickEvent("Perseguir")
-		game.onTick(dificultad.nivel(), "Buscar", {self.irAPuerta()})
+			self.moverHaciaJugador()
+		}
 	}
 	
 	method moverHaciaJugador(){

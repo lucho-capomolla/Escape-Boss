@@ -16,7 +16,6 @@ object menuInicio {
 	
 	method elegirDificultad(){
 		configuraciones.cambiarEstado(estadoDificultad)
-		//confirmacion.play()
 		game.addVisualIn(dificultades, game.origin())
 	}
 	

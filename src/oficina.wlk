@@ -11,7 +11,7 @@ class Consumible {
 
 	method serConsumido() {
 		jugador.aumentarEnergia(energiaAportada)
-		game.say(jugador, "Aumento la energia en " + energiaAportada)
+		game.say(jugador, "Aumento la energia en " + energiaAportada.toString())
 		game.removeVisual(self)
 		sonido.reproducir("Burp.mp3")
 	} 
