@@ -23,6 +23,7 @@ object pantallaJuego {
 		game.addVisual(jugador)
 		game.addVisual(jefe)
 		game.showAttributes(jugador)
+		game.addVisual(energiaJugador)
 		configuraciones.configurarColisiones()
 		jefe.moverse()
 	}
@@ -51,5 +52,5 @@ object fondoGanador{
 
 object energiaJugador {
 	var property position = game.at(15,3)
-	method image() = "Numeros/" + jugador.energia().toString()
+	method image() = "Numeros/" + jugador.energia().toString() + ".jpg"
 }
