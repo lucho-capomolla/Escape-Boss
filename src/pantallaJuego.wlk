@@ -51,6 +51,6 @@ object fondoGanador{
 
 
 object energiaJugador {
-	var property position = game.at(15,3)
+	var property position = game.at(16,2)
 	method image() = "Numeros/" + jugador.energia().toString() + ".jpg"
 }
