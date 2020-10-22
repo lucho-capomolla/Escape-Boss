@@ -92,6 +92,7 @@ class Companieri {
 		if(tareaRequerida == tarea) {
 			game.say(self, "Me has salvado! Estoy agradecido")
 			jugador.terminarTarea(tarea)
+			tarea.seEntrego()
 			sonido.reproducir("Carpeta.mp3")
 		}
 		else{

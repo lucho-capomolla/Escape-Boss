@@ -3,6 +3,7 @@ import jefe.*
 import oficina.*
 import jugador.*
 import configuraciones.*
+import tareas.*
 
 object pantallaJuego {
 	
@@ -23,7 +24,11 @@ object pantallaJuego {
 		game.addVisual(jugador)
 		game.addVisual(jefe)
 		game.showAttributes(jugador)
+		
 		game.addVisual(energiaJugador)
+		game.addVisual(tareaAzul)
+		game.addVisual(tareaRojo)
+		game.addVisual(tareaVerde)
 		configuraciones.configurarColisiones()
 		
 		jefe.moverse()
