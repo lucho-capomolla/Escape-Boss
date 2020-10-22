@@ -43,7 +43,6 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	const property tareasRealizadas = #{}
 	var tareaEnMano = sinTarea
 	
-	
 	method image() {
 		if(self.estaEscondido())
 			return "Personaje/Escondido.png"
@@ -83,7 +82,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 
 	method puedeEsconderse() = true
 	
-	method esAtravesable() = false
+	method esAtravesable() = true
 
 //	      TAREAS
 	method usarImpresora() {

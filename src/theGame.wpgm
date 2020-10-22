@@ -17,9 +17,15 @@ program juego {
 }
 
 
-// Meta proxima semana: 
-		// - Plantear etapas/turnos
-		// - Jefe que pueda moverse RECOMENDADO
+/* CAMBIOS
+ * 	Usar una sola tecla para interactuar con los objectos (reemplazando A, S, D, por una sola tecla)
+ * 		Interactuar -> depende de cada objeto, override method ...
+ * 	AGREGAR TESTS
+ * 	FILTRAR DIRECCIONES ATRAVESABLES PARA EL JEFE
+ *  REPETECION DE LOGICA EN LA ELECCION DE DIFICULTAD
+ *  Terminar el tema de la energia, ya sea con numeros o una barra de energia
+ * 	Terminar el tema de Tarjetas
+ */
 
 /*
  * 	- Seleccion de jugadores? 

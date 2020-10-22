@@ -63,6 +63,47 @@ object estadoMenuInicio inherits Estado{
 }
 
 object estadoDificultad inherits Estado{
+	var dificultad
+	override method alPresionar1(){
+		
+	} 
+}
+
+/*
+class EstadoDificultad inherits Estado{
+	var property dificultad
+	
+	method confirmarDificultad(){
+		menuInicio.mostrarInstrucciones()
+		sonido.reproducir("Confirmar.wav")
+		jefe.elegirDificultad(dificultad)
+	}
+	
+	method alPresionarNum1(){}
+	method alPresionarNum2(){}
+	method alPresionarNum3(){}
+}
+
+
+object easy inherits EstadoDificultad{
+	override method alPresionarNum1(){
+		dificultad = facil
+	}
+}
+object medium inherits EstadoDificultad{
+	override method alPresionarNum2(){
+		dificultad = normal
+	}
+}
+object hard inherits EstadoDificultad{
+	override method alPresionarNum3(){
+		dificultad = dificil
+	}
+}
+*/
+
+/* 
+object estadoDificultad inherits Estado{
 	override method alPresionar1(){
 		jefe.elegirDificultad(facil)
 		menuInicio.mostrarInstrucciones()
@@ -79,7 +120,7 @@ object estadoDificultad inherits Estado{
 		sonido.reproducir("Confirmar.wav")
 	}
 }
-
+*/
 
 
 
