@@ -20,11 +20,7 @@ object configuraciones {
 		keyboard.down().onPressDo({estadoActual.alPresionarDown()})
 		keyboard.right().onPressDo({estadoActual.alPresionarRight()})
 		keyboard.left().onPressDo({estadoActual.alPresionarLeft()})
-		keyboard.e().onPressDo({estadoActual.interactuar()})
-		//keyboard.s().onPressDo({estadoActual.alPresionarS()})
-		//keyboard.a().onPressDo({estadoActual.alPresionarA()})
-		//keyboard.d().onPressDo({estadoActual.alPresionarD()})
-		//keyboard.w().onPressDo({estadoActual.alPresionarW()})
+		keyboard.e().onPressDo({estadoActual.alPresionarE()})
 		keyboard.enter().onPressDo({estadoActual.alPresionarEnter()})
 		keyboard.num1().onPressDo({estadoActual.alPresionar1()})
 		keyboard.num2().onPressDo({estadoActual.alPresionar2()})
@@ -47,10 +43,6 @@ class Estado{
 	method alPresionarRight(){}
 	method alPresionarLeft(){}
 	method alPresionarE(){}
-	//method alPresionarS(){}
-	//method alPresionarA(){}
-	//method alPresionarD(){}
-	//method alPresionarW(){}
 	method alPresionarEnter(){}
 	method alPresionar1(){}
 	method alPresionar2(){}
@@ -86,61 +78,6 @@ object estadoDificultad inherits Estado{
 	}
 }
 
-/*
-class EstadoDificultad inherits Estado{
-	var property dificultad
-	
-	method confirmarDificultad(){
-		menuInicio.mostrarInstrucciones()
-		sonido.reproducir("Confirmar.wav")
-		jefe.elegirDificultad(dificultad)
-	}
-	
-	method alPresionarNum1(){}
-	method alPresionarNum2(){}
-	method alPresionarNum3(){}
-}
-
-
-object easy inherits EstadoDificultad{
-	override method alPresionarNum1(){
-		dificultad = facil
-	}
-}
-object medium inherits EstadoDificultad{
-	override method alPresionarNum2(){
-		dificultad = normal
-	}
-}
-object hard inherits EstadoDificultad{
-	override method alPresionarNum3(){
-		dificultad = dificil
-	}
-}
-*/
-
-/* 
-object estadoDificultad inherits Estado{
-	override method alPresionar1(){
-		jefe.elegirDificultad(facil)
-		menuInicio.mostrarInstrucciones()
-		sonido.reproducir("Confirmar.wav")
-	}
-	override method alPresionar2(){
-		jefe.elegirDificultad(normal)
-		menuInicio.mostrarInstrucciones()
-		sonido.reproducir("Confirmar.wav")
-	}
-	override method alPresionar3(){
-		jefe.elegirDificultad(dificil)
-		menuInicio.mostrarInstrucciones()
-		sonido.reproducir("Confirmar.wav")
-	}
-}
-*/
-
-
-
 
 object estadoJuego inherits Estado{
 	override method alPresionarUp() {
@@ -155,21 +92,7 @@ object estadoJuego inherits Estado{
 	override method alPresionarLeft() {
 		jugador.moverse(izquierda)
 	}
-	
 	override method alPresionarE() {
 		jugador.interactuar()
 	}
-	//override method alPresionarS() {
-	//	jugador.usarImpresora()
-	//}
-	//override method alPresionarA() {
-	//	jugador.consumir()
-	//}
-	//override method alPresionarD() {
-	//	jugador.entregarTarea()
-	//}
-	//override method alPresionarW(){
-	//	jugador.interactuar()
-	//}
-
 }

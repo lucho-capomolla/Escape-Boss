@@ -60,6 +60,8 @@ object jefe inherits Personaje(position = game.at(14,1)){
 	
 	//filter direcciones -> si la posicion que vas a caer es atravesable
 	
-	method direccionesAtravesables() = [izquierda, arriba, abajo, derecha].filter({posicion => posicion.esAtravesable()})
+	method direccionesAtravesables() = [izquierda, arriba, abajo, derecha]
+	//method direccionesAtravesables() = [izquierda, arriba, abajo, derecha].filter({posicion => posicion.esAtravesable()})
+	//method direccionesAtravesables() = [izquierda, arriba, abajo, derecha].filter({posicion => posicion.allElements().forEach({elemento => elemento.esAtravesable()})})
 		
 }
