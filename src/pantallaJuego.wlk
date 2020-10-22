@@ -25,6 +25,7 @@ object pantallaJuego {
 		game.showAttributes(jugador)
 		game.addVisual(energiaJugador)
 		configuraciones.configurarColisiones()
+		
 		jefe.moverse()
 	}
 	

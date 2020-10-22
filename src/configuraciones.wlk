@@ -20,10 +20,11 @@ object configuraciones {
 		keyboard.down().onPressDo({estadoActual.alPresionarDown()})
 		keyboard.right().onPressDo({estadoActual.alPresionarRight()})
 		keyboard.left().onPressDo({estadoActual.alPresionarLeft()})
-		keyboard.s().onPressDo({estadoActual.alPresionarS()})
-		keyboard.a().onPressDo({estadoActual.alPresionarA()})
-		keyboard.d().onPressDo({estadoActual.alPresionarD()})
-		keyboard.w().onPressDo({estadoActual.alPresionarW()})
+		keyboard.e().onPressDo({estadoActual.interactuar()})
+		//keyboard.s().onPressDo({estadoActual.alPresionarS()})
+		//keyboard.a().onPressDo({estadoActual.alPresionarA()})
+		//keyboard.d().onPressDo({estadoActual.alPresionarD()})
+		//keyboard.w().onPressDo({estadoActual.alPresionarW()})
 		keyboard.enter().onPressDo({estadoActual.alPresionarEnter()})
 		keyboard.num1().onPressDo({estadoActual.alPresionar1()})
 		keyboard.num2().onPressDo({estadoActual.alPresionar2()})
@@ -45,10 +46,11 @@ class Estado{
 	method alPresionarDown(){}
 	method alPresionarRight(){}
 	method alPresionarLeft(){}
-	method alPresionarS(){}
-	method alPresionarA(){}
-	method alPresionarD(){}
-	method alPresionarW(){}
+	method alPresionarE(){}
+	//method alPresionarS(){}
+	//method alPresionarA(){}
+	//method alPresionarD(){}
+	//method alPresionarW(){}
 	method alPresionarEnter(){}
 	method alPresionar1(){}
 	method alPresionar2(){}
@@ -64,9 +66,24 @@ object estadoMenuInicio inherits Estado{
 
 object estadoDificultad inherits Estado{
 	var dificultad
+	
+	method confirmarDificultad(){
+		jefe.elegirDificultad(dificultad)
+		menuInicio.mostrarInstrucciones()
+		sonido.reproducir("Confirmar.wav")
+	}
 	override method alPresionar1(){
-		
+		dificultad = facil
+		self.confirmarDificultad()
 	} 
+	override method alPresionar2(){
+		dificultad = normal
+		self.confirmarDificultad()
+	}
+	override method alPresionar3(){
+		dificultad = dificil
+		self.confirmarDificultad()
+	}
 }
 
 /*
@@ -139,16 +156,20 @@ object estadoJuego inherits Estado{
 		jugador.moverse(izquierda)
 	}
 	
-	override method alPresionarS() {
-		jugador.usarImpresora()
-	}
-	override method alPresionarA() {
-		jugador.consumir()
-	}
-	override method alPresionarD() {
-		jugador.entregarTarea()
-	}
-	override method alPresionarW(){
+	override method alPresionarE() {
 		jugador.interactuar()
 	}
+	//override method alPresionarS() {
+	//	jugador.usarImpresora()
+	//}
+	//override method alPresionarA() {
+	//	jugador.consumir()
+	//}
+	//override method alPresionarD() {
+	//	jugador.entregarTarea()
+	//}
+	//override method alPresionarW(){
+	//	jugador.interactuar()
+	//}
+
 }
