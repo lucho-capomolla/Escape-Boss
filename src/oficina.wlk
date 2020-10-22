@@ -9,7 +9,7 @@ class Consumible {
 	var property position
 	var energiaAportada
 
-	method serConsumido() {
+	method interactuar() {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada.toString())
 		game.removeVisual(self)
@@ -19,23 +19,18 @@ class Consumible {
 
 	method esAtravesable() = true
 	
-	method darCopia(){}
-	
-	method presentarTarea(tarea){}
-	
-	method analizar(){}
 }
 
 
-object cafeConLeche inherits Consumible (energiaAportada=20, position = game.at(7,7)) {
+object cafeConLeche inherits Consumible (energiaAportada=25, position = game.at(7,7)) {
 	 method image() = "Oficina/Cafe.png"
 }
 
-object chocolate inherits Consumible (energiaAportada=35, position = game.at(13,8)){
+object chocolate inherits Consumible (energiaAportada=45, position = game.at(13,8)){
 	method image() = "Oficina/Chocolate.png"
 }
 
-object hamburguesa inherits Consumible (energiaAportada=50, position = game.at(11,2)) {
+object hamburguesa inherits Consumible (energiaAportada=60, position = game.at(11,2)) {
 	 method image() = "Oficina/Hamburguesa.png"
 }
 
@@ -51,12 +46,9 @@ object planta {
 	method serConsumido() {
 		jugador.error("Eto no eh comida papi")
 	}
-	
-	method presentarTarea(tarea){}
-	
+
 	method esAtravesable() = jugador.puedeEsconderse() and not(jefe.puedeEsconderse())
 	
-	method analizar(){}
 }
 
 
@@ -66,19 +58,14 @@ class Impresora {
 	
 	method esAtravesable() = true
 	
-	method darCopia() {
+	method interactuar() {
 		jugador.agregarTarea(tarea)
 		game.say(self, "Printer does BRRR BRRR")
 		sonido.reproducir("Impresion.mp3")
 	}
 	
-	method serConsumido(){}
-	
-	method presentarTarea(unaTarea){}
-	
 	method teEncontro() = true
 	
-	method analizar(){}
 }
 
 object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,4)) {
@@ -100,7 +87,8 @@ class Companieri {
 	
 	method esAtravesable() = true
 	
-	method presentarTarea(tarea) {
+	method interactuar() {
+		const tarea = jugador.tareaEnMano()
 		if(tareaRequerida == tarea) {
 			game.say(self, "Me has salvado! Estoy agradecido")
 			jugador.terminarTarea(tarea)
@@ -111,13 +99,8 @@ class Companieri {
 		}
 	}
 	
-	method darCopia(){}
-	
-	method serConsumido(){}
-	
 	method teEncontro() = true
 	
-	method analizar(){}
 }
 
 object companieriAzul inherits Companieri (tareaRequerida = tareaAzul, position = game.at(13,5)){
@@ -158,17 +141,8 @@ object puerta {
 		}
 	}
 	
-	method potenciar(){}
-	
-	method serConsumido(){}
-	
-	method presentarTarea(tarea){}
-	
-	method darCopia(){}
-	
 	method esAtravesable() = true
 	
-	method analizar(){}
 }
 
 
@@ -179,18 +153,12 @@ object cuadrito {
 	
 	method teEncontro() = position == jugador.position()
 	
-	method analizar(){
+	method interactuar(){
 		game.removeVisual(jefe)
 		game.addVisual(carpinchito)
 		game.schedule(2000, {game.removeVisual(carpinchito)})
 		game.schedule(2000, {game.addVisual(jefe)})
 	}
-	
-	method darCopia(){}
-	
-	method presentarTarea(tarea){}
-	
-	method serConsumido(){}
 	
 	method esAtravesable() = true
 }

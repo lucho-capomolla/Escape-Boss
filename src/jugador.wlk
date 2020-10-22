@@ -38,7 +38,7 @@ class Personaje {
 
 object jugador inherits Personaje (position = game.at(3,1)) {
 	
-	var property energia = 35
+	var property energia = 100
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
 	var tareaEnMano = sinTarea
@@ -52,17 +52,17 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
-		self.disminuirEnergia(1)
+		self.disminuirEnergia(5)
 	}
 	
 //       CONSUMIBLES
 	method aumentarEnergia(cantidad) {
-		energia=(energia + cantidad).min(100)
+		energia = (energia + cantidad).min(100)
 	}
 	
 	method disminuirEnergia(cantidad) {
-		energia=(energia - cantidad).max(0)
-			if(energia==0){
+		energia = (energia - cantidad).max(0)
+			if(energia == 0){
 				pantallaJuego.terminar()
 				game.addVisual(fondoPerdioEnergia)
 				game.schedule(500, {sonido.reproducir("Lost.wav")})
@@ -83,9 +83,13 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		tareaEnMano = tarea
 	}
 	
+	method tareaEnMano() = tareaEnMano
+	
 	method accionar(){
 		position.allElements().forEach({elemento => elemento.interactuar()})
 	}
+	
+	method interactuar(){}
 	
 	method terminarTarea(tarea) {
 		tareaEnMano = sinTarea
