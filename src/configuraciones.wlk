@@ -93,6 +93,6 @@ object estadoJuego inherits Estado{
 		jugador.moverse(izquierda)
 	}
 	override method alPresionarE() {
-		jugador.interactuar()
+		jugador.accionar()
 	}
 }

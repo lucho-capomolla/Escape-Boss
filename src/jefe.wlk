@@ -50,12 +50,11 @@ object jefe inherits Personaje(position = game.at(14,1)){
 		const direccionAPuerta = self.perritoGuardian(self.direccionesAtravesables())
 		self.moverHaciaSiSePuede(self, direccionAPuerta)
 	}
-	
+
 	
 	method direccionMasConveniente(direcciones) = direcciones.min({ direccion => direccion.posicion(position).distance(jugador.position())}) 
 	
-	method direccionMenosConveniente(direcciones) = direcciones.max({ direccion => direccion.posicion(position).distance(jugador.position())})
-	
+
 	method perritoGuardian(direcciones) = direcciones.min({direccion => direccion.posicion(position).distance(puerta.position())})
 	
 	//filter direcciones -> si la posicion que vas a caer es atravesable

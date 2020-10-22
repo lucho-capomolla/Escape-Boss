@@ -42,7 +42,7 @@ object hamburguesa inherits Consumible (energiaAportada=50, position = game.at(1
 
 
 object planta {
-	var property position = game.at(3,6)
+	var property position = game.at(4,5)
 	
 	method image() = "Oficina/Planta.png"
 	
@@ -54,7 +54,7 @@ object planta {
 	
 	method presentarTarea(tarea){}
 	
-	method esAtravesable() = jugador.puedeEsconderse() && not(jefe.puedeEsconderse())
+	method esAtravesable() = jugador.puedeEsconderse() and not(jefe.puedeEsconderse())
 	
 	method analizar(){}
 }

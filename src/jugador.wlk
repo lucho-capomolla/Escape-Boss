@@ -56,12 +56,6 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	}
 	
 //       CONSUMIBLES
-	method consumir() {
-		position.allElements().forEach({elemento=>elemento.serConsumido()})
-	}
-	
-	method serConsumido(){}
-	
 	method aumentarEnergia(cantidad) {
 		energia=(energia + cantidad).min(100)
 	}
@@ -82,30 +76,16 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 
 	method puedeEsconderse() = true
 	
-	method esAtravesable() = true
+	method esAtravesable() = not(self.estaEscondido())
 
 //	      TAREAS
-	method usarImpresora() {
-		position.allElements().forEach({impresora=>impresora.darCopia()})
-	}
-	
-	method darCopia(){}
-	
 	method agregarTarea(tarea) {
 		tareaEnMano = tarea
 	}
 	
-	method entregarTarea() {
-		position.allElements().forEach({companieri=>companieri.presentarTarea(tareaEnMano)})
+	method accionar(){
+		position.allElements().forEach({elemento => elemento.interactuar()})
 	}
-	
-	method interactuar(){
-		position.allElements().forEach({elemento => elemento.analizar()})
-	}
-	
-	method analizar(){}
-	
-	method presentarTarea(tarea){}
 	
 	method terminarTarea(tarea) {
 		tareaEnMano = sinTarea
