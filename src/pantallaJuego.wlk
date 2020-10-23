@@ -4,34 +4,12 @@ import oficina.*
 import jugador.*
 import configuraciones.*
 import tareas.*
+import niveles.*
 
 object pantallaJuego {
 	
 	method iniciar() {
-		configuraciones.cambiarEstado(estadoJuego)
-		game.addVisual(puerta)
-		game.addVisual(cafeConLeche)
-		game.addVisual(chocolate)
-		game.addVisual(hamburguesa)
-		game.addVisual(companieriAzul)
-		game.addVisual(companieriRojo)
-		game.addVisual(companieriVerde)
-		game.addVisual(planta)
-		game.addVisual(impresoraAzul)
-		game.addVisual(impresoraRojo)
-		game.addVisual(impresoraVerde)
-		game.addVisual(cuadrito)
-		game.addVisual(jugador)
-		game.addVisual(jefe)
-		game.showAttributes(jugador)
-		
-		game.addVisual(energiaJugador)
-		game.addVisual(tareaAzul)
-		game.addVisual(tareaRojo)
-		game.addVisual(tareaVerde)
-		configuraciones.configurarColisiones()
-		
-		jefe.moverse()
+		niveles.nivel1()
 	}
 	
 	method terminar(){
@@ -57,7 +35,7 @@ object fondoGanador{
 
 
 object energiaJugador {
-	var property position = game.at(16,2)
+	var property position = game.at(16,1)
 	/*
 	method image() { 
 	if(jugador.energia().between(1,10)){ return "Energia/0.jpg"}

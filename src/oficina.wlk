@@ -4,6 +4,7 @@ import tareas.*
 import jefe.*
 import pantallaJuego.*
 import sonidos.*
+import niveles.*
 
 class Consumible {
 	var property position
@@ -119,16 +120,16 @@ object companieriVerde inherits Companieri (tareaRequerida = tareaVerde, positio
 
 
 object puerta {
-	var property position = game.at(8,9)
+	var property position = game.at(8,10)
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
 	
-	method escapar() {
+	method avanzar() {
 		if (tareasNecesarias == jugador.tareasRealizadas()){
-			game.say(self, "GOOD ENDING")
 			pantallaJuego.terminar()
-			game.addVisual(fondoGanador)
-			sonido.reproducir("Yodelling.mp3")
-			game.schedule(5000, {game.stop()})
+			//game.addVisual(fondoGanador)
+			//sonido.reproducir("Yodelling.mp3")
+			niveles.avanzaNivel2()
+			//game.schedule(5000, {game.stop()})
 		}
 		else {
 			game.say(self, "TE FALTAN TAREAS BOLUDO")
@@ -138,7 +139,7 @@ object puerta {
 	
 	method teEncontro() {
 		if(position == jugador.position()){
-			self.escapar()
+			self.avanzar()
 		}
 	}
 	
@@ -148,7 +149,7 @@ object puerta {
 
 
 object cuadrito {
-	var property position = game.at(10,9)
+	var property position = game.at(10,10)
 	
 	method image() = "Fondos/Cuadrito.png"
 	

@@ -13,15 +13,15 @@ class Tarea {
 	}
 }
 
-object tareaAzul inherits Tarea(position = game.at(15, 4)) {
+object tareaAzul inherits Tarea(position = game.at(16,3)) {
 	override method color() = "Azul"
 }
 
-object tareaRojo inherits Tarea(position = game.at(17,4)) {
+object tareaRojo inherits Tarea(position = game.at(16,7)) {
 	override method color() = "Rojo"
 }
 
-object tareaVerde inherits Tarea(position = game.at(16,3)) {
+object tareaVerde inherits Tarea(position = game.at(16,5)) {
 	override method color() = "Verde"
 }
 

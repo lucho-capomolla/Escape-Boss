@@ -9,7 +9,7 @@ import pantallaJuego.*
 import sonidos.*
 
 const ancho = 19
-const altura = 12
+const altura = 13
 
 object configuraciones {
 	var estadoActual = estadoMenuInicio
