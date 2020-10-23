@@ -51,6 +51,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	}
 	
 	method moverAlInicio() {
+		self.orientacion(derecha)
 		position = game.at(3,1)
 	}
 	

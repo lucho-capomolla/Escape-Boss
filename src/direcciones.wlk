@@ -8,8 +8,6 @@ object arriba {
 	
 	method posicion(posicion) = posicion.up(1)
 	
-	method opuesto() = abajo
-	
 	//method posicion(posicion, cantidad) = posicion.up(cantidad)
 	
 	method puedeIr(personaje) = personaje.position().y() < (altura - 3) and self.posicion(personaje.position()).allElements().all({elemento => elemento.esAtravesable()})
@@ -23,9 +21,7 @@ object abajo {
 	method nombre() = "DeFrente"
 	
 	method posicion(posicion) = posicion.down(1)
-	
-	method opuesto() = arriba
-	
+
 	//method posicion(posicion, cantidad) = posicion.down(cantidad)
 	
 	method puedeIr(personaje) = personaje.position().y() > 1 and self.posicion(personaje.position()).allElements().all({elemento => elemento.esAtravesable()})
@@ -40,11 +36,9 @@ object derecha {
 	
 	method posicion(posicion) = posicion.right(1)
 	
-	method puedeIr(personaje) = personaje.position().x() < (ancho - 5) and self.posicion(personaje.position()).allElements().all({elemento => elemento.esAtravesable()})
-	
-	method opuesto() = izquierda
-	
 	//method posicion(posicion, cantidad) = posicion.right(cantidad)
+	
+	method puedeIr(personaje) = personaje.position().x() < (ancho - 5) and self.posicion(personaje.position()).allElements().all({elemento => elemento.esAtravesable()})
 	
 	method orientar(personaje, posicion) {
 		personaje.orientacion(self)
@@ -55,11 +49,9 @@ object derecha {
 object izquierda {
 	method nombre() = "Izquierda"
 	
-	//method posicion(posicion, cantidad) = posicion.left(cantidad)
-	
-	method opuesto() = derecha
-	
 	method posicion(posicion) = posicion.left(1)
+	
+	//method posicion(posicion, cantidad) = posicion.left(cantidad)
 	
 	method puedeIr(personaje) = personaje.position().x() > 3 and self.posicion(personaje.position()).allElements().all({elemento => elemento.esAtravesable()})
 	

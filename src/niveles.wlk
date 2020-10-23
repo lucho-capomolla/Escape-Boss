@@ -61,8 +61,8 @@ object nivel1 inherits Nivel{
 		
 		super()
 		
-		game.addVisual(jefe)
-		jefe.moverse()
+		game.addVisual(jefe1)
+		jefe1.moverse()
 	}
 	
 	override method finalizarNivel(){
@@ -87,8 +87,8 @@ object nivel2 inherits Nivel{
 
 		// Aca podria estar otra planta, y a su vez el otro jefe
 		//game.addVisual(planta2)
-		//game.addVisual(jefe2)
-		//jefe2.moverse()
+		game.addVisual(jefe2)
+		jefe2.moverse()
 		super()
 	}
 	

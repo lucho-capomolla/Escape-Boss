@@ -6,27 +6,26 @@ import sonidos.*
 import oficina.*
 import menuInicio.*
 
-//Hacer que Jefe sea una clase
-object jefe inherits Personaje(position = game.at(14,1)){
-	var property orientacion = izquierda
+class Jefe inherits Personaje{
+	var property orientacion
 	var dificultad
 	
 	method elegirDificultad(nuevaDificultad) {
 		dificultad = nuevaDificultad
 	}
 	
-	method image()="Jefe/Jefe" + orientacion.nombre() + ".png"
-		
-	method esAtravesable() = true
+	method esAtravesable() = false
 	
 	method teEncontro() {
 		if(position == jugador.position())
 			game.clear()
-			game.addVisual(fondoJefeGano)
+			self.mostrarFondo()
 			game.schedule(250, {sonido.reproducir("Lost.wav")})
 			game.schedule(10000, {game.stop()})	
 	}
 
+	method mostrarFondo(){}
+	
 	method puedeEsconderse() = false
 	
 	method esconderse() {
@@ -65,13 +64,24 @@ object jefe inherits Personaje(position = game.at(14,1)){
 		
 }
 
-/*
-object jefe1 inherits Jefe {
+
+object jefe1 inherits Jefe(position = game.at(14,1), orientacion = izquierda) {
 	
+	method image() = "Jefe/Jefe1" + orientacion.nombre() + ".png"
+	
+	override method mostrarFondo() {
+		game.addVisual(fondoJefeGano)
+	}
 }
 
-object jefe2 inherits Jefe {
+object jefe2 inherits Jefe(position = game.at(14,10), orientacion = izquierda) {
 	
+	method image() = "Jefe/Jefe2" + orientacion.nombre() + ".png"
+	
+	override method teEncontro() {
+		game.addVisual(fondoJefeGano)
+		super()
+	}
 }
-*/
+
 

@@ -48,7 +48,7 @@ object planta {
 		jugador.error("Eto no eh comida papi")
 	}
 
-	method esAtravesable() = jugador.puedeEsconderse() and not(jefe.puedeEsconderse())
+	method esAtravesable() = jugador.puedeEsconderse() and not(jefe1.puedeEsconderse())
 	
 }
 
@@ -155,7 +155,7 @@ object cuadrito {
 	method teEncontro() = position == jugador.position()
 	
 	method interactuar(){
-		jefe.esconderse()
+		jefe1.esconderse()
 		game.addVisual(carpinchito)
 		game.schedule(2000, {game.removeVisual(carpinchito)})
 	}
