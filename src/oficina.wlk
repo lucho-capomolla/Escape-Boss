@@ -138,7 +138,7 @@ object puerta {
 		}
 	}
 	
-	method image() = "Oficina/Puerta.png"
+	method image() = "Oficina/puerta.png"
 	
 	method teEncontro() {
 		if(position == jugador.position()){
@@ -154,7 +154,7 @@ object puerta {
 object cuadrito {
 	var property position = game.at(10,10)
 	
-	method image() = "Fondos/Cuadrito.png"
+	method image() = "Oficina/cuadro.png"
 	
 	method teEncontro() = position == jugador.position()
 	

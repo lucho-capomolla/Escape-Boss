@@ -11,7 +11,7 @@ program juego {
 	configuraciones.configurarTeclas()
 	menuInicio.iniciar()
 	
-	game.boardGround("Fondos/Fondo2.png")
+	game.boardGround("Fondos/Fondo.png")
 	
 	game.start()
 }
