@@ -4,7 +4,6 @@ import tareas.*
 import jefe.*
 import pantallaJuego.*
 import sonidos.*
-import niveles.*
 
 class Consumible {
 	var property position
@@ -36,9 +35,8 @@ object hamburguesa inherits Consumible (energiaAportada=60, position = game.at(1
 }
 
 
-
-object planta {
-	var property position = game.at(4,5)
+class Planta {
+	var property position
 	
 	method image() = "Oficina/Planta.png"
 	
@@ -47,10 +45,15 @@ object planta {
 	method serConsumido() {
 		jugador.error("Eto no eh comida papi")
 	}
-
-	method esAtravesable() = jugador.puedeEsconderse() and not(jefe1.puedeEsconderse())
 	
+	method esAtravesable() = jugador.puedeEsconderse() and not(jefe1.puedeEsconderse())
 }
+
+
+object planta1 inherits Planta(position = game.at(4,5)){}
+
+object planta2 inherits Planta(position = game.at(12,3)){}
+
 
 
 class Impresora {
@@ -118,22 +121,23 @@ object companieriVerde inherits Companieri (tareaRequerida = tareaVerde, positio
 }
 
 
-// Seria el CheckPoint
+
 object puerta {
 	var property position = game.at(8,10)
-	
+	const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
 	
 	method avanzar() {
-		//if (tareasNecesarias == jugador.tareasRealizadas()){
-		pantallaJuego.nivelActual().finalizarNivel()
-			//game.addVisual(fondoGanador)
-			//sonido.reproducir("Yodelling.mp3")
-			//game.schedule(5000, {game.stop()})
+		if (tareasNecesarias == jugador.tareasRealizadas()){
+		//pantallaJuego.nivelActual().finalizarNivel()
+			game.addVisual(fondoGanador)
+			sonido.reproducir("Yodelling.mp3")
+			game.schedule(5000, {game.stop()})
 		}
-		//else {
-		//	game.say(self, "TE FALTAN TAREAS BOLUDO")
-		//}
-	//}
+		else {
+			game.say(self, "Te faltan más tareas, apurate!")
+		}
+	}
+	
 	method image() = "Oficina/Puerta.png"
 	
 	method teEncontro() {

@@ -1,3 +1,5 @@
+/* 
+
 import wollok.game.*
 import configuraciones.*
 import pantallaJuego.*
@@ -13,6 +15,10 @@ class Nivel {
 		game.addVisual(chocolate)
 		game.addVisual(hamburguesa)
 		game.addVisual(planta)
+		
+		game.addVisual(companieriAzul)
+		game.addVisual(companieriRojo)
+		game.addVisual(companieriVerde)
 		
 		game.addVisual(energiaJugador)
 		//game.addVisual(tarjetas)
@@ -31,13 +37,6 @@ class Nivel {
 	method reiniciarElementos() {
 		jugador.moverAlInicio()
 		jugador.aumentarEnergia(100)
-		self.reiniciarTareas()
-	}
-	
-	method reiniciarTareas(){
-		tareaAzul.reEntregar()
-		tareaRojo.reEntregar()
-		tareaVerde.reEntregar()
 	}
 }
 
@@ -48,9 +47,6 @@ object nivel1 inherits Nivel{
 	override method cargarNivel() {
 				
 		// Todo esto es propio del primer nivel
-		game.addVisual(companieriAzul)
-		game.addVisual(companieriRojo)
-		game.addVisual(companieriVerde)
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraVerde)
@@ -126,3 +122,4 @@ object nivel3 inherits Nivel{
 	}
 	
 }
+*/

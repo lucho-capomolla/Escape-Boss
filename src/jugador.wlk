@@ -78,7 +78,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method objetosEnMochila() = objetosEnMochila
 
 //		ACCIONES POR ENTORNO (ESCONDERSE)
-	method estaEscondido() = position == planta.position()
+	method estaEscondido() = position == planta1.position() or position == planta2.position()
 
 	method puedeEsconderse() = true
 	
