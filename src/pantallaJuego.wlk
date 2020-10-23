@@ -5,18 +5,28 @@ import jugador.*
 import configuraciones.*
 import tareas.*
 import niveles.*
+import sonidos.*
 
 object pantallaJuego {
+	var nivelActual = nivel1
+	
+	method nivelActual() = nivelActual
 	
 	method iniciar() {
-		niveles.nivel1()
+		nivelActual.cargarNivel()
 	}
 	
-	method terminar(){
-		game.clear()
+	method avanzarNivel(unNivel) {
+		nivelActual = unNivel
+		self.iniciar()
+	}
+	
+	method terminarJuego(){
+		game.addVisual(fondoGanador)
+		sonido.reproducir("Yodelling.mp3")
+		game.schedule(5000, {game.stop()})
 	}
 }
-	
 
 object fondoPerdioEnergia{
 	var property position = game.origin()

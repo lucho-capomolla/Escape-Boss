@@ -41,6 +41,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	var property energia = 100
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
+	const objetosEnMochila = []
 	var tareaEnMano = sinTarea
 	
 	method image() {
@@ -49,6 +50,9 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	
+	method moverAlInicio() {
+		position = game.at(3,1)
+	}
 	
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
@@ -63,13 +67,14 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method disminuirEnergia(cantidad) {
 		energia = (energia - cantidad).max(0)
 			if(energia == 0){
-				pantallaJuego.terminar()
+				game.clear()
 				game.addVisual(fondoPerdioEnergia)
 				game.schedule(500, {sonido.reproducir("Lost.wav")})
 				game.schedule(5000, {game.stop()})
 		}
 	}
 
+	method objetosEnMochila() = objetosEnMochila
 
 //		ACCIONES POR ENTORNO (ESCONDERSE)
 	method estaEscondido() = position == planta.position()

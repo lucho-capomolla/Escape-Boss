@@ -1,5 +1,5 @@
-import jugador.*
 import wollok.game.*
+import jugador.*
 import tarjetas.*
 import oficina.*
 import jefe.*
@@ -28,13 +28,14 @@ object configuraciones {
 		
 		}
 		
-		method cambiarEstado(nuevoEstado) {
+	method cambiarEstado(nuevoEstado) {
 			estadoActual = nuevoEstado
 	}
 	
 	method configurarColisiones() {
 		game.onCollideDo(jugador, {algo => algo.teEncontro()})
 	}	
+	
 }	
 	
 class Estado{

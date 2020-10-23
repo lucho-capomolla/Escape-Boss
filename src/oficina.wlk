@@ -118,23 +118,22 @@ object companieriVerde inherits Companieri (tareaRequerida = tareaVerde, positio
 }
 
 
-
+// Seria el CheckPoint
 object puerta {
 	var property position = game.at(8,10)
-	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
+	
 	
 	method avanzar() {
-		if (tareasNecesarias == jugador.tareasRealizadas()){
-			pantallaJuego.terminar()
+		//if (tareasNecesarias == jugador.tareasRealizadas()){
+		pantallaJuego.nivelActual().finalizarNivel()
 			//game.addVisual(fondoGanador)
 			//sonido.reproducir("Yodelling.mp3")
-			niveles.avanzaNivel2()
 			//game.schedule(5000, {game.stop()})
 		}
-		else {
-			game.say(self, "TE FALTAN TAREAS BOLUDO")
-		}
-	}
+		//else {
+		//	game.say(self, "TE FALTAN TAREAS BOLUDO")
+		//}
+	//}
 	method image() = "Oficina/Puerta.png"
 	
 	method teEncontro() {
@@ -156,10 +155,9 @@ object cuadrito {
 	method teEncontro() = position == jugador.position()
 	
 	method interactuar(){
-		game.removeVisual(jefe)
+		jefe.esconderse()
 		game.addVisual(carpinchito)
 		game.schedule(2000, {game.removeVisual(carpinchito)})
-		game.schedule(2000, {game.addVisual(jefe)})
 	}
 	
 	method esAtravesable() = true
