@@ -22,16 +22,28 @@ class Consumible {
 }
 
 
-object cafeConLeche inherits Consumible (energiaAportada=25, position = game.at(7,7)) {
+object cafeConLeche inherits Consumible (energiaAportada=25, position = game.at(3,5)) {
 	 method image() = "Oficina/Cafe.png"
 }
 
-object chocolate inherits Consumible (energiaAportada=45, position = game.at(13,8)){
+object chocolate inherits Consumible (energiaAportada=45, position = game.at(13,7)){
 	method image() = "Oficina/Chocolate.png"
 }
 
 object hamburguesa inherits Consumible (energiaAportada=60, position = game.at(11,2)) {
 	 method image() = "Oficina/Hamburguesa.png"
+}
+
+object pizza inherits Consumible (energiaAportada = 30, position = game.at(8,8)){
+	method image() = "Oficina/Pizza.png"
+}
+
+object bebida inherits Consumible (energiaAportada = 20, position = game.at(9,4)){
+	method image() = "Oficina/Bebida.png"
+}
+
+object rosquilla inherits Consumible (energiaAportada = 50, position = game.at(8,2)){
+	method image() = "Oficina/Rosquilla.png"
 }
 
 
@@ -50,9 +62,9 @@ class Planta {
 }
 
 
-object planta1 inherits Planta(position = game.at(4,5)){}
+object planta1 inherits Planta(position = game.at(4,6)){}
 
-object planta2 inherits Planta(position = game.at(12,3)){}
+object planta2 inherits Planta(position = game.at(13,4)){}
 
 
 
@@ -72,15 +84,15 @@ class Impresora {
 	
 }
 
-object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,4)) {
+object impresoraAzul inherits Impresora (tarea = tareaAzul, position = game.at(3,3)) {
 	method image() = "Oficina/ImpresoraAAzul.png"
 }
 
-object impresoraRojo inherits Impresora (tarea = tareaRojo, position = game.at(8,2)) {
+object impresoraRojo inherits Impresora (tarea = tareaRojo, position = game.center()) {
 	method image() = "Oficina/ImpresoraBRojo.png"
 }
 
-object impresoraVerde inherits Impresora (tarea = tareaVerde, position = game.center()) {
+object impresoraVerde inherits Impresora (tarea = tareaVerde, position = game.at(14,3)) {
 	method image() = "Oficina/ImpresoraAVerde.png"
 }
 
@@ -108,11 +120,11 @@ class Companieri {
 	
 }
 
-object companieriAzul inherits Companieri (tareaRequerida = tareaAzul, position = game.at(13,5)){
+object companieriAzul inherits Companieri (tareaRequerida = tareaAzul, position = game.at(13,8)){
 	method image() = "Oficina/CompanieriAzul.png"
 }
 
-object companieriRojo inherits Companieri (tareaRequerida = tareaRojo, position = game.at(6,4)){
+object companieriRojo inherits Companieri (tareaRequerida = tareaRojo, position = game.at(6,5)){
 	method image() = "Oficina/CompanieriRojo.png"
 }
 
