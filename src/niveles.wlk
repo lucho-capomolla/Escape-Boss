@@ -123,3 +123,10 @@ object nivel3 inherits Nivel{
 	
 }
 */
+
+/*
+ * Fase 1: Entregar las 3 tareas
+ * Fase 2: Entregar los 3 cafes 
+ * Fase 3: Buscar la mochila y buscar los 3 objetos personales, e irse (Notebook, Celular, Llaves)
+ */
+

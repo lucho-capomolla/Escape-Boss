@@ -5,9 +5,10 @@ import jugador.*
 import configuraciones.*
 import tareas.*
 import sonidos.*
+import tarjetas.*
 
 object pantallaJuego {
-	
+	var property cantidadTurnos = 0
 	/*
 	var nivelActual = nivel1
 	
@@ -56,6 +57,10 @@ object pantallaJuego {
 		configuraciones.configurarColisiones()	
 		configuraciones.cambiarEstado(estadoJuego)
 		
+	}
+	
+	method hacerTurno() {
+		cantidadTurnos += 1
 	}
 }
 

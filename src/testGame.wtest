@@ -4,3 +4,17 @@ test "testX" {
 	assert.that(true)
 
 }
+
+
+
+// Cuando vas a la puerta y no tenes las tareas (No podes salir)
+
+// Cuando vas a la puerta y podes salir (Ganar el juego)
+
+// Cuando obtenes una tarea de la impresora (Tarea en mano == Tarea)
+// VALOR CENTINELA QUE LA IMPRESORA NO REPITA DANDO TAREAS DEMAS
+// Si ya sacaste una tarea de una impresora, no podes seguir sacando mas tareas
+
+// Cuando entregas una tarea a un compañero (Tareas realizadas += 1)
+
+// Cuando consumis una comida y te aumenta la energia
