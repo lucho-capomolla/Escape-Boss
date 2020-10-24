@@ -32,7 +32,7 @@ class Jefe inherits Personaje{
 	
 	
 	
-	method esAtravesable() = false
+	method esAtravesable() = true
 	
 	method teEncontro() {
 		if(position == jugador.position())
