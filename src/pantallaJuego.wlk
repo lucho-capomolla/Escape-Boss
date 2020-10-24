@@ -58,6 +58,7 @@ object pantallaJuego {
 		game.addVisual(tareaAzul)	
 		game.addVisual(tareaRojo)	
 		game.addVisual(tareaVerde)	
+		game.addVisual(pikachu)
 		
 		configuraciones.configurarColisiones()	
 		configuraciones.cambiarEstado(estadoJuego)
