@@ -12,6 +12,15 @@ import menuInicio.*
 
 
 describe "Escape Boss"{
+fixture{game.addVisual(jugador)
+		game.addVisual(tareaAzul)
+		game.addVisual(tareaRojo)
+		game.addVisual(tareaVerde)
+		game.addVisual(companieriAzul)
+		game.addVisual(companieriRojo)
+		game.addVisual(companieriVerde)
+		game.addVisual(puerta)
+}
 
 test"El jugador disminuye 3 de energia al moverse"{
 	jugador.disminuirEnergia(3)
@@ -25,15 +34,36 @@ test"El jugador disminuye 3 de energia al moverse"{
 //	assert.equals(95,jugador.energia())
 //}
 
-test"El jugador no tiene todas las tareas realizadas,entonces no puede salir por la puerta"{}
+test"El jugador no tiene todas las tareas realizadas,entonces no puede salir por la puerta"{
+	jugador.agregarTarea(tareaAzul)
+	jugador.agregarTarea(tareaRojo)
+	jugador.agregarTarea(tareaVerde)
+	companieriAzul.interactuar()
+	companieriRojo.interactuar()
+	companieriVerde.interactuar()	
+	puerta.avanzar()
+}
 
-test"El jugador tiene todas las tareas realizadas,entonces puede salir por la puerta"{}
+test"El jugador tiene todas las tareas realizadas,entonces puede salir por la puerta"{
+	
+}
 
-test"El jugador toma una tarea"{}
+test"El jugador toma una tarea"{
+	jugador.agregarTarea(tareaAzul)
+	assert.equals(tareaAzul,jugador.tareaEnMano())
+}
 
 test"El jugador no puede volver a tomar la misma tarea"{}
 
-test"El jugador le entrega la tarea al compañero"{}
+test"El jugador le entrega la tarea al compañero"{
+//	jugador.agregarTarea(tareaAzul)
+//	companieriAzul.interactuar()
+}
+test"El jugador entrega una tarea equivocada al compañero"{
+	jugador.agregarTarea(tareaVerde)
+	companieriRojo.interactuar()
+	assert.that(jugador.tareasRealizadas().isEmpty())
+}
 
 }
 
