@@ -47,6 +47,17 @@ object rosquilla inherits Consumible (energiaAportada = 50, position = game.at(8
 }
 
 
+object mochila {
+	var property position
+	
+	method image() = "Oficina/Mochila.png"
+	
+	method interactuar() {
+		jugador.agarrarMochila()
+	}
+}
+
+
 class Planta {
 	var property position
 	

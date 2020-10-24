@@ -43,10 +43,13 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	const property tareasRealizadas = #{}
 	const objetosEnMochila = []
 	var tareaEnMano = sinTarea
+	var tieneMochila = false
 	
 	method image() {
 		if(self.estaEscondido())
 			return "Personaje/Escondido.png"
+		if(tieneMochila)
+			return "Personaje/Jugador" + orientacion.nombre() + "Mochila.png" 
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	
@@ -55,6 +58,9 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		position = game.at(3,1)
 	}
 	
+	method agarrarMochila() {
+		tieneMochila = true
+	}
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
 		self.disminuirEnergia(3)

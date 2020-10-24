@@ -54,5 +54,5 @@ object dificil inherits Dificultad(nivelDeDificultad=500){
 
 object instrucciones{
 	
-	method image() = "Fondos/pantallaInicio3.png"
+	method image() = "Fondos/Instrucciones.png"
 }
