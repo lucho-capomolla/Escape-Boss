@@ -12,36 +12,42 @@ import menuInicio.*
 
 
 describe "Escape Boss"{
-fixture{game.addVisual(jugador)
-		game.addVisual(tareaAzul)
-		game.addVisual(tareaRojo)
-		game.addVisual(tareaVerde)
-		game.addVisual(companieriAzul)
-		game.addVisual(companieriRojo)
-		game.addVisual(companieriVerde)
-		game.addVisual(puerta)
+	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
+	
+fixture {
+	game.addVisual(jugador)
+	game.addVisual(tareaAzul)
+	game.addVisual(tareaRojo)
+	game.addVisual(tareaVerde)
+	game.addVisual(companieriAzul)
+	game.addVisual(companieriRojo)
+	game.addVisual(companieriVerde)
+	game.addVisual(puerta)
 }
 
-test"El jugador disminuye 3 de energia al moverse"{
+test"El jugador pierde energia al moverse"{
 	jugador.disminuirEnergia(3)
 	assert.equals(97,jugador.energia())
 }
-//test "El jugador consume un chocolate" {
-//	game.addVisual(jugador)
-//	game.addVisual(cafeConLeche)
-//	jugador.disminuirEnergia(30)
-//	cafeConLeche.interactuar()
-//	assert.equals(95,jugador.energia())
-//}
+test "El jugador interactua con un consumible" {
+	game.addVisual(cafeConLeche)
+	jugador.disminuirEnergia(30)
+	cafeConLeche.interactuar()
+	assert.equals(95,jugador.energia())
+}
 
-test"El jugador tiene todas las tareas realizadas,entonces puede salir por la puerta"{
+test"El jugador puede atravesar por la puerta si tiene todas las tareas realizadas"{
 	jugador.terminarTarea(tareaAzul)
 	jugador.terminarTarea(tareaRojo)
 	jugador.terminarTarea(tareaVerde)	
 	puerta.avanzar()
+	assert.equals(tareasNecesarias, jugador.tareasRealizadas())
 }
 
-//test"El jugador no tiene todas las tareas realizadas,entonces no puede salir por la puerta"{}
+test"El jugador no puede atravesar por la puerta si no tiene todas las tareas realizadas"{
+	jugador.terminarTarea(tareaAzul)
+	//assert.equals(game.say(puerta, "Te faltan más tareas, apurate!"), puerta.avanzar())
+}
 
 test"El jugador toma una tarea"{
 	jugador.agregarTarea(tareaAzul)
