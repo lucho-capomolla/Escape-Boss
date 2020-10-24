@@ -15,6 +15,7 @@ describe "Escape Boss"{
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
 	
 fixture {
+	game.clear()
 	game.addVisual(jugador)
 	game.addVisual(tareaAzul)
 	game.addVisual(tareaRojo)
@@ -23,6 +24,7 @@ fixture {
 	game.addVisual(companieriRojo)
 	game.addVisual(companieriVerde)
 	game.addVisual(puerta)
+	game.start()
 }
 
 test"El jugador pierde energia al moverse"{
