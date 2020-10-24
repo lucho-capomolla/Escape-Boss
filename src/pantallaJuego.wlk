@@ -67,6 +67,13 @@ object pantallaJuego {
 	method hacerTurno() {
 		cantidadTurnos += 1
 	}
+	
+	method terminarJuego(){
+		jefe1.dejarDePerseguir()
+		game.addVisual(fondoGanador)
+		sonido.reproducir("Yodelling.mp3")
+		game.schedule(5000, {game.stop()})
+	}
 }
 
 object fondoPerdioEnergia{

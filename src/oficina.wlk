@@ -54,7 +54,7 @@ class Planta {
 	
 	method teEncontro() = position == jugador.position()
 	
-	method serConsumido() {
+	method interactuar() {
 		jugador.error("Eto no eh comida papi")
 	}
 	
@@ -62,7 +62,7 @@ class Planta {
 }
 
 
-object planta1 inherits Planta(position = game.at(4,6)){}
+object planta1 inherits Planta(position = game.at(3,6)){}
 
 object planta2 inherits Planta(position = game.at(13,4)){}
 
@@ -104,6 +104,17 @@ class Companieri {
 	method esAtravesable() = true
 	
 	method interactuar() {
+		if(self.noTieneNingunaTarea()) {
+			game.say(self, "No me hagas perder el tiempo.")
+		}
+		else{
+			self.entregarTarea()
+		}
+	}
+	
+	method noTieneNingunaTarea() = jugador.tareaEnMano() == sinTarea
+	
+	method entregarTarea() {
 		const tarea = jugador.tareaEnMano()
 		if(tareaRequerida == tarea) {
 			game.say(self, "Me has salvado! Estoy agradecido")
@@ -141,9 +152,7 @@ object puerta {
 	method avanzar() {
 		if (tareasNecesarias == jugador.tareasRealizadas()){
 		//pantallaJuego.nivelActual().finalizarNivel()
-			game.addVisual(fondoGanador)
-			sonido.reproducir("Yodelling.mp3")
-			game.schedule(5000, {game.stop()})
+			pantallaJuego.terminarJuego()
 		}
 		else {
 			game.say(self, "Te faltan más tareas, apurate!")
