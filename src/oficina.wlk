@@ -184,3 +184,43 @@ object carpinchito {
 	
 	method image() = "Fondos/Carpinchito.jpg"
 }
+
+
+class Muro {
+	var property position
+	method esAtravesable() = false
+	
+	method image() = "Oficina/Vacio.png"
+}
+
+object muroHorizontal inherits Muro(position = game.at(6,7)){
+	override method image() = "Oficina/MuroHorizontal.png"
+	
+	method agregarMurosHorizontales() {
+		game.addVisual(self)
+		game.addVisual(muroHorizontal2)
+		game.addVisual(muroHorizontal3)
+		game.addVisual(muroHorizontal4)
+		game.addVisual(muroHorizontal5)
+	}
+}
+
+object muroHorizontal2 inherits Muro(position = game.at(7,7)){}
+object muroHorizontal3 inherits Muro(position = game.at(8,7)){}
+object muroHorizontal4 inherits Muro(position = game.at(9,7)){}
+object muroHorizontal5 inherits Muro(position = game.at(10,7)){}
+
+object muroVertical inherits Muro(position = game.at(8,3)){
+	override method image() = "Oficina/MuroVertical.png"
+	
+	method agregarMurosVerticales() {
+		game.addVisual(self)
+		game.addVisual(muroVertical2)
+		game.addVisual(muroVertical3)
+		game.addVisual(muroVertical4)
+	}
+}
+
+object muroVertical2 inherits Muro(position = game.at(8,4)){}
+object muroVertical3 inherits Muro(position = game.at(8,5)){}
+object muroVertical4 inherits Muro(position = game.at(8,6)){}
