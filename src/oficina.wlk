@@ -213,19 +213,22 @@ class Muro {
 	method image() = "Oficina/Vacio.png"
 }
 
-object muroHorizontal inherits Muro(position = game.at(7,7)){
+object muroHorizontal inherits Muro(position = game.at(6,7)){
 	override method image() = "Oficina/MuroHorizontal.png"
 	
 	method agregarMurosHorizontales() {
 		game.addVisual(self)
 		game.addVisual(muroHorizontal2)
 		game.addVisual(muroHorizontal3)
+		game.addVisual(muroHorizontal4)
+		game.addVisual(muroHorizontal5)
 	}
 }
 
-
-object muroHorizontal2 inherits Muro(position = game.at(8,7)){}
-object muroHorizontal3 inherits Muro(position = game.at(9,7)){}
+object muroHorizontal2 inherits Muro(position = game.at(7,7)){}
+object muroHorizontal3 inherits Muro(position = game.at(8,7)){}
+object muroHorizontal4 inherits Muro(position = game.at(9,7)){}
+object muroHorizontal5 inherits Muro(position = game.at(10,7)){}
 
 
 object muroVertical inherits Muro(position = game.at(8,3)){

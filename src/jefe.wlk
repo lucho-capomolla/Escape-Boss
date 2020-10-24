@@ -14,6 +14,24 @@ class Jefe inherits Personaje{
 		dificultad = nuevaDificultad
 	}
 	
+	
+	
+	
+	
+	override method moverHacia(personaje, direccion){
+		const nuevaPosicion = direccion.posicion(personaje.position())
+		if(self.puedeMoverse(nuevaPosicion)){
+			personaje.orientacion(direccion)
+			pikachu.position(personaje.position())
+			personaje.position(nuevaPosicion)
+		}
+	}
+	
+	
+	
+	
+	
+	
 	method esAtravesable() = false
 	
 	method teEncontro() {
@@ -23,7 +41,7 @@ class Jefe inherits Personaje{
 			game.schedule(250, {sonido.reproducir("Lost.wav")})
 			game.schedule(10000, {game.stop()})	
 	}
-
+	
 	method mostrarFondo(){}
 	
 	method puedeEsconderse() = false
@@ -89,3 +107,11 @@ object jefe2 inherits Jefe(position = game.at(14,10), orientacion = izquierda) {
 }
 
 
+
+object pikachu {
+	var property position = game.origin()
+	
+	method image() = "Oficina/Vacio.png"
+	
+	method esAtravesable() = false
+}
