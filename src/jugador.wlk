@@ -38,7 +38,7 @@ class Personaje {
 
 object jugador inherits Personaje (position = game.at(3,1)) {
 	
-	var property energia = 1000000
+	var property energia = 100
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
 	const objetosEnMochila = []

@@ -13,7 +13,7 @@ class Consumible {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada.toString())
 		game.removeVisual(self)
-		sonido.reproducir("Burp.mp3")
+		game.schedule(1, {sonido.reproducir("Burp.mp3")})
 	} 
 	method teEncontro() = true
 
@@ -88,7 +88,7 @@ class Impresora {
 	method interactuar() {
 		jugador.agregarTarea(tarea)
 		game.say(self, "Printer does BRRR BRRR")
-		sonido.reproducir("Impresion.mp3")
+		game.schedule(1, {sonido.reproducir("Impresion.mp3")})
 	}
 	
 	method teEncontro() = true
@@ -117,9 +117,11 @@ class Companieri {
 	method interactuar() {
 		if(self.noTieneNingunaTarea()) {
 			game.say(self, "No me hagas perder el tiempo.")
+			return false
 		}
 		else{
-			self.entregarTarea()
+			return self.entregarTarea()
+			//return true
 		}
 	}
 	
@@ -131,10 +133,12 @@ class Companieri {
 			game.say(self, "Me has salvado! Estoy agradecido")
 			jugador.terminarTarea(tarea)
 			tarea.seEntrego()
-			sonido.reproducir("Carpeta.mp3")
+			game.schedule(1, {sonido.reproducir("Carpeta.mp3")})
+			return true
 		}
 		else{
 			game.say(self, "Te equivocaste de tarea, papafrita")
+			return false
 		}
 	}
 	
@@ -164,19 +168,17 @@ object puerta {
 		if (tareasNecesarias == jugador.tareasRealizadas()){
 		//pantallaJuego.nivelActual().finalizarNivel()
 			pantallaJuego.terminarJuego()
+			return true
 		}
 		else {
 			game.say(self, "Te faltan más tareas, apurate!")
+			return false
 		}
 	}
 	
 	method image() = "Oficina/puerta.png"
 	
-	method teEncontro() {
-		if(position == jugador.position()){
-			self.avanzar()
-		}
-	}
+	method teEncontro() = self.avanzar()
 	
 	method esAtravesable() = true
 	

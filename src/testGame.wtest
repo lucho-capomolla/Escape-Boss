@@ -11,7 +11,7 @@ import tarjetas.*
 import menuInicio.*
 
 
-describe "Escape Boss"{
+describe "Jugador interactua con un objeto"{
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
 	
 fixture {
@@ -23,13 +23,19 @@ fixture {
 	game.addVisual(companieriAzul)
 	game.addVisual(companieriRojo)
 	game.addVisual(companieriVerde)
+	game.addVisual(impresoraRojo)
+	game.addVisual(impresoraAzul)
+	game.addVisual(impresoraVerde)
 	game.addVisual(puerta)
-	game.start()
+	game.addVisual(jefe1)
+	jefe1.elegirDificultad(facil)
+	jefe1.moverse()
 }
 
 test"El jugador pierde energia al moverse"{
-	jugador.disminuirEnergia(3)
-	assert.equals(97,jugador.energia())
+	jugador.moverse(arriba)
+	jugador.moverse(derecha)
+	assert.equals(94,jugador.energia())
 }
 test "El jugador interactua con un consumible" {
 	game.addVisual(cafeConLeche)
@@ -42,30 +48,36 @@ test"El jugador puede atravesar por la puerta si tiene todas las tareas realizad
 	jugador.terminarTarea(tareaAzul)
 	jugador.terminarTarea(tareaRojo)
 	jugador.terminarTarea(tareaVerde)	
-	puerta.avanzar()
 	assert.equals(tareasNecesarias, jugador.tareasRealizadas())
+	assert.that(puerta.avanzar())
 }
 
 test"El jugador no puede atravesar por la puerta si no tiene todas las tareas realizadas"{
 	jugador.terminarTarea(tareaAzul)
-	//assert.equals(game.say(puerta, "Te faltan más tareas, apurate!"), puerta.avanzar())
+	assert.notThat(puerta.avanzar())
 }
 
-test"El jugador toma una tarea"{
-	jugador.agregarTarea(tareaAzul)
-	assert.equals(tareaAzul,jugador.tareaEnMano())
+test"El jugador obtiene una tarea"{
+	//jugador.agregarTarea(tareaAzul)
+	impresoraAzul.interactuar()
+	assert.equals(tareaAzul, jugador.tareaEnMano())
 }
 
 test"El jugador no puede volver a tomar la misma tarea"{}
 
 test"El jugador le entrega la tarea al compañero"{
-//	jugador.agregarTarea(tareaAzul)
-//	companieriAzul.interactuar()
+	//jugador.agregarTarea(tareaAzul)
+	impresoraAzul.interactuar()
+	assert.that(companieriAzul.interactuar())
+	//assert.that(companieriAzul.entregarTarea())
+
 }
+
 test"El jugador entrega una tarea equivocada al compañero"{
-	jugador.agregarTarea(tareaVerde)
-	companieriRojo.interactuar()
-	assert.that(jugador.tareasRealizadas().isEmpty())
+	//jugador.agregarTarea(tareaVerde)
+	impresoraVerde.interactuar()
+	assert.notThat(companieriRojo.interactuar())
+	//assert.notThat(companieriRojo.entregarTarea())
 }
 
 }

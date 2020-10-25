@@ -72,7 +72,7 @@ object pantallaJuego {
 	method terminarJuego(){
 		jefe1.dejarDePerseguir()
 		game.addVisual(fondoGanador)
-		sonido.reproducir("Yodelling.mp3")
+		game.schedule(1, {sonido.reproducir("Yodelling.mp3")})
 		game.schedule(5000, {game.stop()})
 	}
 }
