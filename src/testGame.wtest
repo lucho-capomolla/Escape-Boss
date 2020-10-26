@@ -11,86 +11,76 @@ import tarjetas.*
 import menuInicio.*
 
 
-describe "Jugador interactua con un objeto"{
+describe "Jugador en la primera fase"{
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
 	
-fixture {
-	game.clear()
-	game.addVisual(jugador)
-	game.addVisual(tareaAzul)
-	game.addVisual(tareaRojo)
-	game.addVisual(tareaVerde)
-	game.addVisual(companieriAzul)
-	game.addVisual(companieriRojo)
-	game.addVisual(companieriVerde)
-	game.addVisual(impresoraRojo)
-	game.addVisual(impresoraAzul)
-	game.addVisual(impresoraVerde)
-	game.addVisual(puerta)
-	game.addVisual(jefe1)
-	jefe1.elegirDificultad(facil)
-	jefe1.moverse()
+	fixture {
+		game.clear()
+		sonido.escapeBoss(mockGame)
+		game.addVisual(jugador)
+		game.addVisual(tareaAzul)
+		game.addVisual(tareaRojo)
+		game.addVisual(tareaVerde)
+		game.addVisual(companieriAzul)
+		game.addVisual(companieriRojo)
+		game.addVisual(companieriVerde)
+		game.addVisual(impresoraRojo)
+		game.addVisual(impresoraAzul)
+		game.addVisual(impresoraVerde)
+		game.addVisual(puerta)
+		game.addVisual(jefe1)
+		jefe1.elegirDificultad(facil)
+		jefe1.moverse()
+	}
+
+	test"El jugador pierde energia al moverse"{
+		jugador.moverse(arriba)
+		jugador.moverse(derecha)
+		assert.equals(94,jugador.energia())
+	}
+	
+	test "El jugador interactua con un consumible" {
+		game.addVisual(cafeConLeche)
+		jugador.disminuirEnergia(30)
+		cafeConLeche.interactuar()
+		assert.equals(95,jugador.energia())
+	}
+
+	test"El jugador puede atravesar por la puerta si tiene todas las tareas realizadas"{
+		jugador.terminarTarea(tareaAzul)
+		jugador.terminarTarea(tareaRojo)
+		jugador.terminarTarea(tareaVerde)	
+		assert.equals(tareasNecesarias, jugador.tareasRealizadas())
+		assert.that(puerta.avanzar())
+	}
+
+	test"El jugador no puede atravesar por la puerta si no tiene todas las tareas realizadas"{
+		jugador.terminarTarea(tareaAzul)
+		assert.notThat(puerta.avanzar())
+	}
+
+	test"El jugador obtiene una tarea"{
+		assert.that(impresoraAzul.puedeImprimir())
+		impresoraAzul.interactuar()
+		assert.equals(tareaAzul, jugador.tareaEnMano())
+	}
+
+	test"El jugador no puede volver a tomar la misma tarea"{
+		assert.that(impresoraVerde.puedeImprimir())
+		impresoraVerde.interactuar()
+		assert.equals(tareaVerde, jugador.tareaEnMano())
+		jugador.terminarTarea(tareaVerde)
+		assert.notThat(impresoraVerde.puedeImprimir())
+	}
+
+	test"El jugador le entrega la tarea al compañero"{
+		impresoraAzul.interactuar()
+		assert.that(companieriAzul.interactuar())
+	}
+
+	test"El jugador entrega una tarea equivocada al compañero"{
+		impresoraVerde.interactuar()
+		assert.notThat(companieriRojo.interactuar())
+	}
+
 }
-
-test"El jugador pierde energia al moverse"{
-	jugador.moverse(arriba)
-	jugador.moverse(derecha)
-	assert.equals(94,jugador.energia())
-}
-test "El jugador interactua con un consumible" {
-	game.addVisual(cafeConLeche)
-	jugador.disminuirEnergia(30)
-	cafeConLeche.interactuar()
-	assert.equals(95,jugador.energia())
-}
-
-test"El jugador puede atravesar por la puerta si tiene todas las tareas realizadas"{
-	jugador.terminarTarea(tareaAzul)
-	jugador.terminarTarea(tareaRojo)
-	jugador.terminarTarea(tareaVerde)	
-	assert.equals(tareasNecesarias, jugador.tareasRealizadas())
-	assert.that(puerta.avanzar())
-}
-
-test"El jugador no puede atravesar por la puerta si no tiene todas las tareas realizadas"{
-	jugador.terminarTarea(tareaAzul)
-	assert.notThat(puerta.avanzar())
-}
-
-test"El jugador obtiene una tarea"{
-	//jugador.agregarTarea(tareaAzul)
-	impresoraAzul.interactuar()
-	assert.equals(tareaAzul, jugador.tareaEnMano())
-}
-
-test"El jugador no puede volver a tomar la misma tarea"{}
-
-test"El jugador le entrega la tarea al compañero"{
-	//jugador.agregarTarea(tareaAzul)
-	impresoraAzul.interactuar()
-	assert.that(companieriAzul.interactuar())
-	//assert.that(companieriAzul.entregarTarea())
-
-}
-
-test"El jugador entrega una tarea equivocada al compañero"{
-	//jugador.agregarTarea(tareaVerde)
-	impresoraVerde.interactuar()
-	assert.notThat(companieriRojo.interactuar())
-	//assert.notThat(companieriRojo.entregarTarea())
-}
-
-}
-
-
-// Cuando vas a la puerta y no tenes las tareas (No podes salir)
-
-// Cuando vas a la puerta y podes salir (Ganar el juego)
-
-// Cuando obtenes una tarea de la impresora (Tarea en mano == Tarea)
-// VALOR CENTINELA QUE LA IMPRESORA NO REPITA DANDO TAREAS DEMAS
-// Si ya sacaste una tarea de una impresora, no podes seguir sacando mas tareas
-
-// Cuando entregas una tarea a un compañero (Tareas realizadas += 1)
-
-// Cuando consumis una comida y te aumenta la energia

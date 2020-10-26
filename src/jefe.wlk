@@ -39,7 +39,7 @@ class Jefe inherits Personaje{
 			game.clear()
 			self.mostrarFondo()
 			game.schedule(250, {sonido.reproducir("Lost.wav")})
-			game.schedule(10000, {game.stop()})	
+			game.schedule(8000, {game.stop()})	
 	}
 	
 	method mostrarFondo(){}

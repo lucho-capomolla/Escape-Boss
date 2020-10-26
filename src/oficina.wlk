@@ -13,7 +13,7 @@ class Consumible {
 		jugador.aumentarEnergia(energiaAportada)
 		game.say(jugador, "Aumento la energia en " + energiaAportada.toString())
 		game.removeVisual(self)
-		game.schedule(1, {sonido.reproducir("Burp.mp3")})
+		sonido.reproducir("Burp.mp3")
 	} 
 	method teEncontro() = true
 
@@ -86,10 +86,20 @@ class Impresora {
 	method esAtravesable() = true
 	
 	method interactuar() {
-		jugador.agregarTarea(tarea)
-		game.say(self, "Printer does BRRR BRRR")
-		game.schedule(1, {sonido.reproducir("Impresion.mp3")})
+		if(self.puedeImprimir()){
+			jugador.agregarTarea(tarea)
+			game.say(self, "Printer does BRRR BRRR")
+			sonido.reproducir("Impresion.mp3")
+		}
+		else{
+			game.say(self, "Hace falta magenta")
+		}
+		
 	}
+	
+	method puedeImprimir() = not(jugador.entregoTarea(tarea))
+		
+	
 	
 	method teEncontro() = true
 	
@@ -133,7 +143,7 @@ class Companieri {
 			game.say(self, "Me has salvado! Estoy agradecido")
 			jugador.terminarTarea(tarea)
 			tarea.seEntrego()
-			game.schedule(1, {sonido.reproducir("Carpeta.mp3")})
+			sonido.reproducir("Carpeta.mp3")
 			return true
 		}
 		else{

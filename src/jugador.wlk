@@ -77,8 +77,8 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 			if(energia == 0){
 				game.clear()
 				game.addVisual(fondoPerdioEnergia)
-				game.schedule(500, {sonido.reproducir("Lost.wav")})
-				game.schedule(5000, {game.stop()})
+				game.schedule(250, {sonido.reproducir("Lost.wav")})
+				game.schedule(8000, {game.stop()})
 		}
 	}
 
@@ -108,5 +108,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		tareaEnMano = sinTarea
 		tareasRealizadas.add(tarea)
 	}
+	
+	method entregoTarea(tarea) = tareasRealizadas.contains(tarea)
 	
 }
