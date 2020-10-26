@@ -59,9 +59,12 @@ object pantallaJuego {
 		game.addVisual(tareaRojo)	
 		game.addVisual(tareaVerde)
 		game.addVisual(pikachu)
-		
+		game.addVisual(contador)
+		game.addVisual(mazoTarjeta)
 		configuraciones.configurarColisiones()	
 		configuraciones.cambiarEstado(estadoJuego)
+		
+		game.onTick(8000, "Sacar tarjeta", {mazoTarjeta.ponerTarjeta()})
 		
 	}
 	
