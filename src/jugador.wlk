@@ -109,6 +109,11 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		tareasRealizadas.add(tarea)
 	}
 	
+	method quitarTarea(tarea) {
+		tareasRealizadas.remove(tarea)
+		tarea.reEntregar()
+	}
+	
 	method entregoTarea(tarea) = tareasRealizadas.contains(tarea)
 	
 }

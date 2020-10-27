@@ -11,6 +11,10 @@ class Tarea {
 	method seEntrego(){
 		estado = "Ok"
 	}
+	
+	method reEntregar(){
+		estado = "Not"
+	}
 }
 
 object tareaAzul inherits Tarea(position = game.at(16,3)) {

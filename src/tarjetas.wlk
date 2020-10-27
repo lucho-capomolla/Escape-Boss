@@ -3,7 +3,7 @@ import pantallaJuego.*
 import jugador.*
 import jefe.*
 import oficina.*
-
+import tareas.*
 
 
 object contador {
@@ -22,7 +22,7 @@ class Tarjeta {
 }
 
 object mazoTarjeta inherits Tarjeta(nombreTarjeta = "Mazo") {
-	const mazoTarjetas = [jefeAUnaImpresora, jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia]
+	const mazoTarjetas = [jefeAUnaImpresora, jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio]
 	
 	method ponerTarjeta() {
 		const tarjetaElegida = mazoTarjetas.anyOne()
@@ -43,6 +43,7 @@ object jefeAUnaImpresora inherits Tarjeta(nombreTarjeta = "JefeAImpresora"){
 	}
 }
 
+
 object jefeACompanieri inherits Tarjeta(nombreTarjeta = "JefeACompanieri"){
 	const companieris = [companieriAzul, companieriRojo, companieriVerde]
 	
@@ -51,6 +52,7 @@ object jefeACompanieri inherits Tarjeta(nombreTarjeta = "JefeACompanieri"){
 		jefe1.position(posCompanieri.anyOne())
 	}
 }
+
 
 object agregarEnergia inherits Tarjeta(nombreTarjeta = "AgregarEnergia"){
 	var cantidad = 15
@@ -64,12 +66,14 @@ object agregarEnergia inherits Tarjeta(nombreTarjeta = "AgregarEnergia"){
 	}
 }
 
+
 object restaurarEnergia inherits Tarjeta(nombreTarjeta = "RestaurarEnergia") {
 	
 	override method producirEfecto() {
 		jugador.energia(100)
 	}
 }
+
 
 object perderEnergia inherits Tarjeta(nombreTarjeta = "PerderEnergia") {
 	var porcentaje = 15
@@ -85,20 +89,22 @@ object perderEnergia inherits Tarjeta(nombreTarjeta = "PerderEnergia") {
 }
 
 
-
-// Cada 10 turnos, muestra una tarjeta, y se resetea el contador
-
-
-
+object perderTarea inherits Tarjeta(nombreTarjeta = "PerderTarea"){
 	
-	// Se podrian hacer muchas tarjetas, y que cada cierta cantidad de turnos, se levante una tarjeta de forma aleatoria
-	// Y una vez levantada que muestre en pantalla su información, y active su efecto por 1 o mas turnos?
-	
-	
-// OPCIONAL: Desaparece el jefe por 5 turnos
+	override method producirEfecto() {
+		if(not(jugador.tareasRealizadas().isEmpty())) {
+			const tareaAPerder = jugador.tareasRealizadas().anyOne()
+			jugador.quitarTarea(tareaAPerder)
+		}
+	}
+}
 
-//El jefe vaya a una impresora
-//El jefe vaya a un compañero
-//Agregar 15 de energia
-//Devolver 100% de energia
-//Sacarnos 25% de energia
+
+object volverAlInicio inherits Tarjeta(nombreTarjeta = "VolverAlInicio") {
+	
+	override method producirEfecto() {
+		jugador.moverAlInicio()
+	}
+}
+
+
