@@ -4,6 +4,7 @@ import oficina.*
 class Tarea {
 	var property position
 	var estado = "Not"
+	
 	method image() = "Tareas/Tarea" + self.color() + estado + ".png"
 	
 	method color()

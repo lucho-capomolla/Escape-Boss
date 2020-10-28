@@ -43,6 +43,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	const property tareasRealizadas = #{}
 	const objetosEnMochila = []
 	var tareaEnMano = sinTarea
+	var objetoEnMano = vacio
 	var tieneMochila = false
 	
 	method image() {
@@ -50,22 +51,30 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 			return "Personaje/Escondido.png"
 		if(tieneMochila)
 			return "Personaje/Jugador" + orientacion.nombre() + "Mochila.png" 
+		if(self.noTieneNingunaTarea())
+			return "Personaje/Jugador" + orientacion.nombre() + objetoEnMano.nombre() + ".png"
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	
+	
+//		ACCIONES
 	method moverAlInicio() {
 		self.orientacion(derecha)
 		position = game.at(3,1)
 	}
 	
-	method agarrarMochila() {
-		tieneMochila = true
-	}
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
 		self.disminuirEnergia(3)
 		pantallaJuego.hacerTurno()
 	}
+	
+		method accionar(){
+		position.allElements().forEach({elemento => elemento.interactuar()})
+	}
+	
+	method interactuar(){}
+	
 	
 //       CONSUMIBLES
 	method aumentarEnergia(cantidad) {
@@ -82,8 +91,24 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		}
 	}
 
-	method objetosEnMochila() = objetosEnMochila
 
+//		OBJETOS PERSONALES
+	method agarrarMochila() {
+		tieneMochila = true
+	}
+	
+	method objetosEnMochila() = objetosEnMochila
+	
+	method guardarObjeto(unObjeto) {
+		if(self.puedoGuardar()){
+			objetosEnMochila.add(unObjeto)
+		}
+		game.say(self, "¿En donde queres que lo guarde?")
+	}
+	
+	method puedoGuardar() = tieneMochila
+	
+	
 //		ACCIONES POR ENTORNO (ESCONDERSE)
 	method estaEscondido() = position == planta1.position() or position == planta2.position()
 
@@ -91,19 +116,14 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	method esAtravesable() = not(self.estaEscondido())
 
+
 //	      TAREAS
 	method agregarTarea(tarea) {
 		tareaEnMano = tarea
 	}
 	
 	method tareaEnMano() = tareaEnMano
-	
-	method accionar(){
-		position.allElements().forEach({elemento => elemento.interactuar()})
-	}
-	
-	method interactuar(){}
-	
+		
 	method terminarTarea(tarea) {
 		tareaEnMano = sinTarea
 		tareasRealizadas.add(tarea)
@@ -115,5 +135,20 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	}
 	
 	method entregoTarea(tarea) = tareasRealizadas.contains(tarea)
+	
+	method noTieneNingunaTarea() = self.tareaEnMano() == sinTarea
+	
+	
+	method agarrarObjeto(objeto) {
+		objetoEnMano = objeto
+	}
+	
+	method entregarObjeto() {
+		objetoEnMano = vacio
+	}
+	
+	method objetoEnMano() = objetoEnMano
+	
+	method noTieneNingunObjeto() = self.objetoEnMano() == vacio
 	
 }
