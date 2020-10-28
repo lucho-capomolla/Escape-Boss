@@ -62,7 +62,7 @@ object estadoDificultad inherits Estado{
 	
 	method confirmarDificultad(){
 		jefe1.elegirDificultad(dificultad)
-		//jefe2.elegirDificultad(dificultad)
+		jefe2.elegirDificultad(dificultad)
 		menuInicio.mostrarInstrucciones()
 		sonido.reproducir("Confirmar.wav")
 	}

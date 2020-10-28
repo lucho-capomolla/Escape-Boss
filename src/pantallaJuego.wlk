@@ -6,10 +6,11 @@ import configuraciones.*
 import tareas.*
 import sonidos.*
 import tarjetas.*
+import niveles.*
 
 object pantallaJuego {
 	var property cantidadTurnos = 0
-	/*
+	
 	var nivelActual = nivel1
 	
 	method nivelActual() = nivelActual
@@ -23,61 +24,21 @@ object pantallaJuego {
 		self.iniciar()
 	}
 	
-	method terminarJuego(){
-		game.addVisual(fondoGanador)
-		sonido.reproducir("Yodelling.mp3")
-		game.schedule(5000, {game.stop()})
-	}*/
-	
-	method iniciar() {
-		
-		game.addVisual(puerta)	
-		game.addVisual(cafeConLeche)	
-		game.addVisual(chocolate)	
-		game.addVisual(hamburguesa)	
-		game.addVisual(rosquilla)
-		game.addVisual(bebida)
-		game.addVisual(pizza)
-		game.addVisual(companieriAzul)	
-		game.addVisual(companieriRojo)	
-		game.addVisual(companieriVerde)	
-		game.addVisual(planta1)
-		game.addVisual(planta2)	
-		game.addVisual(impresoraAzul)	
-		game.addVisual(impresoraRojo)	
-		game.addVisual(impresoraVerde)
-		muroHorizontal.agregarMurosHorizontales()
-		muroVertical.agregarMurosVerticales()
-		game.addVisual(cuadrito)	
-		game.addVisual(jugador)	
-		game.addVisual(jefe1)	
-		jefe1.moverse()
-		
-		game.showAttributes(jugador)	
-		game.addVisual(energiaJugador)	
-		game.addVisual(tareaAzul)	
-		game.addVisual(tareaRojo)	
-		game.addVisual(tareaVerde)
-		game.addVisual(pikachu)
-		//game.addVisual(contador)
-		game.addVisual(mazoTarjeta)
-		configuraciones.configurarColisiones()	
-		configuraciones.cambiarEstado(estadoJuego)
-		
-		game.onTick(9000, "Sacar tarjeta", {mazoTarjeta.ponerTarjeta()})
-		
-	}
-	
 	method hacerTurno() {
 		cantidadTurnos += 1
 	}
 	
 	method terminarJuego(){
-		jefe1.dejarDePerseguir()
+		game.clear()
 		game.addVisual(fondoGanador)
 		sonido.reproducir("Yodelling.mp3")
 		game.schedule(5000, {game.stop()})
 	}
+}
+
+object fondoNivelSuperior {
+	var property position = game.origin()
+	method image() = "Fondos/FondoPisosAltos.png"
 }
 
 object fondoPerdioEnergia{

@@ -46,11 +46,16 @@ object mochila {
 	
 	method interactuar() {
 		jugador.agarrarMochila()
+		game.removeVisual(self)
 	}
+	
+	method teEncontro() = true
+	
+	method esAtravesable() = true
 }
 
 class ObjetoPersonal {
-	//var property position
+	var property position
 	const nombre
 	
 	method image() = "Oficina/" + nombre + ".png"
@@ -60,21 +65,30 @@ class ObjetoPersonal {
 	method teEncontro() = true
 	
 	method interactuar() {
-		jugador.guardarObjeto(self)
-		game.removeVisual(self)
-		//sonido.reproducir("Take.mp3")
+		if(jugador.puedoGuardar()){
+			jugador.guardarObjeto(self)
+			game.removeVisual(self)
+			//sonido.reproducir("Guardar.mp3")
+			return true
+		}
+		else{
+			game.say(jugador, "Necesito algo para guardarlo...")
+			return false
+		}
 	}
 }
 
-object billetera inherits ObjetoPersonal (/*position = game.at(),*/nombre = "Billetera"){}
+object billetera inherits ObjetoPersonal (position = game.at(3,2), nombre = "Billetera"){}
 
-object celular inherits ObjetoPersonal (/*position = game.at(),*/nombre = "Celular"){}
+object celular inherits ObjetoPersonal (position = game.at(7,6), nombre = "Celular"){}
 
-object credencial inherits ObjetoPersonal (/*position = game.at(),*/nombre = "Credencial"){}
+object credencial inherits ObjetoPersonal (position = game.at(14,1), nombre = "Credencial"){}
 
-object laptop inherits ObjetoPersonal (/*position = game.at(),*/nombre = "Laptop"){}
+object laptop inherits ObjetoPersonal (position = game.at(12,4), nombre = "Laptop"){}
 
-object llaves inherits ObjetoPersonal (/*position = game.at(),*/nombre = "Llaves"){}
+object llaves inherits ObjetoPersonal (position = game.at(7,9), nombre = "Llaves"){}
+
+object auriculares inherits ObjetoPersonal (position = game.at(12,8), nombre = "Auriculares"){} 
 
 
 
@@ -135,27 +149,26 @@ object impresoraVerde inherits Impresora (tipo = "A", color = "Verde", tarea = t
 
 // Comestibles para compañeros
 class Maquina {
-	//var property position
+	var property position
 	const nombre
+	const producto
 	
 	method image() = "Oficina/" + nombre + ".png"
 	
-	method interactuar() {}
-}
-
-object maquinaCafe inherits Maquina (/*position = game.at(),*/nombre = "MaquinaCafe"){
+	method esAtravesable() = true
 	
-	override method interactuar() {
-		jugador.agarrarObjeto(cafe)
+	method teEncontro() = true
+	
+	method interactuar() {
+		jugador.agarrarObjeto(producto)
+		//sonido.reproducir("Take.mp3")
 	}
 }
 
-object heladera inherits Maquina (/*position = game.at(), */nombre = "Heladerita"){
-	
-	override method interactuar() {
-		jugador.agarrarObjeto(helado)
-	}
-}
+object maquinaCafe inherits Maquina (position = game.at(6,10), nombre = "MaquinaCafe", producto = cafe){}
+
+object heladera inherits Maquina (position = game.center(), nombre = "Heladerita", producto = helado){}
+
 
 class Comestible {
 	const nombre
@@ -175,20 +188,29 @@ object vacio inherits Comestible (nombre = ""){}
 class Companieri {
 	var property position
 	var tareaRequerida
+	//const objetosPosibles = [cafe, helado]
+	const objetoRequerido
 	const color
+	var objetoEntregado = false
 	
 	method image() = "Oficina/Companieri" + color + ".png"
 	
 	method esAtravesable() = true
 	
+	//method objetoRequerido() = objetosPosibles.anyOne()
+	
 	method interactuar() {
-		if(jugador.noTieneNingunaTarea()) {
-			// jugador.noTieneNingunObjeto() AGREGAR ESTE CONDICIONAL
+		if(jugador.noTieneNingunaTarea() and jugador.noTieneNingunObjeto()) {
 			game.say(self, "No me hagas perder el tiempo.")
 			return false
 		}
 		else{
-			return self.entregarTarea()
+			if(jugador.noTieneNingunObjeto()){
+				return self.entregarTarea()
+			}
+			else{
+				return self.entregarObjeto()
+			}
 		}
 	}
 	
@@ -207,33 +229,51 @@ class Companieri {
 		}
 	}
 	
+	method entregarObjeto() {
+		const objeto = jugador.objetoEnMano()
+		if(objetoRequerido == objeto and not(objetoEntregado)){
+			game.say(self, "Gracias! Me salvaste la tarde")
+			jugador.entregarObjeto(self)
+			self.entregoObjeto()
+			return true
+		}
+		else{
+			game.say(self, "Gracias, pero no era lo que quería.")
+			return false
+		}
+	}
+	
+	method entregoObjeto() {
+		objetoEntregado = true
+	}
+	
 	method teEncontro() = true
 }
 
-object companieriAzul inherits Companieri (color = "Azul", tareaRequerida = tareaAzul, position = game.at(13,8)){}
+object companieriAzul inherits Companieri (color = "Azul", tareaRequerida = tareaAzul, objetoRequerido = helado, position = game.at(13,8)){}
 
-object companieriRojo inherits Companieri (color = "Rojo", tareaRequerida = tareaRojo, position = game.at(6,5)){}
+object companieriRojo inherits Companieri (color = "Rojo", tareaRequerida = tareaRojo, objetoRequerido = cafe, position = game.at(6,4)){}
 
-object companieriVerde inherits Companieri (color = "Verde", tareaRequerida = tareaVerde, position = game.at(3,8)){}
+object companieriVerde inherits Companieri (color = "Verde", tareaRequerida = tareaVerde, objetoRequerido = helado, position = game.at(3,8)){}
 
 
 
 // Puerta y Ascensor
 object puerta {
 	var property position = game.at(8,10)
-	const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
+	//const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
 	
-	method avanzar() {
-		if (tareasNecesarias == jugador.tareasRealizadas()){
-		//pantallaJuego.nivelActual().finalizarNivel()
-			pantallaJuego.terminarJuego()
-			return true
-		}
-		else {
-			game.say(self, "Te faltan más tareas, apurate!")
-			return false
-		}
-	}
+	method avanzar() = pantallaJuego.nivelActual().finalizarNivel()
+		//if (tareasNecesarias == jugador.tareasRealizadas()){
+			
+			//pantallaJuego.terminarJuego()
+			//return true
+		//}
+		//else {
+			//game.say(self, "Te faltan más tareas, apurate!")
+			//return false
+		//}
+	
 	
 	method image() = "Oficina/puerta.png"
 	

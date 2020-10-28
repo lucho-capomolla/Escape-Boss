@@ -46,10 +46,6 @@ class Jefe inherits Personaje{
 	
 	method puedeEsconderse() = false
 	
-	method dejarDePerseguir(){
-		game.removeTickEvent("Perseguir")
-	}
-	
 	method esconderse() {
 		self.dejarDePerseguir()
 		game.schedule(2000, {self.moverse()})
@@ -57,6 +53,10 @@ class Jefe inherits Personaje{
 	
 	method moverse(){
 		game.onTick(dificultad.nivel(), "Perseguir", {self.perseguir()})
+	}
+	
+	method dejarDePerseguir(){
+		game.removeTickEvent("Perseguir")
 	}
 	
 	method perseguir(){

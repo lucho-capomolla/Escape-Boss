@@ -41,7 +41,8 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	var property energia = 100
 	var property orientacion = derecha
 	const property tareasRealizadas = #{}
-	const objetosEnMochila = []
+	const property companierisAyudados = #{}
+	const objetosEnMochila = #{}
 	var tareaEnMano = sinTarea
 	var objetoEnMano = vacio
 	var tieneMochila = false
@@ -65,7 +66,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
-		self.disminuirEnergia(3)
+		self.disminuirEnergia(2)
 		pantallaJuego.hacerTurno()
 	}
 	
@@ -102,8 +103,11 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method guardarObjeto(unObjeto) {
 		if(self.puedoGuardar()){
 			objetosEnMochila.add(unObjeto)
+			game.say(self, "Preciooosooo")
 		}
-		game.say(self, "¿En donde queres que lo guarde?")
+		else{
+			game.say(self, "¿En donde queres que lo guarde?")
+		}
 	}
 	
 	method puedoGuardar() = tieneMochila
@@ -143,8 +147,9 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		objetoEnMano = objeto
 	}
 	
-	method entregarObjeto() {
+	method entregarObjeto(companieri) {
 		objetoEnMano = vacio
+		companierisAyudados.add(companieri)
 	}
 	
 	method objetoEnMano() = objetoEnMano
