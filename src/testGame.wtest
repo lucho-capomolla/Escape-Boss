@@ -77,11 +77,13 @@ describe "Jugador en la primera fase"{
 
 	test"El jugador le entrega la tarea al compañero"{
 		impresoraAzul.interactuar()
+		companieriAzul.interactuar()
 		assert.that(companieriAzul.tareaEntregada())
 	}
 
 	test"El jugador entrega una tarea equivocada al compañero"{
 		impresoraVerde.interactuar()
+		companieriRojo.interactuar()
 		assert.notThat(companieriRojo.tareaEntregada())
 	}
 
@@ -106,7 +108,7 @@ describe "Jugador en la segunda fase"{
 		maquinaCafe.interactuar()
 		companieraVerde.interactuar()
 		assert.equals(vacio, jugador.objetoEnMano())
-		assert.that(companieraVerde.tareaEntregada())
+		assert.that(companieraVerde.objetoEntregado())
 	}
 	
 	test"El jugador le entrega un helado a la compañera Verde"{
@@ -115,7 +117,7 @@ describe "Jugador en la segunda fase"{
 		heladera.interactuar()
 		companieraAzul.interactuar()
 		assert.equals(vacio,jugador.objetoEnMano())
-		assert.that(companieraAzul.tareaEntregada())
+		assert.that(companieraAzul.objetoEntregado())
 	}
 	
 	test"El jugador no puede entregarle café a un compañero que quiere helado"{
