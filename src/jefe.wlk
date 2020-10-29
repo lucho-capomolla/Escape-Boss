@@ -37,7 +37,8 @@ class Jefe inherits Personaje{
 		if(position == jugador.position())
 			game.clear()
 			self.mostrarFondo()
-			game.schedule(250, {sonido.reproducir("Lost.wav")})
+			sonido.reproducir("Lost.wav")
+			sonido.reproducir("MadWorld.mp3")
 			game.schedule(8000, {game.stop()})	
 	}
 	

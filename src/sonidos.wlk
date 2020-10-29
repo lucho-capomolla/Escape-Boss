@@ -12,6 +12,10 @@ object sonido{
 	method reproducir(audio) {
 		self.sonido(audio).play()
 	}
+	
+	method parar(audio) {
+		self.sonido(audio).stop()
+	}
 }
 
 

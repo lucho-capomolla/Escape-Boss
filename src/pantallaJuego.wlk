@@ -29,6 +29,7 @@ object pantallaJuego {
 	}
 	
 	method terminarJuego(){
+		sonido.reproducir("TurnDownForWhat.mp3")
 		game.clear()
 		game.addVisual(fondoGanador)
 		sonido.reproducir("Yodelling.mp3")
