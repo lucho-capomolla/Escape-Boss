@@ -2,7 +2,7 @@ import wollok.game.*
 import oficina.*
 import configuraciones.*
 import direcciones.*
-import tareas.*
+import objetivos.*
 import jefe.*
 import pantallaJuego.*
 import sonidos.*
@@ -53,7 +53,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		if(tieneMochila)
 			return "Personaje/Jugador" + orientacion.nombre() + "Mochila.png" 
 		if(self.noTieneNingunaTarea())
-			return "Personaje/Jugador" + orientacion.nombre() + objetoEnMano.nombre() + ".png"
+			return "Personaje/Jugador" + orientacion.nombre() + objetoEnMano.tipo() + ".png"
 		return "Personaje/Jugador" + orientacion.nombre() + tareaEnMano.color() + ".png"
 	}
 	

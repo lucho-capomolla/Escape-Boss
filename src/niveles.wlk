@@ -4,13 +4,16 @@ import pantallaJuego.*
 import jugador.*
 import oficina.*
 import jefe.*
-import tareas.*
+import objetivos.*
 import tarjetas.*
 
 class Nivel {
 	
 	method cargarNivel(){
-		game.addVisual(puerta)	
+	
+		muroHorizontal.agregarMurosHorizontales()
+		muroVertical.agregarMurosVerticales()
+		
 		game.addVisual(cafeConLeche)	
 		game.addVisual(chocolate)	
 		game.addVisual(hamburguesa)	
@@ -22,33 +25,26 @@ class Nivel {
 		game.addVisual(companieriVerde)	
 		game.addVisual(planta1)
 		game.addVisual(planta2)	
-		//game.addVisual(impresoraAzul)	
-		//game.addVisual(impresoraRojo)	
-		//game.addVisual(impresoraVerde)
-		muroHorizontal.agregarMurosHorizontales()
-		muroVertical.agregarMurosVerticales()
 		game.addVisual(cuadrito)	
 		game.addVisual(jugador)	
-		//game.addVisual(jefe1)	
-		//jefe1.moverse()
-		
+
 		game.showAttributes(jugador)	
 		game.addVisual(energiaJugador)	
-		//game.addVisual(tareaAzul)	
-		//game.addVisual(tareaRojo)	
-		//game.addVisual(tareaVerde)
-		game.addVisual(pikachu)
+		//game.addVisual(pikachu)
 		game.addVisual(mazoTarjeta)
 		configuraciones.configurarColisiones()	
 		configuraciones.cambiarEstado(estadoJuego)
 		
-		game.onTick(9000, "Sacar tarjeta", {mazoTarjeta.ponerTarjeta()})
+		game.onTick(10000, "Sacar tarjeta", {mazoTarjeta.ponerTarjeta()})
 	}
 	
 	method finalizarNivel()
 	
 	method reiniciarElementos() {
-		//game.removeTickEvent("Sacar tarjeta")
+		jefe1.volverAlInicio()
+		jefe2.volverAlInicio()
+		game.removeTickEvent("Sacar tarjeta")
+		mazoTarjeta.mazoTarjetas([])
 		jugador.moverAlInicio()
 		jugador.aumentarEnergia(100)
 	}
@@ -59,8 +55,11 @@ object nivel1 inherits Nivel{
 	const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
 	
 	override method cargarNivel() {
+		game.addVisual(fondoNivelSuperior)
+		game.addVisual(ascensor2)
 		
-		// Todo esto es propio del primer nivel
+		mazoTarjeta.mazoTarjetas([jefeAUnaImpresora, jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio])
+		
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraVerde)
@@ -78,12 +77,12 @@ object nivel1 inherits Nivel{
 	override method finalizarNivel(){
 		if(tareasNecesarias == jugador.tareasRealizadas()){
 			game.allVisuals().forEach({visual => game.removeVisual(visual)})
-			pantallaJuego.avanzarNivel(nivel2)
 			self.reiniciarElementos()
+			pantallaJuego.avanzarNivel(nivel2)
 			return true
 		}
 		else{
-			game.say(puerta, "Te faltan más tareas, apurate!")
+			game.say(ascensor2, "Te faltan más tareas, apurate!")
 			return false
 		}
 	}
@@ -94,9 +93,15 @@ object nivel2 inherits Nivel{
 	
 	override method cargarNivel(){
 		game.addVisual(fondoNivelSuperior)
+		game.addVisual(ascensor1)
+		
+		mazoTarjeta.mazoTarjetas([jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio])
+		
+		self.inicializarPedidos()
 		
 		game.addVisual(maquinaCafe)
 		game.addVisual(heladera)
+		
 		super()
 		
 		game.addVisual(jefe2)
@@ -107,14 +112,23 @@ object nivel2 inherits Nivel{
 	override method finalizarNivel(){
 		if(companierisAyudados == jugador.companierisAyudados()){
 			game.allVisuals().forEach({visual => game.removeVisual(visual)})
-			pantallaJuego.avanzarNivel(nivel3)
 			self.reiniciarElementos()
+			pantallaJuego.avanzarNivel(nivel3)
 			return true
 		}
 		else{
-			game.say(puerta, "Segui ayudando a tus compañeris!")
+			game.say(ascensor1, "Segui ayudando a tus compañeris!")
 			return false
 		}
+	}
+	
+	method inicializarPedidos() {
+		companieriRojo.generarPedido()
+		game.addVisual(pedidoRojo)
+		companieriAzul.generarPedido()
+		game.addVisual(pedidoAzul)
+		companieriVerde.generarPedido()
+		game.addVisual(pedidoVerde)
 	}
 }
 
@@ -123,14 +137,11 @@ object nivel3 inherits Nivel{
 	const objetosNecesarios = #{llaves, laptop, credencial, celular, auriculares, billetera}
 	
 	override method cargarNivel(){
+		game.addVisual(puerta)
+		mazoTarjeta.mazoTarjetas([jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio])
 		
-		game.addVisual(mochila)
-		game.addVisual(llaves)
-		game.addVisual(laptop)
-		game.addVisual(credencial)
-		game.addVisual(celular)
-		game.addVisual(auriculares)
-		game.addVisual(billetera)
+		game.addVisual(contenidoMochila)
+		self.prepararObjetos()
 		
 		super()
 		
@@ -149,6 +160,23 @@ object nivel3 inherits Nivel{
 			game.say(puerta, "Todavía te faltan cosas, apurate!")
 			return false
 		}
+	}
+	
+	method prepararObjetos() {
+		game.addVisual(mochila)
+		game.addVisual(llaves)
+		game.addVisual(laptop)
+		game.addVisual(credencial)
+		game.addVisual(celular)
+		game.addVisual(auriculares)
+		game.addVisual(billetera)
+		
+		game.addVisual(auricularesEstado)
+		game.addVisual(llavesEstado)
+		game.addVisual(laptopEstado)
+		game.addVisual(credencialEstado)
+		game.addVisual(celularEstado)
+		game.addVisual(billeteraEstado)
 	}
 	
 }

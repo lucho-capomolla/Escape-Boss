@@ -17,7 +17,7 @@ class Jefe inherits Personaje{
 	
 	
 	
-	
+	/* 
 	override method moverHacia(personaje, direccion){
 		const nuevaPosicion = direccion.posicion(personaje.position())
 		if(self.puedeMoverse(nuevaPosicion)){
@@ -25,12 +25,11 @@ class Jefe inherits Personaje{
 			pikachu.position(personaje.position())
 			personaje.position(nuevaPosicion)
 		}
-	}
+	}*/
 	
 	
 	
-	
-	
+	method volverAlInicio() {}
 	
 	method esAtravesable() = true
 	
@@ -61,7 +60,7 @@ class Jefe inherits Personaje{
 	
 	method perseguir(){
 		if(jugador.estaEscondido()){
-			self.irAPuerta()
+			self.irASalida()
 		}
 		else{
 			self.moverHaciaJugador()
@@ -73,14 +72,14 @@ class Jefe inherits Personaje{
 		self.moverHaciaSiSePuede(self,direccionMasConveniente)	
 	}
 	
-	method irAPuerta(){
+	method irASalida(){
 		const direccionAPuerta = self.perritoGuardian(self.direccionesAtravesables())
 		self.moverHaciaSiSePuede(self, direccionAPuerta)
 	}
 
 	method direccionMasConveniente(direcciones) = direcciones.min({ direccion => direccion.posicion(position).distance(jugador.position())}) 
 	
-	method perritoGuardian(direcciones) = direcciones.min({direccion => direccion.posicion(position).distance(puerta.position())})
+	method perritoGuardian(direcciones) = direcciones.min({direccion => direccion.posicion(position).distance(salida)})
 	
 	method direccionesAtravesables() = [izquierda, arriba, abajo, derecha].filter({direccion => direccion.puedeIr(self)})
 		
@@ -91,8 +90,12 @@ object jefe1 inherits Jefe(position = game.at(14,1), orientacion = izquierda) {
 	
 	method image() = "Jefe/Jefe1" + orientacion.nombre() + ".png"
 	
+	override method volverAlInicio() {
+		position = game.at(14,1)
+	}
+	
 	override method mostrarFondo() {
-		game.addVisual(fondoJefeGano)
+		game.addVisual(fondoJefe1Gano)
 	}
 }
 
@@ -100,18 +103,21 @@ object jefe2 inherits Jefe(position = game.at(14,10), orientacion = izquierda) {
 	
 	method image() = "Jefe/Jefe2" + orientacion.nombre() + ".png"
 	
-	override method teEncontro() {
-		game.addVisual(fondoJefeGano)
-		super()
+	override method volverAlInicio() {
+		position = game.at(14,10)
+	}
+	
+	override method mostrarFondo() {
+		game.addVisual(fondoJefe2Gano)
 	}
 }
 
 
-
+/*
 object pikachu {
 	var property position = game.origin()
 	
 	method image() = "Oficina/Vacio.png"
 	
 	method esAtravesable() = false
-}
+}*/

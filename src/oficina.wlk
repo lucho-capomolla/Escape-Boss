@@ -1,6 +1,6 @@
 import wollok.game.*
 import jugador.*
-import tareas.*
+import objetivos.*
 import jefe.*
 import pantallaJuego.*
 import sonidos.*
@@ -32,7 +32,7 @@ object hamburguesa inherits Consumible (nombre = "Hamburguesa", energiaAportada=
 
 object pizza inherits Consumible (nombre = "Pizza", energiaAportada = 30, position = game.at(8,8)){}
 
-object bebida inherits Consumible (nombre = "Bebida", energiaAportada = 20, position = game.at(9,4)){}
+object bebida inherits Consumible (nombre = "Bebida", energiaAportada = 20, position = game.at(10,5)){}
 
 object rosquilla inherits Consumible (nombre = "Rosquilla", energiaAportada = 50, position = game.at(8,2)){}
 
@@ -57,6 +57,7 @@ object mochila {
 class ObjetoPersonal {
 	var property position
 	const nombre
+	var estado
 	
 	method image() = "Oficina/" + nombre + ".png"
 	
@@ -67,6 +68,7 @@ class ObjetoPersonal {
 	method interactuar() {
 		if(jugador.puedoGuardar()){
 			jugador.guardarObjeto(self)
+			estado.encontrado()
 			game.removeVisual(self)
 			//sonido.reproducir("Guardar.mp3")
 			return true
@@ -78,17 +80,17 @@ class ObjetoPersonal {
 	}
 }
 
-object billetera inherits ObjetoPersonal (position = game.at(3,2), nombre = "Billetera"){}
+object billetera inherits ObjetoPersonal (position = game.at(3,2), nombre = "Billetera", estado = billeteraEstado){}
 
-object celular inherits ObjetoPersonal (position = game.at(7,6), nombre = "Celular"){}
+object celular inherits ObjetoPersonal (position = game.at(7,6), nombre = "Celular", estado = celularEstado){}
 
-object credencial inherits ObjetoPersonal (position = game.at(14,1), nombre = "Credencial"){}
+object credencial inherits ObjetoPersonal (position = game.at(14,1), nombre = "Credencial", estado = credencialEstado){}
 
-object laptop inherits ObjetoPersonal (position = game.at(12,4), nombre = "Laptop"){}
+object laptop inherits ObjetoPersonal (position = game.at(12,4), nombre = "Laptop", estado = laptopEstado){}
 
-object llaves inherits ObjetoPersonal (position = game.at(7,9), nombre = "Llaves"){}
+object llaves inherits ObjetoPersonal (position = game.at(7,9), nombre = "Llaves", estado = llavesEstado){}
 
-object auriculares inherits ObjetoPersonal (position = game.at(12,8), nombre = "Auriculares"){} 
+object auriculares inherits ObjetoPersonal (position = game.at(12,8), nombre = "Auriculares", estado = auricularesEstado){} 
 
 
 
@@ -142,7 +144,7 @@ class Impresora {
 
 object impresoraAzul inherits Impresora (tipo = "A", color = "Azul", tarea = tareaAzul, position = game.at(3,3)) {}
 
-object impresoraRojo inherits Impresora (tipo = "B", color = "Rojo", tarea = tareaRojo, position = game.center()) {}
+object impresoraRojo inherits Impresora (tipo = "B", color = "Rojo", tarea = tareaRojo, position = game.at(9,4)) {}
 
 object impresoraVerde inherits Impresora (tipo = "A", color = "Verde", tarea = tareaVerde, position = game.at(14,3)) {}
 
@@ -170,26 +172,13 @@ object maquinaCafe inherits Maquina (position = game.at(6,10), nombre = "Maquina
 object heladera inherits Maquina (position = game.center(), nombre = "Heladerita", producto = helado){}
 
 
-class Comestible {
-	const nombre
-	
-	method nombre() = nombre
-}
-
-object cafe inherits Comestible (nombre = "Cafe"){}
-
-object helado inherits Comestible (nombre = "Helado"){}
-
-object vacio inherits Comestible (nombre = ""){}
-
-
 
 // Compañeros
 class Companieri {
 	var property position
 	var tareaRequerida
-	//const objetosPosibles = [cafe, helado]
-	const objetoRequerido
+	var pedido	
+	var producto
 	const color
 	var objetoEntregado = false
 	
@@ -197,7 +186,11 @@ class Companieri {
 	
 	method esAtravesable() = true
 	
-	//method objetoRequerido() = objetosPosibles.anyOne()
+	method generarPedido() {
+		 pedido.tipo(producto.tipo())
+	}
+	
+	method tipoProducto() = producto.tipo()
 	
 	method interactuar() {
 		if(jugador.noTieneNingunaTarea() and jugador.noTieneNingunObjeto()) {
@@ -216,6 +209,7 @@ class Companieri {
 	
 	method entregarTarea() {
 		const tarea = jugador.tareaEnMano()
+		
 		if(tareaRequerida == tarea) {
 			game.say(self, "Me has salvado! Estoy agradecido")
 			jugador.terminarTarea(tarea)
@@ -231,10 +225,12 @@ class Companieri {
 	
 	method entregarObjeto() {
 		const objeto = jugador.objetoEnMano()
-		if(objetoRequerido == objeto and not(objetoEntregado)){
+		
+		if(producto == objeto and not(objetoEntregado)){
 			game.say(self, "Gracias! Me salvaste la tarde")
 			jugador.entregarObjeto(self)
 			self.entregoObjeto()
+			pedido.seEntrego()
 			return true
 		}
 		else{
@@ -250,36 +246,42 @@ class Companieri {
 	method teEncontro() = true
 }
 
-object companieriAzul inherits Companieri (color = "Azul", tareaRequerida = tareaAzul, objetoRequerido = helado, position = game.at(13,8)){}
+object companieriAzul inherits Companieri (color = "Azul", tareaRequerida = tareaAzul, producto = productos.anyOne(), pedido = pedidoAzul,  position = game.at(13,8)){}
 
-object companieriRojo inherits Companieri (color = "Rojo", tareaRequerida = tareaRojo, objetoRequerido = cafe, position = game.at(6,4)){}
+object companieriRojo inherits Companieri (color = "Rojo", tareaRequerida = tareaRojo, producto = productos.anyOne(), pedido = pedidoRojo, position = game.at(6,4)){}
 
-object companieriVerde inherits Companieri (color = "Verde", tareaRequerida = tareaVerde, objetoRequerido = helado, position = game.at(3,8)){}
+object companieriVerde inherits Companieri (color = "Verde", tareaRequerida = tareaVerde, producto = productos.anyOne(), pedido = pedidoVerde, position = game.at(3,8)){}
 
 
 
 // Puerta y Ascensor
-object puerta {
-	var property position = game.at(8,10)
-	//const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
+//		Posicion de salida
+const salida = game.at(8,10)
+class Salida {
+	var property position = salida
 	
 	method avanzar() = pantallaJuego.nivelActual().finalizarNivel()
-		//if (tareasNecesarias == jugador.tareasRealizadas()){
-			
-			//pantallaJuego.terminarJuego()
-			//return true
-		//}
-		//else {
-			//game.say(self, "Te faltan más tareas, apurate!")
-			//return false
-		//}
 	
-	
-	method image() = "Oficina/puerta.png"
+	method image() 
 	
 	method teEncontro() = self.avanzar()
 	
 	method esAtravesable() = true
+}
+
+object puerta inherits Salida {
+	
+	override method image() = "Oficina/Puerta.png"
+}
+
+object ascensor1 inherits Salida {
+	
+	override method image() = "Oficina/Ascensor1.png"
+}
+
+object ascensor2 inherits Salida {
+	
+	override method image() = "Oficina/Ascensor2.png"
 }
 
 

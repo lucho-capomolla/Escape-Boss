@@ -3,7 +3,7 @@ import pantallaJuego.*
 import jugador.*
 import jefe.*
 import oficina.*
-import tareas.*
+import objetivos.*
 
 
 object contador {
@@ -22,10 +22,10 @@ class Tarjeta {
 }
 
 object mazoTarjeta inherits Tarjeta(nombreTarjeta = "Mazo") {
-	const mazoTarjetas = [jefeAUnaImpresora, jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio]
+	var property mazoTarjetas = []
 	
 	method ponerTarjeta() {
-		const tarjetaElegida = mazoTarjetas.anyOne()
+		var tarjetaElegida = mazoTarjetas.anyOne()
 		game.addVisual(tarjetaElegida)
 		tarjetaElegida.producirEfecto()
 		game.schedule(2000, {game.removeVisual(tarjetaElegida)})

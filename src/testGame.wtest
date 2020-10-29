@@ -5,7 +5,7 @@ import direcciones.*
 import wollok.game.*
 import pantallaJuego.*
 import configuraciones.*
-import tareas.*
+import objetivos.*
 import sonidos.*
 import tarjetas.*
 import menuInicio.*

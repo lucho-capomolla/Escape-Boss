@@ -3,7 +3,7 @@ import jefe.*
 import oficina.*
 import jugador.*
 import configuraciones.*
-import tareas.*
+import objetivos.*
 import sonidos.*
 import tarjetas.*
 import niveles.*
@@ -46,9 +46,14 @@ object fondoPerdioEnergia{
 	method image() = "Fondos/GameOverEnergia.png"
 }
 
-object fondoJefeGano {
+object fondoJefe1Gano {
 	var property position = game.origin()
-	method image() = "Fondos/GameOverJefe.png"
+	method image() = "Fondos/GameOverJefe1.png"
+}
+
+object fondoJefe2Gano {
+	var property position = game.origin()
+	method image() = "Fondos/GameOverJefe2.png"
 }
 
 object fondoGanador{
