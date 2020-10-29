@@ -58,6 +58,7 @@ class ObjetoPersonal {
 	var property position
 	const nombre
 	var estado
+	var property guardado= false
 	
 	method estado() = estado
 	
@@ -73,12 +74,15 @@ class ObjetoPersonal {
 			estado.encontrado()
 			game.removeVisual(self)
 			//sonido.reproducir("Guardar.mp3")
-			return true
+			self.estaGuardado()
 		}
 		else{
 			game.say(jugador, "Necesito algo para guardarlo...")
-			return false
 		}
+	}
+	
+	method estaGuardado(){
+		guardado=true
 	}
 }
 
@@ -182,7 +186,8 @@ class Companieri {
 	var pedido	
 	var producto
 	const color
-	var objetoEntregado = false
+	var property objetoEntregado = false
+	var property tareaEntregada= false
 	
 	method image() = "Oficina/Companieri" + color + ".png"
 	
@@ -197,14 +202,13 @@ class Companieri {
 	method interactuar() {
 		if(jugador.noTieneNingunaTarea() and jugador.noTieneNingunObjeto()) {
 			game.say(self, "No me hagas perder el tiempo.")
-			return false
 		}
 		else{
 			if(jugador.noTieneNingunObjeto()){
-				return self.entregarTarea()
+				self.entregarTarea()
 			}
 			else{
-				return self.entregarObjeto()
+				self.entregarObjeto()
 			}
 		}
 	}
@@ -217,12 +221,15 @@ class Companieri {
 			jugador.terminarTarea(tarea)
 			tarea.seEntrego()
 			sonido.reproducir("Carpeta.mp3")
-			return true
+			self.tareaLista()
 		}
 		else{
 			game.say(self, "Te equivocaste de tarea, papafrita")
-			return false
 		}
+	}
+	
+	method tareaLista(){
+		tareaEntregada=true
 	}
 	
 	method entregarObjeto() {
@@ -231,13 +238,11 @@ class Companieri {
 		if(producto == objeto and not(objetoEntregado)){
 			game.say(self, "Gracias! Me salvaste la tarde")
 			jugador.entregarObjeto(self)
-			self.entregoObjeto()
 			pedido.seEntrego()
-			return true
+			self.entregoObjeto()
 		}
 		else{
 			game.say(self, "Gracias, pero no era lo que quería.")
-			return false
 		}
 	}
 	
