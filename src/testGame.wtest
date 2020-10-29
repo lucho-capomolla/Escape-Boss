@@ -150,3 +150,4 @@ describe"Jugador en la tercera fase"{
 		assert.that(billetera.guardado())
 	}
 }
+//HACER TESTS DE LAS TARJETAS
