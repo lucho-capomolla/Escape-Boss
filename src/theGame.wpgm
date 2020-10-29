@@ -16,26 +16,7 @@ program juego {
 	game.start()
 }
 
-
-/* CAMBIOS
- 
- * 	AGREGAR TESTS
- * 	Terminar el tema de Tarjetas
- */
-
+  
 /*
- * 	- Seleccion de jugadores? 
- * Todo el tema de las tarjetas con los turnos IMPORTANTE
- * Que se vean las tarjetas en la derecha SEMI IMPORTANTE
- * 	- Pila de papeles
- * 	- Cajas
+ * TRAILER DEL JUEGO
  */
- 
- 
- /* IDEAS
-  * Agregar tiempo a cada impresora
-  * Agregar mas tareas, o que cada compañero requiera mas tareas
-  * Alargar tareas, agregando nuevas tareas o cosas para hacer
-  * Agregar cafeteria, y usarlo para misiones
-  * Si no se agregan más tareas, hacer que las impresoras tengan un valor centinela, y verifique cuando ya entrego una tarea
-  */

@@ -44,14 +44,29 @@ object jefeAUnaImpresora inherits Tarjeta(nombreTarjeta = "JefeAImpresora"){
 }
 
 
-object jefeACompanieri inherits Tarjeta(nombreTarjeta = "JefeACompanieri"){
+class JefeACompanieri inherits Tarjeta{
 	const companieris = [companieriAzul, companieriRojo, companieriVerde]
+	const posCompanieri = companieris.map({companieri => companieri.position()})
 	
 	override method producirEfecto() {
-		const posCompanieri = companieris.map({companieri => companieri.position()})
+		
+	}
+}
+
+object jefe1ACompanieri inherits JefeACompanieri(nombreTarjeta = "JefeACompanieri"){
+	
+	override method producirEfecto() {
 		jefe1.position(posCompanieri.anyOne())
 	}
 }
+
+object jefe2ACompanieri inherits JefeACompanieri(nombreTarjeta = "JefeACompanieri") {
+	
+	override method producirEfecto() {
+		jefe2.position(posCompanieri.anyOne())
+	}
+}
+
 
 
 object agregarEnergia inherits Tarjeta(nombreTarjeta = "AgregarEnergia"){
@@ -106,5 +121,18 @@ object volverAlInicio inherits Tarjeta(nombreTarjeta = "VolverAlInicio") {
 		jugador.moverAlInicio()
 	}
 }
+
+
+object perderObjeto inherits Tarjeta(nombreTarjeta = "PerderObjeto") {
+	
+	override method producirEfecto() {
+		if(not(jugador.objetosEnMochila().isEmpty())) {
+			const objetoAPerder = jugador.objetosEnMochila().anyOne()
+			jugador.quitarObjeto(objetoAPerder)
+		}
+	}
+}
+
+
 
 

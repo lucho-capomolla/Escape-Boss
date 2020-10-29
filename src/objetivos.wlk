@@ -68,7 +68,11 @@ class ObjetoEstado {
 		estado = "Ok"
 	}
 	
+	method perdido() {
+		estado = "Not"
+	}
 }
+
 
 object auricularesEstado inherits ObjetoEstado(nombre = "Auriculares") {}
 

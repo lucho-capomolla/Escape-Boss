@@ -55,10 +55,10 @@ object nivel1 inherits Nivel{
 	const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
 	
 	override method cargarNivel() {
-		game.addVisual(fondoNivelSuperior)
+		game.addVisual(fondoUltimoNivel)
 		game.addVisual(ascensor2)
 		
-		mazoTarjeta.mazoTarjetas([jefeAUnaImpresora, jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio])
+		mazoTarjeta.mazoTarjetas([jefeAUnaImpresora, jefe1ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio])
 		
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
@@ -92,10 +92,10 @@ object nivel2 inherits Nivel{
 	const companierisAyudados = #{companieriRojo, companieriAzul, companieriVerde}
 	
 	override method cargarNivel(){
-		game.addVisual(fondoNivelSuperior)
+		game.addVisual(fondoNivel2)
 		game.addVisual(ascensor1)
 		
-		mazoTarjeta.mazoTarjetas([jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio])
+		mazoTarjeta.mazoTarjetas([jefe2ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio])
 		
 		self.inicializarPedidos()
 		
@@ -138,7 +138,7 @@ object nivel3 inherits Nivel{
 	
 	override method cargarNivel(){
 		game.addVisual(puerta)
-		mazoTarjeta.mazoTarjetas([jefeACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio])
+		mazoTarjeta.mazoTarjetas([jefe1ACompanieri, jefe2ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio, perderObjeto])
 		
 		game.addVisual(contenidoMochila)
 		self.prepararObjetos()

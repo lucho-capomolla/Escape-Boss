@@ -36,7 +36,12 @@ object pantallaJuego {
 	}
 }
 
-object fondoNivelSuperior {
+object fondoUltimoNivel {
+	var property position = game.origin()
+	method image() = "Fondos/FondoUltimoPiso.png"
+}
+
+object fondoNivel2 {
 	var property position = game.origin()
 	method image() = "Fondos/FondoPisosAltos.png"
 }

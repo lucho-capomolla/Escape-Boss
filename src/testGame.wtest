@@ -27,16 +27,18 @@ describe "Jugador en la primera fase"{
 		game.addVisual(impresoraRojo)
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraVerde)
-		game.addVisual(puerta)
+		game.addVisual(ascensor2)
 		game.addVisual(jefe1)
 		jefe1.elegirDificultad(facil)
+		jefe2.elegirDificultad(facil)
 		jefe1.moverse()
+		game.onTick(10000, "Sacar tarjeta", {})
 	}
 
 	test"El jugador pierde energia al moverse"{
 		jugador.moverse(arriba)
 		jugador.moverse(derecha)
-		assert.equals(94,jugador.energia())
+		assert.equals(96,jugador.energia())
 	}
 	
 	test "El jugador interactua con un consumible" {

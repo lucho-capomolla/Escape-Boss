@@ -110,6 +110,12 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		}
 	}
 	
+	method quitarObjeto(unObjeto) {
+		objetosEnMochila.remove(unObjeto)
+		game.addVisual(unObjeto)
+		unObjeto.estado().perdido()
+	}
+	
 	method puedoGuardar() = tieneMochila
 	
 	

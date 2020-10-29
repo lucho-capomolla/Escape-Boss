@@ -8,6 +8,7 @@ object menuInicio {
 	method iniciar(){
 		game.addVisualIn(self, game.origin())
 		configuraciones.cambiarEstado(estadoMenuInicio)
+		sonido.reproducir("HouseOfTheRisingSun.mp3")
 	}
 	
 	method cerrar(){
@@ -21,7 +22,7 @@ object menuInicio {
 	
 	method mostrarInstrucciones(){
 		game.addVisualIn(instrucciones, game.origin())
-		game.schedule(5000, {self.continuar()})
+		game.schedule(8000, {self.continuar()})
 	}
 	
 	method continuar(){

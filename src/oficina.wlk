@@ -59,6 +59,8 @@ class ObjetoPersonal {
 	const nombre
 	var estado
 	
+	method estado() = estado
+	
 	method image() = "Oficina/" + nombre + ".png"
 	
 	method esAtravesable() = true
@@ -338,6 +340,7 @@ object cuadrito {
 	
 	method interactuar(){
 		jefe1.esconderse()
+		jefe2.esconderse()
 		game.addVisual(carpinchito)
 		game.schedule(2000, {game.removeVisual(carpinchito)})
 	}
