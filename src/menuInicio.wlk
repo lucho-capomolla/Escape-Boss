@@ -4,11 +4,12 @@ import pantallaJuego.*
 import sonidos.*
 
 object menuInicio {
+	var musicaInicio = sonido.sonido("HouseOfTheRisingSun.mp3")
 	
 	method iniciar(){
 		game.addVisualIn(self, game.origin())
 		configuraciones.cambiarEstado(estadoMenuInicio)
-		sonido.reproducir("HouseOfTheRisingSun.mp3")
+		game.schedule(1, {musicaInicio.play()})
 	}
 	
 	method cerrar(){
@@ -27,6 +28,7 @@ object menuInicio {
 	
 	method continuar(){
 		self.cerrar()
+		musicaInicio.stop()
 		pantallaJuego.iniciar()
 	}
 	
