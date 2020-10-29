@@ -45,7 +45,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	const objetosEnMochila = #{}
 	var tareaEnMano = sinTarea
 	var objetoEnMano = vacio
-	var tieneMochila = false
+	var property tieneMochila = false
 	
 	method image() {
 		if(self.estaEscondido())
@@ -87,7 +87,8 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 			if(energia == 0){
 				game.clear()
 				game.addVisual(fondoPerdioEnergia)
-				game.schedule(250, {sonido.reproducir("Lost.wav")})
+				sonido.reproducir("Lost.wav")
+				sonido.reproducir("MadWorld.mp3")
 				game.schedule(8000, {game.stop()})
 		}
 	}

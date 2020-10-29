@@ -61,7 +61,7 @@ describe "Jugador en la primera fase"{
 		assert.notThat(puerta.avanzar())
 	}
 
-	test"El jugador obtiene una tarea"{
+	test"El jugador obtiene una copia"{
 		assert.that(impresoraAzul.puedeImprimir())
 		impresoraAzul.interactuar()
 		assert.equals(tareaAzul, jugador.tareaEnMano())
@@ -77,12 +77,74 @@ describe "Jugador en la primera fase"{
 
 	test"El jugador le entrega la tarea al compañero"{
 		impresoraAzul.interactuar()
-		assert.that(companieriAzul.interactuar())
+		assert.that(companieriAzul.tareaEntregada())
 	}
 
 	test"El jugador entrega una tarea equivocada al compañero"{
 		impresoraVerde.interactuar()
-		assert.notThat(companieriRojo.interactuar())
+		assert.notThat(companieriRojo.tareaEntregada())
 	}
 
+}
+
+
+describe "Jugador en la segunda fase"{
+	
+	test"El jugador agarra un cafe de la maquina"{
+		maquinaCafe.interactuar()
+		assert.equals(cafe, jugador.objetoEnMano())
+	}
+	
+	test"El jugador agarra el helado de la heladera"{
+		heladera.interactuar()
+		assert.equals(helado, jugador.objetoEnMano())
+	}
+	
+	test"El jugador le entrega el café a la compañera Verde"{
+		const companieraVerde = new Companieri(color = "Verde", tareaRequerida = tareaVerde, producto = cafe, pedido = pedidoVerde, position = game.at(5,8))
+		game.addVisual(companieraVerde)
+		maquinaCafe.interactuar()
+		companieraVerde.interactuar()
+		assert.equals(vacio, jugador.objetoEnMano())
+		assert.that(companieraVerde.tareaEntregada())
+	}
+	
+	test"El jugador le entrega un helado a la compañera Verde"{
+		const companieraAzul = new Companieri(color = "Verde", tareaRequerida = tareaVerde, producto = helado, pedido = pedidoVerde, position = game.at(5,8))
+		game.addVisual(companieraAzul)
+		heladera.interactuar()
+		companieraAzul.interactuar()
+		assert.equals(vacio,jugador.objetoEnMano())
+		assert.that(companieraAzul.tareaEntregada())
+	}
+	
+	test"El jugador no puede entregarle café a un compañero que quiere helado"{
+		const companieraRoja = new Companieri(color = "Verde", tareaRequerida = tareaVerde, producto = helado, pedido = pedidoVerde, position = game.at(5,8))
+		game.addVisual(companieraRoja)
+		maquinaCafe.interactuar()
+		companieraRoja.interactuar()
+		assert.notThat(companieraRoja.tareaEntregada())
+	}
+}
+
+describe"Jugador en la tercera fase"{
+	fixture{
+		game.addVisual(jugador)
+		game.addVisual(celular)
+		game.addVisual(mochila)
+		game.addVisual(billetera)
+	}
+	test"El jugador agarra la mochila"{
+		mochila.interactuar()
+		assert.that(jugador.tieneMochila())
+	}
+	test"El jugador sin la mochila,no puede agarrar un objeto"{
+		celular.interactuar()
+		assert.notThat(celular.guardado())
+	}
+	test"El jugador con la mochila,puede agarrar un objeto"{
+		mochila.interactuar()
+		billetera.interactuar()
+		assert.that(billetera.guardado())
+	}
 }
