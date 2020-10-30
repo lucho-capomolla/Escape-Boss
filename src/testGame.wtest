@@ -130,11 +130,14 @@ describe "Jugador en la segunda fase"{
 }
 
 describe"Jugador en la tercera fase"{
+	
 	fixture{
 		game.addVisual(jugador)
-		game.addVisual(celular)
 		game.addVisual(mochila)
+		game.addVisual(celular)
 		game.addVisual(billetera)
+		game.addVisual(llaves)
+		game.addVisual(credencial)
 	}
 	test"El jugador agarra la mochila"{
 		mochila.interactuar()
@@ -150,4 +153,73 @@ describe"Jugador en la tercera fase"{
 		assert.that(billetera.guardado())
 	}
 }
-//HACER TESTS DE LAS TARJETAS
+
+
+describe "Tarjetas del juego" {
+	const impresoras = [impresoraAzul, impresoraRojo, impresoraVerde]
+	const posImpresoras = impresoras.map({impresora => impresora.position()})
+	const companieris = [companieriAzul, companieriRojo, companieriVerde]
+	const posCompanieris = companieris.map({companieri => companieri.position()})
+	
+	fixture {
+		game.addVisual(jugador)
+		game.addVisual(mochila)
+		game.addVisual(llaves)
+		game.addVisual(billetera)
+		game.addVisual(celular)
+		game.addVisual(credencial)
+	}
+	test "El jefe1 reaparece en una impresora" {
+		jefeAUnaImpresora.producirEfecto()
+		assert.that(posImpresoras.contains(jefe1.position()))
+	}
+	
+	test "El jefe 2 reaparece en el cubiculo de un companieri" {
+		jefe2ACompanieri.producirEfecto()
+		assert.that(posCompanieris.contains(jefe2.position()))
+	}
+	
+	test "El jugador recibe un bonus de energia" {
+		jugador.energia(70)
+		agregarEnergia.producirEfecto()
+		assert.equals(85, jugador.energia())
+	}
+	
+	test "El jugador restaura por completo su energia" {
+		jugador.energia(20)
+		restaurarEnergia.producirEfecto()
+		assert.equals(100, jugador.energia())
+	}
+	
+	test "El jugador pierde un porcentaje de su energia" {
+		jugador.energia(60)
+		perderEnergia.producirEfecto()
+		assert.equals(51, jugador.energia())
+	}
+	
+	test "El jugador pierde una de las tareas hechas" {
+		jugador.terminarTarea(tareaAzul)
+		jugador.terminarTarea(tareaRojo)
+		jugador.terminarTarea(tareaVerde)	
+		assert.equals(3, jugador.tareasRealizadas().size())
+		perderTarea.producirEfecto()
+		assert.equals(2, jugador.tareasRealizadas().size())
+	}
+	
+	test "El jugador vuelve a su posición inicial" {
+		jugador.position(game.at(5,3))
+		volverAlInicio.producirEfecto()
+		assert.equals(game.at(3,1), jugador.position())
+	}
+	
+	test "El jugador pierde un objeto de la mochila" {
+		mochila.interactuar()
+		billetera.interactuar()
+		celular.interactuar()
+		credencial.interactuar()
+		llaves.interactuar()
+		assert.equals(4, jugador.objetosEnMochila().size())
+		perderObjeto.producirEfecto()
+		assert.equals(3, jugador.objetosEnMochila().size())
+	}
+}
