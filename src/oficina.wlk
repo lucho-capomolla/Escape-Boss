@@ -4,6 +4,7 @@ import objetivos.*
 import jefe.*
 import pantallaJuego.*
 import sonidos.*
+import niveles.*
 
 class Consumible {
 	var property position
@@ -344,8 +345,16 @@ object cuadrito {
 	method teEncontro() = position == jugador.position()
 	
 	method interactuar(){
+		if(pantallaJuego.nivelActual()==nivel1){
 		jefe1.esconderse()
-		jefe2.esconderse()
+		}else{ 
+			if(pantallaJuego.nivelActual()==nivel2){
+				jefe2.esconderse()
+			}else{
+				jefe1.esconderse()
+				jefe2.esconderse()
+				}
+		}
 		game.addVisual(carpinchito)
 		game.schedule(2000, {game.removeVisual(carpinchito)})
 	}
