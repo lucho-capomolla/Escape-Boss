@@ -4,12 +4,13 @@ import jugador.*
 import jefe.*
 import oficina.*
 import objetivos.*
+import sonidos.*
 
-
+/*
 object contador {
 	var property position = game.at(1,11)
 	method image() = "ContadorTurnos/Contador" + pantallaJuego.cantidadTurnos().toString() + ".png"
-}
+}*/
 
 
 class Tarjeta {
@@ -21,24 +22,31 @@ class Tarjeta {
 	method producirEfecto(){}
 }
 
-object mazoTarjeta inherits Tarjeta(nombreTarjeta = "Mazo") {
-	var property mazoTarjetas = []
+const mazo1 = [jefeAUnaImpresora, jefe1ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio]
+const mazo2 = [jefe2ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio]
+const mazo3 = [jefe1ACompanieri, jefe2ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio, perderObjeto]
+
+object mazoTarjeta {
+	var property position = game.at(15,10)
+	var property mazoTarjetas
+	
+	method image() = "Tarjetas/Mazo.png"
 	
 	method ponerTarjeta() {
-		var tarjetaElegida = mazoTarjetas.anyOne()
+		const tarjetaElegida = mazoTarjetas.anyOne()
 		game.addVisual(tarjetaElegida)
+		sonido.reproducir("Alerta.wav")
 		tarjetaElegida.producirEfecto()
-		game.schedule(2000, {game.removeVisual(tarjetaElegida)})
+		game.schedule(2000, {if(game.hasVisual(tarjetaElegida)) {game.removeVisual(tarjetaElegida)}})
 	} 
-	
 }
 
 
 object jefeAUnaImpresora inherits Tarjeta(nombreTarjeta = "JefeAImpresora"){
 	const impresoras = [impresoraAzul, impresoraRojo, impresoraVerde]
+	const posImpresora = impresoras.map({impresora => impresora.position()})
 	
 	override method producirEfecto() {
-		const posImpresora = impresoras.map({impresora => impresora.position()})
 		jefe1.position(posImpresora.anyOne())
 	}
 }
@@ -47,10 +55,6 @@ object jefeAUnaImpresora inherits Tarjeta(nombreTarjeta = "JefeAImpresora"){
 class JefeACompanieri inherits Tarjeta{
 	const companieris = [companieriAzul, companieriRojo, companieriVerde]
 	const posCompanieri = companieris.map({companieri => companieri.position()})
-	
-	override method producirEfecto() {
-		
-	}
 }
 
 object jefe1ACompanieri inherits JefeACompanieri(nombreTarjeta = "JefeACompanieri"){
@@ -134,5 +138,52 @@ object perderObjeto inherits Tarjeta(nombreTarjeta = "PerderObjeto") {
 }
 
 
+object perderPedido inherits Tarjeta(nombreTarjeta = "PerderPedido"){
+	
+	override method producirEfecto() {
+		if(not(jugador.companierisAyudados().isEmpty())) {
+			const companieriPerdido = jugador.companierisAyudados().anyOne()
+			jugador.quitarPedido(companieriPerdido)
+		}
+	}
+}
 
+
+object jefeAMaquina inherits Tarjeta(nombreTarjeta = "JefeAMaquina") {
+	const maquinas = [maquinaCafe, heladera]
+	const posMaquinas = maquinas.map({maquina => maquina.position()})
+	
+	override method producirEfecto() {
+		jefe2.position(posMaquinas.anyOne())
+	}
+}
+
+
+
+class JefeAObjeto inherits Tarjeta {
+	const objetos = [billetera, credencial, llaves, laptop, auriculares, celular]
+	const posObjetos = objetos.map({objeto => objeto.position()})
+}
+
+
+object jefe1AObjeto inherits JefeAObjeto(nombreTarjeta = "JefeAObjeto") {
+	
+	override method producirEfecto() {
+		const objetoVigilado = posObjetos.anyOne()
+		if(game.hasVisual(objetoVigilado)){
+			jefe1.position(objetoVigilado)
+		}
+	}
+}
+
+object jefe2AObjeto inherits JefeAObjeto(nombreTarjeta = "JefeAObjeto") {
+	
+	override method producirEfecto() {
+		const objetoVigilado = posObjetos.anyOne()
+		if(game.hasVisual(objetoVigilado)){
+			jefe2.position(objetoVigilado)
+		}
+	}
+}
+ 
 

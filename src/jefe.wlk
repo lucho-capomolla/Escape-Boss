@@ -5,6 +5,7 @@ import pantallaJuego.*
 import sonidos.*
 import oficina.*
 import menuInicio.*
+import niveles.*
 
 class Jefe inherits Personaje{
 	var property orientacion
@@ -34,12 +35,15 @@ class Jefe inherits Personaje{
 	method esAtravesable() = true
 	
 	method teEncontro() {
-		if(position == jugador.position())
+		if(position == jugador.position()){
+			musicaJuego.stop()
 			game.clear()
 			self.mostrarFondo()
 			sonido.reproducir("Lost.wav")
 			sonido.reproducir("MadWorld.mp3")
-			game.schedule(8000, {game.stop()})	
+			game.schedule(12000, {game.stop()})	
+			
+			}
 	}
 	
 	method mostrarFondo(){}
@@ -48,16 +52,12 @@ class Jefe inherits Personaje{
 	
 	method esconderse() {
 		self.dejarDePerseguir()
-		game.schedule(2000, {self.moverse()})
+		game.schedule(4000, {self.moverse()})
 	}
 	
-	method moverse(){
-		game.onTick(dificultad.nivel(), "Perseguir", {self.perseguir()})
-	}
+	method moverse(){}
 	
-	method dejarDePerseguir(){
-		game.removeTickEvent("Perseguir")
-	}
+	method dejarDePerseguir(){}
 	
 	method perseguir(){
 		if(jugador.estaEscondido()){
@@ -95,6 +95,14 @@ object jefe1 inherits Jefe(position = game.at(14,1), orientacion = izquierda) {
 		position = game.at(14,1)
 	}
 	
+	override method moverse() {
+		game.onTick(dificultad.nivel(), "Perseguir1", {self.perseguir()})
+	}
+	
+	override method dejarDePerseguir() {
+		game.removeTickEvent("Perseguir1")
+	}
+	
 	override method mostrarFondo() {
 		game.addVisual(fondoJefe1Gano)
 	}
@@ -106,6 +114,14 @@ object jefe2 inherits Jefe(position = game.at(14,10), orientacion = izquierda) {
 	
 	override method volverAlInicio() {
 		position = game.at(14,10)
+	}
+	
+	override method moverse() {
+		game.onTick(dificultad.nivel(), "Perseguir2", {self.perseguir()})
+	}
+	
+	override method dejarDePerseguir() {
+		game.removeTickEvent("Perseguir2")
 	}
 	
 	override method mostrarFondo() {

@@ -6,9 +6,15 @@ import oficina.*
 import jefe.*
 import objetivos.*
 import tarjetas.*
+import sonidos.*
+
+const musicaJuego = sonido.sonido("MisionImposible.mp3")
 
 class Nivel {
+	var nivelPasado = false
 	
+	method nivelPasado() = nivelPasado
+		
 	method cargarNivel(){
 	
 		muroHorizontal.agregarMurosHorizontales()
@@ -25,12 +31,12 @@ class Nivel {
 		game.addVisual(companieriVerde)	
 		game.addVisual(planta1)
 		game.addVisual(planta2)	
-		game.addVisual(cuadrito)	
+		game.addVisual(cuadrito1)	
 		game.addVisual(jugador)	
 
 		game.showAttributes(jugador)	
 		game.addVisual(energiaJugador)	
-		//game.addVisual(pikachu)
+	
 		game.addVisual(mazoTarjeta)
 		configuraciones.configurarColisiones()	
 		configuraciones.cambiarEstado(estadoJuego)
@@ -48,6 +54,10 @@ class Nivel {
 		jugador.moverAlInicio()
 		jugador.aumentarEnergia(100)
 	}
+	
+	method pasarDeNivel() {
+		nivelPasado = true
+	}
 }
 
 
@@ -55,10 +65,11 @@ object nivel1 inherits Nivel{
 	const tareasNecesarias = #{tareaAzul, tareaVerde, tareaRojo}
 	
 	override method cargarNivel() {
+		musicaJuego.play()
 		game.addVisual(fondoUltimoNivel)
 		game.addVisual(ascensor2)
 		
-		mazoTarjeta.mazoTarjetas([jefeAUnaImpresora, jefe1ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, perderTarea, volverAlInicio])
+		mazoTarjeta.mazoTarjetas(mazo1)
 		
 		game.addVisual(impresoraAzul)
 		game.addVisual(impresoraRojo)
@@ -78,12 +89,11 @@ object nivel1 inherits Nivel{
 		if(tareasNecesarias == jugador.tareasRealizadas()){
 			game.allVisuals().forEach({visual => game.removeVisual(visual)})
 			self.reiniciarElementos()
+			self.pasarDeNivel()
 			pantallaJuego.avanzarNivel(nivel2)
-			return true
 		}
 		else{
 			game.say(ascensor2, "Te faltan más tareas, apurate!")
-			return false
 		}
 	}
 }
@@ -95,7 +105,7 @@ object nivel2 inherits Nivel{
 		game.addVisual(fondoNivel2)
 		game.addVisual(ascensor1)
 		
-		mazoTarjeta.mazoTarjetas([jefe2ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio])
+		mazoTarjeta.mazoTarjetas(mazo2)
 		
 		self.inicializarPedidos()
 		
@@ -113,12 +123,11 @@ object nivel2 inherits Nivel{
 		if(companierisAyudados == jugador.companierisAyudados()){
 			game.allVisuals().forEach({visual => game.removeVisual(visual)})
 			self.reiniciarElementos()
+			self.pasarDeNivel()
 			pantallaJuego.avanzarNivel(nivel3)
-			return true
 		}
 		else{
 			game.say(ascensor1, "Segui ayudando a tus compañeris!")
-			return false
 		}
 	}
 	
@@ -138,8 +147,8 @@ object nivel3 inherits Nivel{
 	
 	override method cargarNivel(){
 		game.addVisual(puerta)
-		mazoTarjeta.mazoTarjetas([jefe1ACompanieri, jefe2ACompanieri, agregarEnergia, restaurarEnergia, perderEnergia, volverAlInicio, perderObjeto])
-		
+		mazoTarjeta.mazoTarjetas(mazo3)
+		game.addVisual(cuadrito2)
 		game.addVisual(contenidoMochila)
 		self.prepararObjetos()
 		
@@ -153,12 +162,11 @@ object nivel3 inherits Nivel{
 	
 	override method finalizarNivel(){
 		if(objetosNecesarios == jugador.objetosEnMochila()){
+			self.pasarDeNivel()
 			pantallaJuego.terminarJuego()
-			return true
 		}
 		else{
 			game.say(puerta, "Todavía te faltan cosas, apurate!")
-			return false
 		}
 	}
 	

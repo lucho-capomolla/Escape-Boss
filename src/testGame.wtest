@@ -9,7 +9,7 @@ import objetivos.*
 import sonidos.*
 import tarjetas.*
 import menuInicio.*
-
+import niveles.*
 
 describe "Jugador en la primera fase"{
 	const tareasNecesarias = #{tareaAzul, tareaRojo, tareaVerde}
@@ -17,22 +17,9 @@ describe "Jugador en la primera fase"{
 	fixture {
 		game.clear()
 		sonido.escapeBoss(mockGame)
-		game.addVisual(jugador)
-		game.addVisual(tareaAzul)
-		game.addVisual(tareaRojo)
-		game.addVisual(tareaVerde)
-		game.addVisual(companieriAzul)
-		game.addVisual(companieriRojo)
-		game.addVisual(companieriVerde)
-		game.addVisual(impresoraRojo)
-		game.addVisual(impresoraAzul)
-		game.addVisual(impresoraVerde)
-		game.addVisual(ascensor2)
-		game.addVisual(jefe1)
 		jefe1.elegirDificultad(facil)
 		jefe2.elegirDificultad(facil)
-		jefe1.moverse()
-		game.onTick(10000, "Sacar tarjeta", {})
+		pantallaJuego.avanzarNivel(nivel1)
 	}
 
 	test"El jugador pierde energia al moverse"{
@@ -42,23 +29,9 @@ describe "Jugador en la primera fase"{
 	}
 	
 	test "El jugador interactua con un consumible" {
-		game.addVisual(cafeConLeche)
 		jugador.disminuirEnergia(30)
 		cafeConLeche.interactuar()
 		assert.equals(95,jugador.energia())
-	}
-
-	test"El jugador puede atravesar por la puerta si tiene todas las tareas realizadas"{
-		jugador.terminarTarea(tareaAzul)
-		jugador.terminarTarea(tareaRojo)
-		jugador.terminarTarea(tareaVerde)	
-		assert.equals(tareasNecesarias, jugador.tareasRealizadas())
-		assert.that(puerta.avanzar())
-	}
-
-	test"El jugador no puede atravesar por la puerta si no tiene todas las tareas realizadas"{
-		jugador.terminarTarea(tareaAzul)
-		assert.notThat(puerta.avanzar())
 	}
 
 	test"El jugador obtiene una copia"{
@@ -87,11 +60,38 @@ describe "Jugador en la primera fase"{
 		assert.notThat(companieriRojo.tareaEntregada())
 	}
 
+	test"El jugador puede pasar de nivel si tiene todas las tareas realizadas"{
+		jugador.terminarTarea(tareaAzul)
+		jugador.terminarTarea(tareaRojo)
+		jugador.terminarTarea(tareaVerde)	
+		assert.equals(tareasNecesarias, jugador.tareasRealizadas())
+		ascensor2.avanzar()
+		assert.that(nivel1.nivelPasado())
+	}
+
+	test"El jugador no puede pasar de nivel si no tiene todas las tareas realizadas"{
+		jugador.terminarTarea(tareaAzul)
+		ascensor2.avanzar()
+		assert.notThat(nivel1.nivelPasado())
+	}
 }
 
 
+
+
 describe "Jugador en la segunda fase"{
+	const companierisAyudados = #{companieriRojo, companieriAzul, companieriVerde}
 	
+	
+	fixture {
+		sonido.escapeBoss(mockGame)
+		jefe1.elegirDificultad(facil)
+		jefe2.elegirDificultad(facil)
+		pantallaJuego.avanzarNivel(nivel2)
+		companieriRojo.producto(helado)
+		companieriVerde.producto(cafe)
+		companieriAzul.producto(helado)
+	}
 	test"El jugador agarra un cafe de la maquina"{
 		maquinaCafe.interactuar()
 		assert.equals(cafe, jugador.objetoEnMano())
@@ -103,54 +103,93 @@ describe "Jugador en la segunda fase"{
 	}
 	
 	test"El jugador le entrega el café a la compañera Verde"{
-		const companieraVerde = new Companieri(color = "Verde", tareaRequerida = tareaVerde, producto = cafe, pedido = pedidoVerde, position = game.at(5,8))
-		game.addVisual(companieraVerde)
 		maquinaCafe.interactuar()
-		companieraVerde.interactuar()
+		companieriVerde.interactuar()
+		companieriVerde.interactuar()
 		assert.equals(vacio, jugador.objetoEnMano())
-		assert.that(companieraVerde.objetoEntregado())
+		assert.that(companieriVerde.objetoEntregado())
+		assert.that(companieriVerde.objetoEntregado())
 	}
 	
 	test"El jugador le entrega un helado a la compañera Verde"{
-		const companieraAzul = new Companieri(color = "Verde", tareaRequerida = tareaVerde, producto = helado, pedido = pedidoVerde, position = game.at(5,8))
-		game.addVisual(companieraAzul)
 		heladera.interactuar()
-		companieraAzul.interactuar()
+		companieriAzul.interactuar()
 		assert.equals(vacio,jugador.objetoEnMano())
-		assert.that(companieraAzul.objetoEntregado())
+		assert.that(companieriAzul.objetoEntregado())
 	}
 	
 	test"El jugador no puede entregarle café a un compañero que quiere helado"{
-		const companieraRoja = new Companieri(color = "Verde", tareaRequerida = tareaVerde, producto = helado, pedido = pedidoVerde, position = game.at(5,8))
-		game.addVisual(companieraRoja)
 		maquinaCafe.interactuar()
-		companieraRoja.interactuar()
-		assert.notThat(companieraRoja.tareaEntregada())
+		companieriRojo.interactuar()
+		assert.notThat(companieriRojo.tareaEntregada())
+	}
+	
+	test"El jugador puede pasar de nivel si ayudo a todos sus companieris"{
+		heladera.interactuar()
+		companieriRojo.interactuar()
+		heladera.interactuar()
+		companieriAzul.interactuar()
+		maquinaCafe.interactuar()
+		companieriVerde.interactuar()	
+		assert.equals(companierisAyudados, jugador.companierisAyudados())
+		ascensor1.avanzar()
+		assert.that(nivel2.nivelPasado())
+	}
+
+	test"El jugador no puede pasar de nivel si no ayudo a todos sus companieris"{
+		maquinaCafe.interactuar()
+		companieriVerde.interactuar()
+		ascensor1.avanzar()
+		assert.notThat(nivel2.nivelPasado())
 	}
 }
 
 describe"Jugador en la tercera fase"{
+	const objetosNecesarios = #{llaves, laptop, credencial, celular, auriculares, billetera}
 	
 	fixture{
-		game.addVisual(jugador)
-		game.addVisual(mochila)
-		game.addVisual(celular)
-		game.addVisual(billetera)
-		game.addVisual(llaves)
-		game.addVisual(credencial)
+		sonido.escapeBoss(mockGame)
+		jefe1.elegirDificultad(facil)
+		jefe2.elegirDificultad(facil)
+		pantallaJuego.avanzarNivel(nivel3)
 	}
+	
 	test"El jugador agarra la mochila"{
 		mochila.interactuar()
 		assert.that(jugador.tieneMochila())
 	}
+	
 	test"El jugador sin la mochila,no puede agarrar un objeto"{
 		celular.interactuar()
 		assert.notThat(celular.guardado())
 	}
+	
 	test"El jugador con la mochila,puede agarrar un objeto"{
 		mochila.interactuar()
 		billetera.interactuar()
 		assert.that(billetera.guardado())
+	}
+	
+	test "El jugador puede terminar el juego si consiguio guardar todos sus objetos personales" {
+		mochila.interactuar()
+		billetera.interactuar()
+		celular.interactuar()
+		llaves.interactuar()
+		credencial.interactuar()
+		laptop.interactuar()
+		auriculares.interactuar()
+		assert.equals(objetosNecesarios, jugador.objetosEnMochila())
+		puerta.avanzar()
+		assert.that(nivel3.nivelPasado())	
+	}
+	
+	test "El jugador no puede terminar el juego si no consiguio guardar todos sus objetos personales" {
+		mochila.interactuar()
+		billetera.interactuar()
+		celular.interactuar()
+		laptop.interactuar()
+		puerta.avanzar()
+		assert.notThat(nivel3.nivelPasado())
 	}
 }
 
@@ -161,7 +200,17 @@ describe "Tarjetas del juego" {
 	const companieris = [companieriAzul, companieriRojo, companieriVerde]
 	const posCompanieris = companieris.map({companieri => companieri.position()})
 	
+	const maquinas = [maquinaCafe, heladera]
+	const posMaquinas = maquinas.map({maquina => maquina.position()})
+	const objetos = [billetera, credencial, llaves, laptop, auriculares, celular]
+	const posObjetos = objetos.map({objeto => objeto.position()})
+	
 	fixture {
+		sonido.escapeBoss(mockGame)
+		game.addVisual(companieriAzul)
+		game.addVisual(companieriVerde)
+		companieriAzul.producto(helado)
+		companieriVerde.producto(cafe)
 		game.addVisual(jugador)
 		game.addVisual(mochila)
 		game.addVisual(llaves)
@@ -169,6 +218,7 @@ describe "Tarjetas del juego" {
 		game.addVisual(celular)
 		game.addVisual(credencial)
 	}
+	
 	test "El jefe1 reaparece en una impresora" {
 		jefeAUnaImpresora.producirEfecto()
 		assert.that(posImpresoras.contains(jefe1.position()))
@@ -212,6 +262,16 @@ describe "Tarjetas del juego" {
 		assert.equals(game.at(3,1), jugador.position())
 	}
 	
+	test "El jugador pierde un pedido que había entregado" {
+		heladera.interactuar()
+		companieriAzul.interactuar()
+		maquinaCafe.interactuar()
+		companieriVerde.interactuar()
+		assert.equals(2, jugador.companierisAyudados().size())
+		perderPedido.producirEfecto()
+		assert.equals(1, jugador.companierisAyudados().size())
+	}
+	
 	test "El jugador pierde un objeto de la mochila" {
 		mochila.interactuar()
 		billetera.interactuar()
@@ -222,4 +282,15 @@ describe "Tarjetas del juego" {
 		perderObjeto.producirEfecto()
 		assert.equals(3, jugador.objetosEnMochila().size())
 	}
+	
+	test "El jefe reaparece en una de las máquinas" {
+		jefeAMaquina.producirEfecto()
+		assert.that(posMaquinas.contains(jefe2.position()))
+	}
+	
+	test "El jefe reaparece en uno de los objetos" {
+		jefe1AObjeto.producirEfecto()
+		assert.that(posObjetos.contains(jefe1.position()))
+	}
+	
 }

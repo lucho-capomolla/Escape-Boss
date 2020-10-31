@@ -25,4 +25,5 @@ object mockGame{
 	
 object mockSonido {
 	method play(){}
+	method stop(){}
 }

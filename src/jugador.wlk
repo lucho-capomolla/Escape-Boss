@@ -6,6 +6,7 @@ import objetivos.*
 import jefe.*
 import pantallaJuego.*
 import sonidos.*
+import niveles.*
 
 class Personaje {
 	var property position
@@ -67,7 +68,6 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	override method moverse(nuevaPosicion) {
 		super(nuevaPosicion)
 		self.disminuirEnergia(2)
-		pantallaJuego.hacerTurno()
 	}
 	
 		method accionar(){
@@ -85,11 +85,12 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method disminuirEnergia(cantidad) {
 		energia = (energia - cantidad).max(0)
 			if(energia == 0){
+				musicaJuego.stop()
 				game.clear()
 				game.addVisual(fondoPerdioEnergia)
 				sonido.reproducir("Lost.wav")
 				sonido.reproducir("MadWorld.mp3")
-				game.schedule(8000, {game.stop()})
+				game.schedule(12000, {game.stop()})
 		}
 	}
 
@@ -108,6 +109,7 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 		}
 		else{
 			game.say(self, "¿En donde queres que lo guarde?")
+			sonido.reproducir("Huh.wav")
 		}
 	}
 	
@@ -157,6 +159,11 @@ object jugador inherits Personaje (position = game.at(3,1)) {
 	method entregarObjeto(companieri) {
 		objetoEnMano = vacio
 		companierisAyudados.add(companieri)
+	}
+	
+	method quitarPedido(companieri) {
+		companierisAyudados.remove(companieri)
+		companieri.perdioObjeto()
 	}
 	
 	method objetoEnMano() = objetoEnMano

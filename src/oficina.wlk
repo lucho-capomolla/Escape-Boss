@@ -47,6 +47,7 @@ object mochila {
 	
 	method interactuar() {
 		jugador.agarrarMochila()
+		sonido.reproducir("Cierre.wav")
 		game.removeVisual(self)
 	}
 	
@@ -74,11 +75,12 @@ class ObjetoPersonal {
 			jugador.guardarObjeto(self)
 			estado.encontrado()
 			game.removeVisual(self)
-			//sonido.reproducir("Guardar.mp3")
+			sonido.reproducir("Collect.wav")
 			self.estaGuardado()
 		}
 		else{
-			game.say(jugador, "Necesito algo para guardarlo...")
+			game.say(self, "¿En donde queres que lo guarde?")
+			sonido.reproducir("Huh.wav")
 		}
 	}
 	
@@ -170,13 +172,23 @@ class Maquina {
 	
 	method interactuar() {
 		jugador.agarrarObjeto(producto)
-		//sonido.reproducir("Take.mp3")
+		self.activar()
+	}
+	
+	method activar() {}
+}
+
+object maquinaCafe inherits Maquina (position = game.at(6,10), nombre = "MaquinaCafe", producto = cafe){
+	override method activar() {
+		sonido.reproducir("MaquinaCafe.wav")
 	}
 }
 
-object maquinaCafe inherits Maquina (position = game.at(6,10), nombre = "MaquinaCafe", producto = cafe){}
-
-object heladera inherits Maquina (position = game.center(), nombre = "Heladerita", producto = helado){}
+object heladera inherits Maquina (position = game.center(), nombre = "Heladerita", producto = helado){
+	//override method activar() {
+	//	sonido.reproducir("AbrirHeladera.wav")
+	//}
+}
 
 
 
@@ -185,7 +197,7 @@ class Companieri {
 	var property position
 	var tareaRequerida
 	var pedido	
-	var producto
+	var property producto
 	const color
 	var property objetoEntregado = false
 	var property tareaEntregada= false
@@ -203,6 +215,7 @@ class Companieri {
 	method interactuar() {
 		if(jugador.noTieneNingunaTarea() and jugador.noTieneNingunObjeto()) {
 			game.say(self, "No me hagas perder el tiempo.")
+			sonido.reproducir("Growly.wav")
 		}
 		else{
 			if(jugador.noTieneNingunObjeto()){
@@ -218,7 +231,7 @@ class Companieri {
 		const tarea = jugador.tareaEnMano()
 		
 		if(tareaRequerida == tarea) {
-			game.say(self, "Me has salvado! Estoy agradecido")
+			game.say(self, "¡Me has salvado!")
 			jugador.terminarTarea(tarea)
 			tarea.seEntrego()
 			sonido.reproducir("Carpeta.mp3")
@@ -226,11 +239,12 @@ class Companieri {
 		}
 		else{
 			game.say(self, "Te equivocaste de tarea, papafrita")
+			self.quejarse()
 		}
 	}
 	
 	method tareaLista(){
-		tareaEntregada=true
+		tareaEntregada = true
 	}
 	
 	method entregarObjeto() {
@@ -241,24 +255,43 @@ class Companieri {
 			jugador.entregarObjeto(self)
 			pedido.seEntrego()
 			self.entregoObjeto()
+			sonido.reproducir("ThankYou.mp3")
 		}
 		else{
 			game.say(self, "Gracias, pero no era lo que quería.")
+			self.quejarse()
 		}
 	}
 	
 	method entregoObjeto() {
 		objetoEntregado = true
 	}
-	
+	method perdioObjeto() {
+		objetoEntregado = false
+	}
+ 	
+ 	method quejarse() {}
+ 	
 	method teEncontro() = true
 }
 
-object companieriAzul inherits Companieri (color = "Azul", tareaRequerida = tareaAzul, producto = productos.anyOne(), pedido = pedidoAzul,  position = game.at(13,8)){}
+object companieriAzul inherits Companieri (color = "Azul", tareaRequerida = tareaAzul, producto = productos.anyOne(), pedido = pedidoAzul,  position = game.at(13,8)){
+	override method quejarse() {
+		sonido.reproducir("Wrong.mp3")
+	}
+}
 
-object companieriRojo inherits Companieri (color = "Rojo", tareaRequerida = tareaRojo, producto = productos.anyOne(), pedido = pedidoRojo, position = game.at(6,4)){}
+object companieriRojo inherits Companieri (color = "Rojo", tareaRequerida = tareaRojo, producto = productos.anyOne(), pedido = pedidoRojo, position = game.at(6,4)){
+	override method quejarse() {
+		sonido.reproducir("Wrong.mp3")
+	}
+}
 
-object companieriVerde inherits Companieri (color = "Verde", tareaRequerida = tareaVerde, producto = productos.anyOne(), pedido = pedidoVerde, position = game.at(3,8)){}
+object companieriVerde inherits Companieri (color = "Verde", tareaRequerida = tareaVerde, producto = productos.anyOne(), pedido = pedidoVerde, position = game.at(3,8)){
+	override method quejarse() {
+		sonido.reproducir("NoChica.mp3")
+	}
+}
 
 
 
@@ -337,33 +370,57 @@ object muroVertical4 inherits Muro(position = game.at(8,6)){}
 
 
 // Easter Egg
-object cuadrito {
-	var property position = game.at(10,10)
-	
-	method image() = "Oficina/cuadro.png"
+class Cuadro {
+	var property position
 	
 	method teEncontro() = position == jugador.position()
 	
 	method interactuar(){
-		if(pantallaJuego.nivelActual()==nivel1){
+		if(pantallaJuego.nivelActual() == nivel1){
 		jefe1.esconderse()
 		}else{ 
-			if(pantallaJuego.nivelActual()==nivel2){
+			if(pantallaJuego.nivelActual() == nivel2){
 				jefe2.esconderse()
 			}else{
 				jefe1.esconderse()
 				jefe2.esconderse()
 				}
 		}
-		game.addVisual(carpinchito)
-		game.schedule(2000, {game.removeVisual(carpinchito)})
+		self.mostrarImagen()
 	}
 	
+	method mostrarImagen(){}
+	
 	method esAtravesable() = true
+}
+
+object cuadrito1 inherits Cuadro(position = game.at(10,10)) {
+	
+	method image() = "Oficina/Cuadro1.png"
+	
+	override method mostrarImagen() {
+		game.addVisual(carpinchito)
+		game.schedule(4000, {game.removeVisual(carpinchito)})
+	}
+}
+object cuadrito2 inherits Cuadro(position = game.at(6,10)) {
+	
+	method image() = "Oficina/Cuadro2.png"
+	
+	override method mostrarImagen() {
+		game.addVisual(carpinchoMatero)
+		game.schedule(4000, {game.removeVisual(carpinchoMatero)})
+	}
 }
 
 object carpinchito {
 	var property position = game.origin()
 	
 	method image() = "Fondos/Carpinchito.jpg"
+}
+
+object carpinchoMatero {
+	var property position = game.origin()
+	
+	method image() = "Fondos/CarpinchoMate.jpg"
 }

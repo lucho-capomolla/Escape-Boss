@@ -9,8 +9,7 @@ import tarjetas.*
 import niveles.*
 
 object pantallaJuego {
-	var property cantidadTurnos = 0
-	
+
 	var nivelActual = nivel1
 	
 	method nivelActual() = nivelActual
@@ -24,16 +23,13 @@ object pantallaJuego {
 		self.iniciar()
 	}
 	
-	method hacerTurno() {
-		cantidadTurnos += 1
-	}
-	
 	method terminarJuego(){
+		musicaJuego.stop()
+		sonido.reproducir("Yodelling.mp3")
 		sonido.reproducir("TurnDownForWhat.mp3")
 		game.clear()
 		game.addVisual(fondoGanador)
-		sonido.reproducir("Yodelling.mp3")
-		game.schedule(5000, {game.stop()})
+		game.schedule(10000, {game.stop()})
 	}
 }
 
