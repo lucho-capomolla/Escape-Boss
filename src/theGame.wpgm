@@ -15,8 +15,3 @@ program juego {
 	
 	game.start()
 }
-
-  
-/*
- * TRAILER DEL JUEGO
- */
